@@ -13,6 +13,13 @@
 //      end
 // end
 
+
+void edge_print(EdgePointer e)
+{
+    printf("%s", e->lbl.mark);
+}
+
+
 Label label(char *mark, size_t len)
 {
     Label ret;
@@ -52,7 +59,7 @@ void add_edge(EdgePointer base, EdgePointer ext)
     } else {
         EdgePointer probe = base->child;
         while (probe->right) {
-            probe->right = probe->right->right;
+            probe = probe->right;
         }
         probe->right = ext;
     }

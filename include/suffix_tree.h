@@ -28,8 +28,6 @@ EdgePointer edge_from_label(Label lbl);
 
 void add_edge(EdgePointer base, EdgePointer ext);
 
-    void edge_destroy(Edge e);
-
-void edge_print(Edge e);
+void edge_print(EdgePointer e);
 
 #endif
