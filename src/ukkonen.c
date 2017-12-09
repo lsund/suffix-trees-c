@@ -1,14 +1,25 @@
 
 #include "ukkonen.h"
 
+void sstring(char *s, int i, int n, char *buf)
+{
+    char subbuff[n + 1];
+    memcpy(subbuff, &s[i], n);
+    subbuff[n] = '\0';
+    sprintf(buf, "%s", subbuff);
+}
+
 void ukkonen_naive() {
-    char *t = "xaxa";
+    char *t = "abc";
     Stree i1 = stree_init("hello");
     size_t len = strlen(t);
-    for (unsigned long i = 0; i < len - 1; i++) {
-        printf("hello\n");
+    for (unsigned long i = 1; i <= len; i++) {
+        for(unsigned long j = 0; j < i; j++) {
+            char buf[8];
+            sstring(t, j, i - j, buf);
+            printf("%s\n", buf);
+        }
     }
-
 }
 
 
