@@ -1,28 +1,27 @@
 
 #include "suffix_tree.h"
 
-void traverse_aux(EdgePointer probe)
+void stree_to_text_aux(EdgePointer probe, char *acc)
 {
-    printf("[");
+    strcat(acc, "[");
     while (probe) {
-        edge_print(probe);
-        traverse_aux(probe->child);
+        strcat(acc, edge_str(probe));
+        stree_to_text_aux(probe->child, acc);
         if (probe->right) {
-            printf("],");
+            strcat(acc, "],");
         } else {
-            printf("]");
+            strcat(acc, "]");
         }
         probe = probe->right;
     }
 }
 
-void traverse(EdgePointer e)
+void stree_to_text(EdgePointer e, char *acc)
 {
-    edge_print(e);
     EdgePointer probe = e;
-    traverse_aux(probe->child);
-    printf("]");
-    printf("\n");
+    strcat(acc, edge_str(probe));
+    stree_to_text_aux(probe->child, acc);
+    strcat(acc, "]");
 }
 
 
@@ -36,6 +35,7 @@ int main()
     EdgePointer b2 = edge_from_mark("b", 1);
     EdgePointer c2 = edge_from_mark("c", 1);
     EdgePointer c3 = edge_from_mark("c", 1);
+    EdgePointer o1 = edge_from_mark("o", 1);
 
     add_edge(i1, a1);
     add_edge(i1, b1);
@@ -43,7 +43,17 @@ int main()
     add_edge(a1, b2);
     add_edge(b2, c3);
     add_edge(b1, c2);
-    traverse(i1);
+    add_edge(c1, o1);
 
+    char *res = malloc(sizeof(char) * 128);
+    stree_to_text(i1, res);
+
+    FILE *f = fopen("../suffix-trees/data/sample", "w");
+    if (f) {
+        fprintf(f, "%s\n", res);
+    } else {
+        printf("Could not open file.\n");
+    }
+    free(res);
     return 0;
 }

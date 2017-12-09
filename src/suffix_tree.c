@@ -14,9 +14,9 @@
 // end
 
 
-void edge_print(EdgePointer e)
+char *edge_str(EdgePointer e)
 {
-    printf("%s", e->lbl.mark);
+    return e->lbl.mark;
 }
 
 
