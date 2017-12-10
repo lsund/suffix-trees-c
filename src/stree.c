@@ -46,12 +46,46 @@ EdgePointer edge_from_label(const Label lbl)
 }
 
 
-int edge_match_marking(EdgePointer e, const char *m)
+Matching edge_match_marking(EdgePointer e, const char *m)
 {
-    char buf[128];
-    sstring(e->lbl.mark, 0, strlen(m), buf);
-    printf("%s\n", buf);
-    return 0;
+    char *em = e->lbl.mark;
+    unsigned long i, m_len, em_len, max_len;
+
+    i = 0;
+    m_len = strlen(m);
+    em_len= strlen(em);
+    max_len = m_len > em_len ? m_len : em_len;
+
+    while (i < max_len && m[i] == em[i]) {
+        i++;
+    }
+    int match       = i == m_len;
+    int exact_match = match && em_len == m_len;
+
+    Matching ret;
+
+    if (exact_match) {
+
+        ret.match = m;
+        ret.rest  = NULL;
+
+    } else if (match) {
+
+        char match[128];
+        char rest[128];
+        sstring(em, 0, i, match);
+        sstring(em, i, strlen(em) - i, rest);
+        ret.match = match;
+        ret.rest  = rest;
+
+    } else {
+
+        ret.match = NULL;
+        ret.rest  = NULL;
+
+    }
+
+    return ret;
 }
 
 
@@ -61,6 +95,7 @@ int edge_match_marking(EdgePointer e, const char *m)
 
 EdgePointer stree_find(EdgePointer tree, const char *m)
 {
+
     EdgePointer probe = tree;
     return NULL;
 }

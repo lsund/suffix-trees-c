@@ -22,38 +22,68 @@ static char *test()
     return 0;
 }
 
+
+
 void mu_message(enum MessageOption option, const char *s)
 {
     switch (option) {
         case MODULE:
-            fprintf(stdout, ANSI_COLOR_YELLOW "Testing Module: %s" ANSI_COLOR_RESET, s);
+            fprintf(
+                stdout,
+                ANSI_COLOR_YELLOW "Testing Module: %s" ANSI_COLOR_RESET,
+                s
+            );
             break;
         case UNIT:
-            fprintf(stdout, ANSI_COLOR_CYAN   "\tTesting Unit: %s" ANSI_COLOR_RESET, s);
+            fprintf(
+                stdout,
+                ANSI_COLOR_CYAN "\tTesting Unit: %s" ANSI_COLOR_RESET,
+                s
+            );
             break;
         case DATA:
-            fprintf(stdout, ANSI_COLOR_GREY   "\t%s" ANSI_COLOR_RESET, s);
+            fprintf(
+                stdout,
+                ANSI_COLOR_GREY "\t%s" ANSI_COLOR_RESET,
+                s
+            );
             break;
         case PASSING:
-            fprintf(stdout, ANSI_COLOR_GREEN  "\t\tPassed" ANSI_COLOR_RESET "\n");
+            fprintf(
+                stdout,
+                ANSI_COLOR_GREEN "\t\tPassed" ANSI_COLOR_RESET "\n"
+            );
             break;
         case STATISTICS:
-            fprintf(stdout, ANSI_COLOR_RESET "%s" ANSI_COLOR_RESET, s);
+            fprintf(
+                stdout,
+                ANSI_COLOR_RESET "%s" ANSI_COLOR_RESET,
+                s
+            );
             break;
         case PREPEND:
-            fprintf(stdout, ANSI_COLOR_GREY "%s" ANSI_COLOR_RESET, s);
+            fprintf(
+                stdout, ANSI_COLOR_GREY "%s" ANSI_COLOR_RESET,
+                s
+            );
             break;
         case ERROR:
-            fprintf(stdout, ANSI_COLOR_RED   "Error >> %s" ANSI_COLOR_RESET "\n", s);
+            fprintf(
+                stdout, ANSI_COLOR_RED   "Error >> %s" ANSI_COLOR_RESET "\n",
+                s
+            );
             break;
         case TESTSPASSED:
-            fprintf(stdout, ANSI_COLOR_GREEN "ALL TESTS PASSED" ANSI_COLOR_RESET "\n");
+            fprintf(
+                stdout,
+                ANSI_COLOR_GREEN "ALL TESTS PASSED" ANSI_COLOR_RESET "\n"
+            );
             break;
     }
 }
 
 static char *all_tests() {
-    char *result; 
+    char *result;
     if ((result = test())) { return result; }
 
     return 0;

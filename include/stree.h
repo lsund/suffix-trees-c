@@ -4,12 +4,17 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <math.h>
 
 #include "util.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 // Structs
 
+typedef struct matching {
+    const char *match;
+    const char *rest;
+} Matching;
 
 typedef struct label {
     char *mark;
@@ -35,7 +40,7 @@ EdgePointer edge_from_mark(char *mark, const size_t len);
 
 EdgePointer edge_from_label(const Label lbl);
 
-int edge_match_marking(EdgePointer e, const char *m);
+Matching edge_match_marking(EdgePointer e, const char *m);
 
 EdgePointer stree_init(const char *t);
 
