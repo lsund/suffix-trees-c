@@ -95,7 +95,6 @@ Matching edge_match_marking(EdgePointer e, const char *m)
 
 EdgePointer stree_find(EdgePointer tree, const char *m)
 {
-
     EdgePointer probe = tree;
     return NULL;
 }
