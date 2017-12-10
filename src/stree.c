@@ -4,7 +4,7 @@
 // Label
 
 
-Label label(const char *mark, const size_t len)
+Label label(char *mark, const size_t len)
 {
     Label ret;
     ret.mark = mark;
@@ -23,7 +23,7 @@ const char *edge_str(const EdgePointer e)
 }
 
 
-EdgePointer edge_from_mark(const char *mark, const size_t len)
+EdgePointer edge_from_mark(char *mark, const size_t len)
 {
     EdgePointer ret;
     Label lbl = label(mark, len);
@@ -46,8 +46,24 @@ EdgePointer edge_from_label(const Label lbl)
 }
 
 
+int edge_match_marking(EdgePointer e, const char *m)
+{
+    char buf[128];
+    sstring(e->lbl.mark, 0, strlen(m), buf);
+    printf("%s\n", buf);
+    return 0;
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
 // Suffix Tree
+
+
+EdgePointer stree_find(EdgePointer tree, const char *m)
+{
+    EdgePointer probe = tree;
+    return NULL;
+}
 
 
 EdgePointer stree_init(const char *t)

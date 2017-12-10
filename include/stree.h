@@ -5,13 +5,14 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "util.h"
 
 ///////////////////////////////////////////////////////////////////////////////
 // Structs
 
 
 typedef struct label {
-    const char *mark;
+    char *mark;
     size_t len;
 } Label;
 
@@ -26,13 +27,15 @@ typedef struct edge {
 // Functions
 
 
-Label label(const char *mark, const size_t len);
+Label label(char *mark, const size_t len);
 
 const char *edge_str(const EdgePointer e);
 
-EdgePointer edge_from_mark(const char *mark, const size_t len);
+EdgePointer edge_from_mark(char *mark, const size_t len);
 
 EdgePointer edge_from_label(const Label lbl);
+
+int edge_match_marking(EdgePointer e, const char *m);
 
 EdgePointer stree_init(const char *t);
 
