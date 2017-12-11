@@ -2,16 +2,19 @@
 #include "ukkonen.h"
 
 void ukkonen_naive() {
-    char *t = "abc";
+    char *t = "abaababa";
     Stree i1 = stree_init(t);
     size_t len = strlen(t);
-    for (unsigned long i = 1; i <= len; i++) {
-        for(unsigned long j = 0; j < i; j++) {
+    /* for (unsigned long i = 1; i <= len; i++) { */
+        /* for(unsigned long j = 0; j < i; j++) { */
+    for (unsigned long i = 1; i <= 2; i++) {
+        for(unsigned long j = 0; j < i - 1; j++) {
             char buf[8];
-            sstring(t, j, i - j, buf);
+            sstring(t, j, i - j - 1, buf);
             printf("%s\n", buf);
             EdgePointer end = stree_find(i1, buf);
-            break;
+            // TODO extend marking
+            printf("End: %s %p\n", end->lbl.mark, end);
         }
     }
 }
