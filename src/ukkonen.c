@@ -10,6 +10,8 @@ void ukkonen_naive() {
             char buf[8];
             sstring(t, j, i - j, buf);
             printf("%s\n", buf);
+            EdgePointer end = stree_find(i1, buf);
+            break;
         }
     }
 }

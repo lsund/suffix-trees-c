@@ -46,6 +46,18 @@ EdgePointer edge_from_label(const Label lbl)
 }
 
 
+MatchType match_type(const Matching match)
+{
+    if (!match.match) {
+        return NONE;
+    } else if (!match.rest) {
+        return EXACT;
+    } else {
+        return PARTIAL;
+    }
+}
+
+
 Matching edge_match_marking(EdgePointer e, const char *m)
 {
     char *em = e->lbl.mark;
@@ -59,7 +71,7 @@ Matching edge_match_marking(EdgePointer e, const char *m)
     while (i < max_len && m[i] == em[i]) {
         i++;
     }
-    int match       = i == m_len;
+    int match       = i == em_len;
     int exact_match = match && em_len == m_len;
 
     Matching ret;
@@ -71,10 +83,10 @@ Matching edge_match_marking(EdgePointer e, const char *m)
 
     } else if (match) {
 
-        char match[128];
-        char rest[128];
-        sstring(em, 0, i, match);
-        sstring(em, i, strlen(em) - i, rest);
+        char *match = malloc(sizeof(char) * 128);
+        char *rest = malloc(sizeof(char) * 128);
+        sstring(m, 0, i, match);
+        sstring(m, i, strlen(m) - i, rest);
         ret.match = match;
         ret.rest  = rest;
 
@@ -93,10 +105,39 @@ Matching edge_match_marking(EdgePointer e, const char *m)
 // Suffix Tree
 
 
-EdgePointer stree_find(EdgePointer tree, const char *m)
+EdgePointer stree_find(Stree tree, const char *m)
 {
-    EdgePointer probe = tree;
-    return NULL;
+    Matching match = edge_match_marking(tree, m);
+
+    switch (match_type(match)) {
+        case NONE:
+            return NULL;
+            break;
+        case PARTIAL:
+            if (strcmp(m, match.match) == 0) {
+                return tree;
+            }
+            if (tree->child) {
+
+                EdgePointer probe = tree->child;
+
+                while (probe) {
+
+                    EdgePointer res = stree_find(probe, match.rest);
+                    if (res) {
+                        return res;
+                    } else{
+                        probe = probe->right;
+                    }
+
+                }
+            }
+            break;
+        case EXACT:
+            return tree;
+    }
+
+    return 0;
 }
 
 
@@ -112,7 +153,7 @@ EdgePointer stree_init(const char *t)
 }
 
 
-void stree_extend(EdgePointer base, const EdgePointer ext)
+void stree_extend(Stree base, const EdgePointer ext)
 {
     if (!base->child) {
         base->child = ext;

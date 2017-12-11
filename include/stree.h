@@ -8,6 +8,12 @@
 
 #include "util.h"
 
+
+///////////////////////////////////////////////////////////////////////////////
+// Enums
+
+typedef enum { NONE, EXACT, PARTIAL } MatchType;
+
 ///////////////////////////////////////////////////////////////////////////////
 // Structs
 
@@ -21,6 +27,8 @@ typedef struct label {
     size_t len;
 } Label;
 
+// This represents both the edge itself and a suffix tree due to its recursive
+// nature.
 typedef struct edge {
     Label lbl;
     struct edge *child;
@@ -40,10 +48,14 @@ EdgePointer edge_from_mark(char *mark, const size_t len);
 
 EdgePointer edge_from_label(const Label lbl);
 
+MatchType match_type(const Matching match);
+
 Matching edge_match_marking(EdgePointer e, const char *m);
+
+EdgePointer stree_find(Stree tree, const char *m);
 
 EdgePointer stree_init(const char *t);
 
-void stree_extend(EdgePointer base, const EdgePointer ext);
+void stree_extend(Stree base, const EdgePointer ext);
 
 #endif
