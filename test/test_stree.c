@@ -4,7 +4,7 @@
 
 char *utest_edge_match()
 {
-    EdgePointer a = edge_from_mark("xest", 2);
+    EdgePointer a = edge_from_mark("xest");
     Matching m = edge_match_marking(a, "test");
     mu_assert("No match", match_type(m) == NONE);
 
@@ -23,16 +23,16 @@ char *utest_edge_match()
 
 char *utest_stree_find()
 {
-    EdgePointer t = edge_from_mark("x", 2);
-    EdgePointer t2 = edge_from_mark("e", 3);
-    EdgePointer t3 = edge_from_mark("zy", 3);
-    EdgePointer t4 = edge_from_mark("zf", 3);
+    EdgePointer t = edge_from_mark("x");
+    EdgePointer t2 = edge_from_mark("e");
+    EdgePointer t3 = edge_from_mark("zy");
+    EdgePointer t4 = edge_from_mark("zf");
     stree_extend(t, t2);
     stree_extend(t2, t3);
     stree_extend(t2, t4);
     EdgePointer e = stree_find(t, "xezyx");
     if (e) {
-        printf("result: %s\n", e->lbl.mark);
+        printf("result: %s\n", e->lbl->mark);
     }
     return NULL;
 }

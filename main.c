@@ -8,13 +8,13 @@ int main()
     // Test
     char *text = "xaxa";
     EdgePointer i1 = stree_init(text);
-    EdgePointer a1 = edge_from_mark("a", 1);
-    EdgePointer b1 = edge_from_mark("b", 1);
-    EdgePointer c1 = edge_from_mark("c", 1);
-    EdgePointer b2 = edge_from_mark("b", 1);
-    EdgePointer c2 = edge_from_mark("c", 1);
-    EdgePointer c3 = edge_from_mark("c", 1);
-    EdgePointer o1 = edge_from_mark("o", 1);
+    EdgePointer a1 = edge_from_mark("a");
+    EdgePointer b1 = edge_from_mark("b");
+    EdgePointer c1 = edge_from_mark("c");
+    EdgePointer b2 = edge_from_mark("b");
+    EdgePointer c2 = edge_from_mark("c");
+    EdgePointer c3 = edge_from_mark("c");
+    EdgePointer o1 = edge_from_mark("o");
 
     stree_extend(i1, a1);
     stree_extend(i1, b1);

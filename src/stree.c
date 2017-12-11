@@ -1,32 +1,13 @@
 #include "stree.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-// Label
-
-
-Label label(char *mark, const size_t len)
-{
-    Label ret;
-    ret.mark = mark;
-    ret.len = len;
-    return ret;
-}
-
-
-///////////////////////////////////////////////////////////////////////////////
 // Edge
 
 
-const char *edge_str(const EdgePointer e)
-{
-    return e->lbl.mark;
-}
-
-
-EdgePointer edge_from_mark(char *mark, const size_t len)
+EdgePointer edge_from_mark(char *mark)
 {
     EdgePointer ret;
-    Label lbl = label(mark, len);
+    Label lbl = label(mark);
     ret = malloc(sizeof(Edge));
     ret->lbl = lbl;
     ret->child = NULL;
@@ -46,21 +27,15 @@ EdgePointer edge_from_label(const Label lbl)
 }
 
 
-MatchType match_type(const Matching match)
+const char *edge_str(const EdgePointer e)
 {
-    if (!match.match) {
-        return NONE;
-    } else if (!match.rest) {
-        return EXACT;
-    } else {
-        return PARTIAL;
-    }
+    return e->lbl->mark;
 }
 
 
 Matching edge_match_marking(EdgePointer e, const char *m)
 {
-    char *em = e->lbl.mark;
+    char *em = e->lbl->mark;
     unsigned long i, m_len, em_len, max_len;
 
     i = 0;
@@ -145,7 +120,7 @@ EdgePointer stree_init(const char *t)
 {
     char *mark = malloc(sizeof(char) * 2);
     sprintf(mark, "%c", t[0]);
-    Label l =label(mark, 2);
+    Label l =label(mark);
 
     EdgePointer ret = edge_from_label(l);
 

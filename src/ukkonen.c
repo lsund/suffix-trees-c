@@ -14,7 +14,7 @@ void ukkonen_naive() {
             printf("%s\n", buf);
             EdgePointer end = stree_find(i1, buf);
             // TODO extend marking
-            printf("End: %s %p\n", end->lbl.mark, end);
+            printf("End: %s %p\n", end->lbl->mark, end);
         }
     }
 }

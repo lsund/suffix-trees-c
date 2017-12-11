@@ -12,6 +12,7 @@
 
 char *test_stree();
 char *test_ukkonen();
+char *test_label();
 
 enum MessageOption {
     MODULE,
