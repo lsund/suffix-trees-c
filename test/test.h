@@ -11,6 +11,7 @@
 #include "config.h"
 
 char *test_stree();
+char *test_ukkonen();
 
 enum MessageOption {
     MODULE,
