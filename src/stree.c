@@ -50,6 +50,8 @@ Matching marking_match_edge(const EdgePointer e, const char *m)
 EdgePointer stree_find(Stree tree, const char *m)
 {
 
+    // TODO Does not continue to child not ATM
+
     Matching match = marking_match_edge(tree, m);
 
     switch (match_type(match)) {

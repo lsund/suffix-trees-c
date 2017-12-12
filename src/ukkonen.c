@@ -27,14 +27,17 @@ Stree ukkonen_naive() {
             EdgePointer end = stree_find(tree, t_init);
             if (end) {
 
+                // TODO At this point we found the end. Now we need to check if
+                // we are at the last character. In that case extend.
+                // Otherwise, need to insert inner node.
+
                 printf("Found. Extending: %s with %c\n\n", end->lbl->mark, a);
                 label_extend_letter(end->lbl, a);
 
             } else {
 
+                // This should not happen
                 printf("Not found. Extending: %s with %c\n\n", tree->lbl->mark, a);
-                // TODO match letter against all possible branches. If no
-                // match, add ned edge.
 
                 EdgePointer probe = tree;
                 int matching_branch = 0;
