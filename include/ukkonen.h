@@ -4,6 +4,6 @@
 #include "util.h"
 #include "stree.h"
 
-void ukkonen_naive();
+Stree ukkonen_naive();
 
 #endif

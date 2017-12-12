@@ -19,4 +19,5 @@ Label label(char *mark);
 
 void label_extend(const Label lbl, const char *mark);
 
+void label_extend_letter(Label lbl, const char mark);
 #endif

@@ -118,7 +118,7 @@ EdgePointer stree_find(Stree tree, const char *m)
 
 EdgePointer stree_init(const char *t)
 {
-    char *mark = malloc(sizeof(char) * 2);
+    char *mark = malloc(sizeof(char) * STRING_INIT_LEN);
     sprintf(mark, "%c", t[0]);
     Label l =label(mark);
 
@@ -139,4 +139,14 @@ void stree_extend(Stree base, const EdgePointer ext)
         }
         probe->right = ext;
     }
+}
+
+
+void stree_extend_right(Stree base, const EdgePointer ext)
+{
+    EdgePointer probe = base;
+    while (probe->right) {
+        probe = probe->right;
+    }
+    probe->right = ext;
 }

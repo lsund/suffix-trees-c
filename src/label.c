@@ -27,6 +27,14 @@ Label label(char *mark)
 }
 
 
+void label_extend_letter(Label lbl, const char mark)
+{
+    char buf[2];
+    buf[0] = mark;
+    label_extend(lbl, buf);
+}
+
+
 void label_extend(Label lbl, const char *mark)
 {
     size_t mark_len = strlen(mark);

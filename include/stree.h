@@ -38,4 +38,6 @@ EdgePointer stree_init(const char *t);
 
 void stree_extend(Stree base, const EdgePointer ext);
 
+void stree_extend_right(Stree base, const EdgePointer ext);
+
 #endif
