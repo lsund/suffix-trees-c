@@ -6,12 +6,12 @@
 int main()
 {
 
-    Stree x = stree_init("x");
+    Stree root = edge_from_mark("root");;
     Stree u = ukkonen_naive();
 
-    stree_extend(x, u);
+    stree_extend(root, u);
 
-    write_stree_to_file(x, "../suffix-trees-haskell/data/sample");
+    write_stree_to_file(root, "../suffix-trees-haskell/data/sample");
 
     return 0;
 }

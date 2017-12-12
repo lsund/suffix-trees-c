@@ -19,9 +19,9 @@ static char *test()
 {
     mu_message(MODULE, "label\n");
     mu_run_test(test_label);
-	mu_message(MODULE,"stree\n");
+    mu_message(MODULE,"stree\n");
     mu_run_test(test_stree);
-	mu_message(MODULE,"ukkonen\n");
+    mu_message(MODULE,"ukkonen\n");
     mu_run_test(test_ukkonen);
     return 0;
 }

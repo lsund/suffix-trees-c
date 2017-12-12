@@ -33,86 +33,41 @@ const char *edge_str(const EdgePointer e)
 }
 
 
-Matching edge_match_marking(EdgePointer e, const char *m)
+Matching edge_match_marking(const EdgePointer e, const char *m)
 {
-    char *em = e->lbl->mark;
-    unsigned long i, m_len, em_len, max_len;
-
-    i = 0;
-    m_len = strlen(m);
-    em_len= strlen(em);
-    max_len = m_len > em_len ? m_len : em_len;
-
-    while (i < max_len && m[i] == em[i]) {
-        i++;
-    }
-    int match       = i == em_len;
-    int exact_match = match && em_len == m_len;
-
-    Matching ret;
-
-    if (exact_match) {
-
-        ret.match = m;
-        ret.rest  = NULL;
-
-    } else if (match) {
-
-        char *match = malloc(sizeof(char) * 128);
-        char *rest = malloc(sizeof(char) * 128);
-        sstring(m, 0, i, match);
-        sstring(m, i, strlen(m) - i, rest);
-        ret.match = match;
-        ret.rest  = rest;
-
-    } else {
-
-        ret.match = NULL;
-        ret.rest  = NULL;
-
-    }
-
-    return ret;
+    return match(e->lbl->mark, m);
 }
 
 
+Matching marking_match_edge(const EdgePointer e, const char *m)
+{
+    return match(m, e->lbl->mark);
+}
 ///////////////////////////////////////////////////////////////////////////////
 // Suffix Tree
 
 
 EdgePointer stree_find(Stree tree, const char *m)
 {
-    Matching match = edge_match_marking(tree, m);
+
+    Matching match = marking_match_edge(tree, m);
 
     switch (match_type(match)) {
         case NONE:
-            return NULL;
+            if (tree->right) {
+                return stree_find(tree->right, m);
+            } else {
+                return NULL;
+            }
             break;
         case PARTIAL:
-            if (strcmp(m, match.match) == 0) {
-                return tree;
-            }
-            if (tree->child) {
-
-                EdgePointer probe = tree->child;
-
-                while (probe) {
-
-                    EdgePointer res = stree_find(probe, match.rest);
-                    if (res) {
-                        return res;
-                    } else{
-                        probe = probe->right;
-                    }
-
-                }
-            }
+            return tree;
             break;
         case EXACT:
             return tree;
     }
 
-    return 0;
+    return NULL;
 }
 
 

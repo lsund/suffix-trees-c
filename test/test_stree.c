@@ -30,10 +30,17 @@ char *utest_stree_find()
     stree_extend(t, t2);
     stree_extend(t2, t3);
     stree_extend(t2, t4);
-    EdgePointer e = stree_find(t, "xezyx");
-    if (e) {
-        printf("result: %s\n", e->lbl->mark);
-    }
+    EdgePointer e = stree_find(t, "xezy");
+    mu_assert("Find end #1", e);
+
+    /* EdgePointer ab = edge_from_mark("ab"); */
+    /* EdgePointer b = edge_from_mark("b"); */
+    /* ab->right = b; */
+    /* mu_assert("Find end #2", stree_find(b, "b")); */
+
+    /* EdgePointer aba = edge_from_mark("aba"); */
+    /* mu_assert("Find end #3", stree_find(aba, "a")); */
+
     return NULL;
 }
 
