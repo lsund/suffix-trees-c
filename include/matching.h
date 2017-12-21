@@ -11,7 +11,7 @@
 // Enums
 
 
-typedef enum { NONE, EXACT, PARTIAL } MatchType;
+typedef enum { NONE, EXACT, PARTIAL_RIGHT, PARTIAL_LEFT } MatchType;
 
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -20,13 +20,15 @@ typedef enum { NONE, EXACT, PARTIAL } MatchType;
 
 typedef struct matching {
     const char *match;
-    const char *rest;
+    const char *rest_left;
+    const char *rest_right;
 } Matching;
 
 
 ///////////////////////////////////////////////////////////////////////////////
 // Functions
 
+Matching matching_empty();
 
 MatchType match_type(const Matching match);
 

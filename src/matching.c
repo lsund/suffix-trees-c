@@ -1,51 +1,69 @@
 #include "matching.h"
 
+Matching matching_empty()
+{
+    Matching ret;
+    ret.match      = NULL;
+    ret.rest_left  = NULL;
+    ret.rest_right = NULL;
+    return ret;
+}
+
 MatchType match_type(const Matching match)
 {
     if (!match.match) {
         return NONE;
-    } else if (!match.rest) {
+    } else if (!match.rest_left && !match.rest_right) {
         return EXACT;
+    } else if (!match.rest_left) {
+        return PARTIAL_LEFT;
     } else {
-        return PARTIAL;
+        return PARTIAL_RIGHT;
     }
 }
 
 
-Matching match(const char *a, const char *b)
+Matching match(const char *left, const char *right)
 {
 
     Matching ret;
-    unsigned long i, a_len, b_len, max_len;
+    unsigned long i, left_len, right_len, max_len;
 
     i = 0;
-    b_len = strlen(b);
-    a_len= strlen(a);
-    max_len = b_len > a_len ? b_len : a_len;
+    left_len= strlen(left);
+    right_len = strlen(right);
+    max_len = right_len > left_len ? right_len : left_len;
 
-    while (i < max_len && b[i] == a[i]) {
+    while (i < max_len && right[i] == left[i]) {
         i++;
     }
+
     if (i > 0) {
+        if (i == max_len) {
+            // the two strings were identical
+            ret.rest_right = NULL;
+            ret.rest_left = NULL;
+        } else if (i == right_len) {
+            // The whole pattern got matched
+            ret.rest_right = NULL;
+            char *rest_left = malloc(sizeof(char) * 128);
+            sstring(left, i, strlen(left) - i, rest_left);
+        } else if (i == left_len) {
+            // The whole input got matched
+            ret.rest_left = NULL;
+            char *rest_right = malloc(sizeof(char) * 128);
+            sstring(right, i, strlen(right) - i, rest_right);
+        }
 
         char *match = malloc(sizeof(char) * 128);
-        sstring(b, 0, i, match);
+        sstring(right, 0, i, match);
         ret.match = match;
 
-        if (i < max_len) {
-
-            char *rest = malloc(sizeof(char) * 128);
-            sstring(b, i, strlen(b) - i, rest);
-            ret.rest  = rest;
-
-        } else {
-            ret.rest = NULL;
-        }
     } else {
-        ret.match = NULL;
-        ret.rest  = NULL;
+        ret.match      = NULL;
+        ret.rest_left  = NULL;
+        ret.rest_right = NULL;
     }
-
     return ret;
 }
 

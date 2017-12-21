@@ -20,6 +20,10 @@ typedef struct edge {
     struct edge *right;
 } Edge, *EdgePointer, *Stree;
 
+typedef struct treematching {
+    Stree tree;
+    Matching m;
+} TreeMatching;
 
 ///////////////////////////////////////////////////////////////////////////////
 // Functions
@@ -30,9 +34,7 @@ EdgePointer edge_from_mark(char *mark);
 
 EdgePointer edge_from_label(const Label lbl);
 
-Matching edge_match_marking(EdgePointer e, const char *m);
-
-EdgePointer stree_find(Stree tree, const char *m);
+TreeMatching stree_find(Stree tree, const char *m);
 
 EdgePointer stree_init(const char *t);
 

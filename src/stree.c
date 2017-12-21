@@ -33,43 +33,38 @@ const char *edge_str(const EdgePointer e)
 }
 
 
-Matching edge_match_marking(const EdgePointer e, const char *m)
-{
-    return match(e->lbl->mark, m);
-}
-
-
-Matching marking_match_edge(const EdgePointer e, const char *m)
-{
-    return match(m, e->lbl->mark);
-}
 ///////////////////////////////////////////////////////////////////////////////
 // Suffix Tree
 
 
-EdgePointer stree_find(Stree tree, const char *m)
+TreeMatching stree_find(Stree tree, const char *c)
 {
+    // TODO Rewrite everything
+    Matching m = match(tree->lbl->mark, c);
 
-    // TODO Does not continue to child not ATM
+    TreeMatching ret;
+    ret.m = matching_empty();
+    ret.tree = NULL;
 
-    Matching match = marking_match_edge(tree, m);
-
-    switch (match_type(match)) {
+    switch (match_type(m)) {
         case NONE:
             if (tree->right) {
-                return stree_find(tree->right, m);
+                stree_find(tree->right, c);
             } else {
-                return NULL;
+                return ret;
             }
             break;
-        case PARTIAL:
-            return tree;
+        case PARTIAL_LEFT:
+            return ret;
+            break;
+        case PARTIAL_RIGHT:
+            return ret;
             break;
         case EXACT:
-            return tree;
+            return ret;
     }
 
-    return NULL;
+    return ret;
 }
 
 

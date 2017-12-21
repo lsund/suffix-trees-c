@@ -7,9 +7,9 @@ Stree ukkonen_naive() {
     size_t len = strlen(text);
     /* for (unsigned long i = 1; i <= len; i++) { */
         /* for(unsigned long j = 0; j < i; j++) { */
-    for (unsigned long i = 3; i <= 5; i++) {
+    for (unsigned long i = 3; i <= 4; i++) {
         for(unsigned long j = 0; j < i - 1; j++) {
-        printf("\n-------Phase %zu-----\n\n", j);
+        printf("\n-------Step: %zu, Phase %zu-----\n\n", i - 2, j);
 
             char t[8];
             char t_init[8];
@@ -19,25 +19,24 @@ Stree ukkonen_naive() {
             sstring(text, j, t_len - 1, t_init);
             char a = t[t_len - 1];
 
-            /* printf("sub: %s \n", t); */
-            printf("init: %s \n", t_init);
-            /* printf("a: %c \n", a); */
+            printf("Searching for: %s\n", t_init);
+            Stree end = stree_find(tree, t_init).tree;
 
-            printf("Searching end for: %s\n", t_init);
-            EdgePointer end = stree_find(tree, t_init);
             if (end) {
 
                 // TODO At this point we found the end. Now we need to check if
                 // we are at the last character. In that case extend.
                 // Otherwise, need to insert inner node.
+                //
 
-                printf("Found. Extending: %s with %c\n\n", end->lbl->mark, a);
+                printf("Matched. Extending: %s with %c\n", end->lbl->mark, a);
                 label_extend_letter(end->lbl, a);
+                printf("Result: %s\n", end->lbl->mark);
 
             } else {
 
-                // This should not happen
-                printf("Not found. Extending: %s with %c\n\n", tree->lbl->mark, a);
+                printf("\nNot matched: label: %s, char: %c\n\n", tree->lbl->mark, a);
+                printf("Trying right sibling...\n");
 
                 EdgePointer probe = tree;
                 int matching_branch = 0;
@@ -53,12 +52,11 @@ Stree ukkonen_naive() {
                     sprintf(mark, "%c", a);
                     EdgePointer right_edge = edge_from_mark(mark);
                     stree_extend_right(tree, right_edge);
-                    printf("No branch. New edge with: %s\n", right_edge->lbl->mark);
+                    printf("No matching sibling. Create new edge with: %s\n",
+                            right_edge->lbl->mark); 
                 } else {
                     printf("Doing nothing\n");
                 }
-
-
             }
         }
     }

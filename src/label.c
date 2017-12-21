@@ -37,6 +37,13 @@ void label_extend_letter(Label lbl, const char mark)
 
 void label_extend(Label lbl, const char *mark)
 {
+
+    Matching m = match(lbl->mark, mark);
+
+    if (match_type(m) != NONE) {
+        return;
+    }
+
     size_t mark_len = strlen(mark);
 
     if (lbl->len + mark_len > lbl->max_len) {

@@ -7,6 +7,7 @@
 #include <stdio.h>
 
 #include "config.h"
+#include "matching.h"
 
 typedef struct label {
     char *mark;
