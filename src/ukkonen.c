@@ -15,8 +15,8 @@ Stree ukkonen_naive() {
             char t_init[8];
             size_t t_len = i - j - 1;
 
-            sstring(text, j, t_len, t);
-            sstring(text, j, t_len - 1, t_init);
+            sstring(t, j, t_len, text);
+            sstring(t_init, j, t_len - 1, text);
             char a = t[t_len - 1];
 
             printf("Searching for: %s\n", t_init);

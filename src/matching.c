@@ -40,23 +40,28 @@ Matching match(const char *left, const char *right)
 
     if (i > 0) {
         if (i == max_len) {
-            // the two strings were identical
+
             ret.rest_right = NULL;
             ret.rest_left = NULL;
+
         } else if (i == right_len) {
-            // The whole pattern got matched
-            ret.rest_right = NULL;
+
             char *rest_left = malloc(sizeof(char) * 128);
-            sstring(left, i, strlen(left) - i, rest_left);
+            sstring(rest_left, i, left_len, left);
+
+            ret.rest_right = NULL;
+            ret.rest_left = rest_left;
+
         } else if (i == left_len) {
-            // The whole input got matched
-            ret.rest_left = NULL;
             char *rest_right = malloc(sizeof(char) * 128);
-            sstring(right, i, strlen(right) - i, rest_right);
+            sstring(rest_right, i, right_len, right);
+
+            ret.rest_left = NULL;
+            ret.rest_right = rest_right;
         }
 
         char *match = malloc(sizeof(char) * 128);
-        sstring(right, 0, i, match);
+        sstring(match, 0, i, left);
         ret.match = match;
 
     } else {
