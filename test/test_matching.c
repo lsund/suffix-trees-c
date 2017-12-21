@@ -16,16 +16,17 @@ char *utest_matching_match()
     mu_assert("Exact match", match_type(m2) == EXACT);
 
     Matching m3 = match("xest", "xester");
-    mu_assert("Partial match left", strcmp(m3.match, "xest") == 0);
-    mu_assert("Partial match left", m3.rest_left == NULL);
-    mu_assert("Partial match left", strcmp(m3.rest_right, "er") == 0);
-    mu_assert("Partial match left", match_type(m3) == PARTIAL_LEFT);
+    mu_assert("Partial match left #1", strcmp(m3.match, "xest") == 0);
+    mu_assert("Partial match left #2", m3.rest_left == NULL);
+    printf("%s\n", m3.rest_right);
+    mu_assert("Partial match left #3", strcmp(m3.rest_right, "er") == 0);
+    mu_assert("Partial match left #4", match_type(m3) == PARTIAL_LEFT);
 
     Matching m4 = match("xester", "xest");
-    mu_assert("Partial match left", strcmp(m4.match, "xest") == 0);
-    mu_assert("Partial match left", m4.rest_right == NULL);
-    mu_assert("Partial match left", strcmp(m4.rest_left, "er") == 0);
-    mu_assert("Partial match left", match_type(m4) == PARTIAL_RIGHT);
+    mu_assert("Partial match left #5", strcmp(m4.match, "xest") == 0);
+    mu_assert("Partial match left #6", m4.rest_right == NULL);
+    mu_assert("Partial match left #7", strcmp(m4.rest_left, "er") == 0);
+    mu_assert("Partial match left #8", match_type(m4) == PARTIAL_RIGHT);
     return NULL;
 }
 

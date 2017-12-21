@@ -4,6 +4,6 @@
 #include <stdio.h>
 #include <string.h>
 
-void sstring(const char *s, const int i, const int n, char *buf);
+void sstring(char *dst, const int i, const int n, const char *src);
 
 #endif

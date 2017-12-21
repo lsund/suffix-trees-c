@@ -1,10 +1,10 @@
 #include "util.h"
 
-void sstring(const char *s, const int i, const int n, char *buf)
+void sstring(char *dst, const int i, const int n, const char *src)
 {
-    char subbuff[n + 1];
-    memcpy(subbuff, &s[i], n);
-    subbuff[n] = '\0';
-    sprintf(buf, "%s", subbuff);
+    char tmp[n + 1];
+    memcpy(tmp, &src[i], n);
+    tmp[n] = '\0';
+    sprintf(dst, "%s", tmp);
 }
 
