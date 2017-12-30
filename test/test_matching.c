@@ -4,10 +4,10 @@
 char *utest_matching_match()
 {
     Matching m0 = match("xest", "test");
-    mu_assert("No match", match_type(m0) == NONE);
+    mu_assert("No match #1", match_type(m0) == NONE);
 
     Matching m = match("test", "xest");
-    mu_assert("No match", match_type(m) == NONE);
+    mu_assert("No match #2", match_type(m) == NONE);
 
     Matching m2 = match("xest", "xest");
     mu_assert("Exact match", strcmp(m2.match, "xest") == 0);
@@ -18,7 +18,6 @@ char *utest_matching_match()
     Matching m3 = match("xest", "xester");
     mu_assert("Partial match left #1", strcmp(m3.match, "xest") == 0);
     mu_assert("Partial match left #2", m3.rest_left == NULL);
-    printf("%s\n", m3.rest_right);
     mu_assert("Partial match left #3", strcmp(m3.rest_right, "er") == 0);
     mu_assert("Partial match left #4", match_type(m3) == PARTIAL_LEFT);
 

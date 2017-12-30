@@ -37,38 +37,7 @@ const char *edge_str(const EdgePointer e)
 // Suffix Tree
 
 
-TreeMatching stree_find(Stree tree, const char *c)
-{
-    // TODO Rewrite everything
-    Matching m = match(tree->lbl->mark, c);
-
-    TreeMatching ret;
-    ret.m = matching_empty();
-    ret.tree = NULL;
-
-    switch (match_type(m)) {
-        case NONE:
-            if (tree->right) {
-                stree_find(tree->right, c);
-            } else {
-                return ret;
-            }
-            break;
-        case PARTIAL_LEFT:
-            return ret;
-            break;
-        case PARTIAL_RIGHT:
-            return ret;
-            break;
-        case EXACT:
-            return ret;
-    }
-
-    return ret;
-}
-
-
-EdgePointer stree_init(const char *t)
+STree stree_init(const char *t)
 {
     char *mark = malloc(sizeof(char) * STRING_INIT_LEN);
     sprintf(mark, "%c", t[0]);
@@ -80,7 +49,49 @@ EdgePointer stree_init(const char *t)
 }
 
 
-void stree_extend(Stree base, const EdgePointer ext)
+TreeMatching stree_find(STree tree, const char *c)
+{
+    // TODO Rewrite everything
+    Matching m = match(tree->lbl->mark, c);
+
+    TreeMatching ret;
+    ret.m = matching_empty();
+    ret.tree = NULL;
+
+    switch (match_type(m)) {
+        case NONE:
+            // The first character of c could not be matched with any character
+            // in the label of the tree
+            if (tree->right) {
+                return stree_find(tree->right, c);
+            } else {
+                return ret;
+            }
+        case PARTIAL_LEFT:
+            // The whole marking of the tree label was matched, but something
+            // in c is left. Try to continue with child nodes.
+            if (tree->child) {
+                return stree_find(tree->child, m.rest_right);
+            } else {
+                return ret;
+            }
+        case PARTIAL_RIGHT:
+            // The whole c was matched but ended up in the middle of the tree
+            // label.
+            ret.m = m;
+            ret.tree = tree;
+            return ret;
+        case EXACT:
+            ret.m = m;
+            ret.tree = tree;
+            return ret;
+    }
+
+    return ret;
+}
+
+
+void stree_extend_edge_below(STree base, const EdgePointer ext)
 {
     if (!base->child) {
         base->child = ext;
@@ -94,7 +105,7 @@ void stree_extend(Stree base, const EdgePointer ext)
 }
 
 
-void stree_extend_right(Stree base, const EdgePointer ext)
+void stree_extend_edge_right(STree base, const EdgePointer ext)
 {
     EdgePointer probe = base;
     while (probe->right) {

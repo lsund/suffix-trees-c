@@ -18,10 +18,10 @@ typedef struct edge {
     Label lbl;
     struct edge *child;
     struct edge *right;
-} Edge, *EdgePointer, *Stree;
+} Edge, *EdgePointer, *STree;
 
 typedef struct treematching {
-    Stree tree;
+    STree tree;
     Matching m;
 } TreeMatching;
 
@@ -34,12 +34,12 @@ EdgePointer edge_from_mark(char *mark);
 
 EdgePointer edge_from_label(const Label lbl);
 
-TreeMatching stree_find(Stree tree, const char *m);
+TreeMatching stree_find(STree tree, const char *m);
 
 EdgePointer stree_init(const char *t);
 
-void stree_extend(Stree base, const EdgePointer ext);
+void stree_extend_edge_below(STree base, const EdgePointer ext);
 
-void stree_extend_right(Stree base, const EdgePointer ext);
+void stree_extend_edge_right(STree base, const EdgePointer ext);
 
 #endif

@@ -11,11 +11,11 @@ Matching matching_empty()
 
 MatchType match_type(const Matching match)
 {
-    if (!match.match) {
+    if (!match.success) {
         return NONE;
-    } else if (!match.rest_left && !match.rest_right) {
+    } else if (match.success && !match.rest_left && !match.rest_right) {
         return EXACT;
-    } else if (!match.rest_left) {
+    } else if (match.success && !match.rest_left) {
         return PARTIAL_LEFT;
     } else {
         return PARTIAL_RIGHT;
@@ -63,11 +63,19 @@ Matching match(const char *left, const char *right)
         char *match = malloc(sizeof(char) * 128);
         sstring(match, 0, i, left);
         ret.match = match;
+        ret.success = 1;
 
     } else {
-        ret.match      = NULL;
-        ret.rest_left  = NULL;
+
+        ret.success = right_len == 0;
         ret.rest_right = NULL;
+        ret.match      = NULL;
+        if (left_len == 0) {
+            ret.rest_left  = NULL;
+        } else {
+            ret.rest_left = left;
+        }
+
     }
     return ret;
 }

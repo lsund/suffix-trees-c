@@ -1,10 +1,10 @@
 
 #include "ukkonen.h"
 
-Stree ukkonen_naive() {
+STree ukkonen_naive() {
     char *text = "abaababa";
-    Stree tree = stree_init(text);
-    size_t len = strlen(text);
+    STree tree = stree_init(text);
+    /* size_t len = strlen(text); */
     /* for (unsigned long i = 1; i <= len; i++) { */
         /* for(unsigned long j = 0; j < i; j++) { */
     for (unsigned long i = 3; i <= 4; i++) {
@@ -19,19 +19,40 @@ Stree ukkonen_naive() {
             sstring(t_init, j, t_len - 1, text);
             char a = t[t_len - 1];
 
-            printf("Searching for: %s\n", t_init);
-            Stree end = stree_find(tree, t_init).tree;
+            printf("Finding %s in %s\n", t_init, tree->lbl->mark);
+            TreeMatching tm = stree_find(tree, t_init);
+            STree end = tm.tree;
 
-            if (end) {
+            if (tm.m.success) {
 
-                // TODO At this point we found the end. Now we need to check if
-                // we are at the last character. In that case extend.
-                // Otherwise, need to insert inner node.
-                //
+                // TODO have to extend where the matching stopped.
+                printf("Matched %s of the label\n", tm.m.match);
 
-                printf("Matched. Extending: %s with %c\n", end->lbl->mark, a);
-                label_extend_letter(end->lbl, a);
-                printf("Result: %s\n", end->lbl->mark);
+                if (match_type(tm.m) == EXACT) {
+                    label_extend_letter(end->lbl, a);
+                    printf("Extended with %c. Result: %s\n", a, end->lbl->mark);
+                } else {
+                    if (!tm.m.match) {
+                        printf("No matching\n");
+                        // TODO Continue here
+                        // If no matching is found, need to create a new right
+                        // edge
+                        // If a matching is found, need to insert a new leaf
+                        // node.
+                        return NULL;
+                    }
+                }
+
+
+
+                /* if (!extended) { */
+                /*     char *mark = malloc(sizeof(char) * STRING_INIT_LEN); */
+                /*     sprintf(mark, "%c", a); */
+                /*     EdgePointer right_edge = edge_from_mark(mark); */
+                /*     stree_extend_edge_right(tree, right_edge); */
+                /*     printf("No matching sibling. Create new edge with: %s\n", */
+                /*             right_edge->lbl->mark); */
+                /* } */
 
             } else {
 
@@ -48,12 +69,6 @@ Stree ukkonen_naive() {
                     probe = probe->right;
                 }
                 if (!matching_branch) {
-                    char *mark = malloc(sizeof(char) * STRING_INIT_LEN);
-                    sprintf(mark, "%c", a);
-                    EdgePointer right_edge = edge_from_mark(mark);
-                    stree_extend_right(tree, right_edge);
-                    printf("No matching sibling. Create new edge with: %s\n",
-                            right_edge->lbl->mark); 
                 } else {
                     printf("Doing nothing\n");
                 }
