@@ -42,6 +42,8 @@ TreeMatching stree_find(STree tree, const char *m);
 
 EdgePointer stree_init(const char *t);
 
+int stree_match_letter(STree tree, size_t o, char c);
+
 int stree_sibling_with(STree tree, char c);
 
 int stree_child_with(STree tree, char c);

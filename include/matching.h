@@ -35,4 +35,7 @@ MatchType match_type(const Matching match);
 
 Matching match(const char *a, const char *b);
 
+int matched_fully_left(Matching m);
+
+int matched_fully_right(Matching m);
 #endif

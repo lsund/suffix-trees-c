@@ -8,3 +8,15 @@ void sstring(char *dst, const int i, const int n, const char *src)
     sprintf(dst, "%s", tmp);
 }
 
+void extend(char *s, char c)
+{
+    *(s + strlen(s)) = c;
+}
+
+int runtime_error(const char *msg)
+{
+    fprintf(stderr, "Error: %s\n", msg);
+    exit(1);
+    return -99;
+}
+

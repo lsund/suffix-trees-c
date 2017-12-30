@@ -3,6 +3,14 @@
 #include "stree.h"
 
 
+char *utest_stree_match_letter()
+{
+    /* EdgePointer t = edge_from_string("aab"); */
+    /* stree_match_letter(t, 'a'); */
+    return NULL;
+}
+
+
 char *utest_edge_split()
 {
     EdgePointer t = edge_from_string("abaa");
@@ -12,7 +20,7 @@ char *utest_edge_split()
     return NULL;
 }
 
-char *utest_stree_branch_with()
+char *utest_stree_sibling_with()
 {
     EdgePointer t1 = edge_from_string("a");
     EdgePointer t2 = edge_from_string("b");
@@ -23,12 +31,12 @@ char *utest_stree_branch_with()
     stree_extend_edge_right(t1, t3);
     stree_extend_edge_right(t1, t4);
 
-    mu_assert("Branches 1", stree_branch_with(t1, 'a'));
-    mu_assert("Branches 2", stree_branch_with(t1, 'b'));
-    mu_assert("Branches 3", stree_branch_with(t1, 'c'));
-    mu_assert("Branches 4", stree_branch_with(t1, 'd'));
-    mu_assert("Branches 5", !stree_branch_with(t1, 'e'));
-    mu_assert("Branches 6", stree_branch_with(t2, 'c'));
+    mu_assert("Branches 1", stree_sibling_with(t1, 'a'));
+    mu_assert("Branches 2", stree_sibling_with(t1, 'b'));
+    mu_assert("Branches 3", stree_sibling_with(t1, 'c'));
+    mu_assert("Branches 4", stree_sibling_with(t1, 'd'));
+    mu_assert("Branches 5", !stree_sibling_with(t1, 'e'));
+    mu_assert("Branches 6", stree_sibling_with(t2, 'c'));
     return NULL;
 }
 
@@ -78,7 +86,7 @@ char *utest_stree_find()
 char *test_stree()
 {
     mu_run_utest(utest_stree_find);
-    mu_run_utest(utest_stree_branch_with);
+    mu_run_utest(utest_stree_sibling_with);
     mu_run_utest(utest_edge_split);
     return NULL;
 }

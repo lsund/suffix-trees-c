@@ -1,13 +1,15 @@
 
 #include "ukkonen.h"
 
+#define MAX_IT 7
+
 STree ukkonen_naive() {
     char *text = "abaababa";
     STree tree = stree_init(text);
     /* size_t len = strlen(text); */
     /* for (unsigned long i = 1; i <= len; i++) { */
         /* for(unsigned long j = 0; j < i; j++) { */
-    for (unsigned long i = 3; i <= 6; i++) {
+    for (unsigned long i = 3; i <= MAX_IT; i++) {
         for(unsigned long j = 0; j < i - 1; j++) {
         printf("\n-------Step: %zu, Phase %zu-----\n\n", i - 2, j);
 
@@ -27,9 +29,11 @@ STree ukkonen_naive() {
 
                 // x = abaababa
                 //
-                // abaab
-                // baa
-                // aa
+                // abaaba
+                // baaba
+                // aaba
+                // aba
+                // ba
                 // a
                 //
                 // TODO The following assumes that the tree is only one level.
@@ -45,14 +49,24 @@ STree ukkonen_naive() {
                     if (match_type(tm.m) == EXACT) {
                         if (!stree_child_with(end, a)) {
                             label_extend_letter(end->lbl, a);
-                            printf("Extended edge with %c. Result: %s\n", a, end->lbl->mark);
-                        } else {
-                            printf("Doing nothing...\n");
+                            printf("Extended edge with %c. Result: %s\n", a,
+                                    end->lbl->mark); }
+                        else {
+                            printf("Child with %c already exists. Doing nothing...\n",
+                                    a);
                         }
                     } else {
-                        // Insert new child node
-                        edge_split(tree, tm.m.match);
-                        stree_extend_edge_right(tree->child, edge_from_letter(a));
+                        size_t o = strlen(tm.m.match);
+                        if (end->lbl->mark[o] == a) {
+                            printf("Next character is the right one. Doing nothing...\n");
+                        } else {
+                                printf("Splitting edge\n");
+                                // Insert new child node
+                                edge_split(tree, tm.m.match);
+                                stree_extend_edge_right(
+                                        tree->child,
+                                        edge_from_letter(a));
+                        }
                     }
 
                 } else {
@@ -65,7 +79,7 @@ STree ukkonen_naive() {
                         stree_extend_edge_right(tree, edge_from_letter(a));
                         printf("Extended tree with new edge: %c\n", a);
                     } else {
-                        printf("Doing nothing..\n");
+                        printf("%c already exists in branch root. Doing nothing..\n", a);
                     }
 
                 }

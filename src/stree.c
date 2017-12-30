@@ -69,6 +69,7 @@ STree stree_init(const char *t)
 
 TreeMatching stree_find(STree tree, const char *c)
 {
+
     Matching m = match(tree->lbl->mark, c);
 
     TreeMatching ret;
@@ -131,6 +132,19 @@ int stree_child_with(STree tree, char c)
         probe = probe->right;
     }
     return 0;
+}
+
+
+int stree_match_letter(STree tree, size_t o, char c)
+{
+    size_t len = tree->lbl->len;
+    if (o > len) {
+        return runtime_error("stree_match_letter: offset longer than length");
+    } else if (o == len) {
+        return stree_child_with(tree, c);
+    } else {
+        return tree->lbl->mark[o + 1] == c;
+    }
 }
 
 

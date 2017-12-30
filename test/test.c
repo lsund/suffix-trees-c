@@ -17,6 +17,8 @@ int tests_run, utests_run;
 
 static char *test()
 {
+    mu_message(MODULE, "util\n");
+    mu_run_test(test_util);
     mu_message(MODULE, "label\n");
     mu_run_test(test_label);
     mu_message(MODULE,"stree\n");

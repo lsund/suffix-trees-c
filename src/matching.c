@@ -80,4 +80,15 @@ Matching match(const char *left, const char *right)
     return ret;
 }
 
+int matched_fully_right(Matching m)
+{
+    MatchType t = match_type(m);
+    return t == EXACT || t == PARTIAL_RIGHT;
+}
 
+
+int matched_fully_left(Matching m)
+{
+    MatchType t = match_type(m);
+    return t == EXACT || t == PARTIAL_LEFT;
+}
