@@ -30,16 +30,17 @@ STree ukkonen_naive() {
 
                 if (match_type(tm.m) == EXACT) {
                     label_extend_letter(end->lbl, a);
-                    printf("Extended with %c. Result: %s\n", a, end->lbl->mark);
+                    printf("Extended edge with %c. Result: %s\n", a, end->lbl->mark);
                 } else {
                     if (!tm.m.match) {
                         printf("No matching\n");
                         EdgePointer new = edge_from_letter(a);
+                        // TODO Might not add at root
                         stree_extend_edge_right(tree, new);
+                        printf("Extended tree with new edge: %c\n", a);
                         // TODO Continue here
                         // If no matching is found, need to create a new right
                         // edge
-                        return NULL;
                     } else {
                         // TODO If a matching is found, need to insert a new leaf
                         // node.

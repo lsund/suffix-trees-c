@@ -99,12 +99,25 @@ TreeMatching stree_find(STree tree, const char *c)
 }
 
 
-void stree_extend_edge_below(STree base, const EdgePointer ext)
+int stree_branch_with(STree tree, char c)
 {
-    if (!base->child) {
-        base->child = ext;
+    EdgePointer probe = tree;
+    while(probe) {
+        if (*probe->lbl->mark == c) {
+            return 1;
+        }
+        probe = probe->right;
+    }
+    return 0;
+}
+
+
+void stree_extend_edge_below(STree tree, const EdgePointer ext)
+{
+    if (!tree->child) {
+        tree->child = ext;
     } else {
-        EdgePointer probe = base->child;
+        EdgePointer probe = tree->child;
         while (probe->right) {
             probe = probe->right;
         }
@@ -113,9 +126,9 @@ void stree_extend_edge_below(STree base, const EdgePointer ext)
 }
 
 
-void stree_extend_edge_right(STree base, const EdgePointer ext)
+void stree_extend_edge_right(STree tree, const EdgePointer ext)
 {
-    EdgePointer probe = base;
+    EdgePointer probe = tree;
     while (probe->right) {
         probe = probe->right;
     }

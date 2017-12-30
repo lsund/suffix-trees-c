@@ -2,6 +2,26 @@
 #include "test.h"
 #include "stree.h"
 
+char *utest_stree_branch_with()
+{
+    EdgePointer t1 = edge_from_string("a");
+    EdgePointer t2 = edge_from_string("b");
+    EdgePointer t3 = edge_from_string("c");
+    EdgePointer t4 = edge_from_string("d");
+
+    stree_extend_edge_right(t1, t2);
+    stree_extend_edge_right(t1, t3);
+    stree_extend_edge_right(t1, t4);
+
+    mu_assert("Branches 1", stree_branch_with(t1, 'a'));
+    mu_assert("Branches 2", stree_branch_with(t1, 'b'));
+    mu_assert("Branches 3", stree_branch_with(t1, 'c'));
+    mu_assert("Branches 4", stree_branch_with(t1, 'd'));
+    mu_assert("Branches 5", !stree_branch_with(t1, 'e'));
+    mu_assert("Branches 6", stree_branch_with(t2, 'c'));
+    return NULL;
+}
+
 char *utest_stree_find()
 {
     EdgePointer t = edge_from_string("he");
@@ -9,10 +29,10 @@ char *utest_stree_find()
     EdgePointer t3 = edge_from_string("o");
     EdgePointer t4 = edge_from_string("as");
     EdgePointer t5 = edge_from_string("j");
-    stree_extend(t, t2);
-    stree_extend(t2, t3);
-    stree_extend(t2, t4);
-    stree_extend(t, t5);
+    stree_extend_edge_below(t, t2);
+    stree_extend_edge_below(t2, t3);
+    stree_extend_edge_below(t2, t4);
+    stree_extend_edge_below(t, t5);
 
     TreeMatching tm = stree_find(t, "he");
     TreeMatching tm1 = stree_find(t, "h");
@@ -48,5 +68,6 @@ char *utest_stree_find()
 char *test_stree()
 {
     mu_run_utest(utest_stree_find);
+    mu_run_utest(utest_stree_branch_with);
     return NULL;
 }

@@ -40,6 +40,8 @@ TreeMatching stree_find(STree tree, const char *m);
 
 EdgePointer stree_init(const char *t);
 
+int stree_branch_with(STree tree, char c);
+
 void stree_extend_edge_below(STree base, const EdgePointer ext);
 
 void stree_extend_edge_right(STree base, const EdgePointer ext);
