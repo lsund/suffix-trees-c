@@ -2,6 +2,16 @@
 #include "test.h"
 #include "stree.h"
 
+
+char *utest_edge_split()
+{
+    EdgePointer t = edge_from_string("abaa");
+    edge_split(t, "a");
+    mu_assert("split 1", strcmp(t->lbl->mark, "a") == 0);
+    mu_assert("split 2", strcmp(t->child->lbl->mark, "baa") == 0);
+    return NULL;
+}
+
 char *utest_stree_branch_with()
 {
     EdgePointer t1 = edge_from_string("a");
@@ -69,5 +79,6 @@ char *test_stree()
 {
     mu_run_utest(utest_stree_find);
     mu_run_utest(utest_stree_branch_with);
+    mu_run_utest(utest_edge_split);
     return NULL;
 }

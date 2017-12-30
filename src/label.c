@@ -1,7 +1,7 @@
 #include "label.h"
 
 
-Label label_maxlen(char *mark, size_t maxlen)
+Label label_maxlen(const char *mark, size_t maxlen)
 {
     Label ret = malloc(sizeof(struct label));
     ret->mark    = NULL;
@@ -21,7 +21,7 @@ Label label_maxlen(char *mark, size_t maxlen)
 }
 
 
-Label label(char *mark)
+Label label(const char *mark)
 {
     return label_maxlen(mark, STRING_INIT_LEN);
 }

@@ -14,9 +14,9 @@ typedef struct label {
     size_t len, max_len;
 } *Label;
 
-Label label_maxlen(char *mark, size_t maxlen);
+Label label_maxlen(const char *mark, size_t maxlen);
 
-Label label(char *mark);
+Label label(const char *mark);
 
 void label_extend(const Label lbl, const char *mark);
 

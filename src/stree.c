@@ -12,7 +12,7 @@ EdgePointer edge_from_letter(char c)
 }
 
 
-EdgePointer edge_from_string(char *string)
+EdgePointer edge_from_string(const char *string)
 {
     EdgePointer ret;
     Label lbl = label(string);
@@ -41,9 +41,14 @@ const char *edge_str(const EdgePointer e)
 }
 
 
-/* void edge_split(EdgePointer e, char *s) */
-/* { */
-/* } */
+void edge_split(EdgePointer e, const char *s)
+{
+    Matching m = match(e->lbl->mark, s);
+    free(e->lbl);
+    e->lbl = label(m.match);
+    EdgePointer child = edge_from_string(m.rest_left);
+    stree_extend_edge_below(e, child);
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////

@@ -35,20 +35,18 @@ STree ukkonen_naive() {
                     if (!tm.m.match) {
                         if (!stree_branch_with(tree, a)) {
                             printf("No matching\n");
-                            EdgePointer new = edge_from_letter(a);
                             // TODO Might not add at root
-                            stree_extend_edge_right(tree, new);
+                            stree_extend_edge_right(tree, edge_from_letter(a));
                             printf("Extended tree with new edge: %c\n", a);
-                            // TODO Continue here
-                            // If no matching is found, need to create a new right
-                            // edge
                         } else {
                             printf("Doing nothing..\n");
                         }
                     } else {
-                        printf("Matching found but not exact\n");
-                        // TODO If a matching is found, need to insert a new leaf
-                        // node.
+                        printf("Matching found but not perfect: %s %s\n",
+                                tm.m.match, tm.m.rest_left);
+                        printf("Label: %s\n", tree->lbl->mark);
+                        edge_split(tree, tm.m.match);
+                        stree_extend_edge_right(tree->child, edge_from_letter(a));
                     }
                 }
 
