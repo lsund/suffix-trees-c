@@ -41,6 +41,11 @@ const char *edge_str(const EdgePointer e)
 }
 
 
+/* void edge_split(EdgePointer e, char *s) */
+/* { */
+/* } */
+
+
 ///////////////////////////////////////////////////////////////////////////////
 // Suffix Tree
 
@@ -110,6 +115,7 @@ int stree_branch_with(STree tree, char c)
     }
     return 0;
 }
+
 
 
 void stree_extend_edge_below(STree tree, const EdgePointer ext)

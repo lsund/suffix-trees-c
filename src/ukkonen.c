@@ -7,7 +7,7 @@ STree ukkonen_naive() {
     /* size_t len = strlen(text); */
     /* for (unsigned long i = 1; i <= len; i++) { */
         /* for(unsigned long j = 0; j < i; j++) { */
-    for (unsigned long i = 3; i <= 4; i++) {
+    for (unsigned long i = 3; i <= 5; i++) {
         for(unsigned long j = 0; j < i - 1; j++) {
         printf("\n-------Step: %zu, Phase %zu-----\n\n", i - 2, j);
 
@@ -33,30 +33,24 @@ STree ukkonen_naive() {
                     printf("Extended edge with %c. Result: %s\n", a, end->lbl->mark);
                 } else {
                     if (!tm.m.match) {
-                        printf("No matching\n");
-                        EdgePointer new = edge_from_letter(a);
-                        // TODO Might not add at root
-                        stree_extend_edge_right(tree, new);
-                        printf("Extended tree with new edge: %c\n", a);
-                        // TODO Continue here
-                        // If no matching is found, need to create a new right
-                        // edge
+                        if (!stree_branch_with(tree, a)) {
+                            printf("No matching\n");
+                            EdgePointer new = edge_from_letter(a);
+                            // TODO Might not add at root
+                            stree_extend_edge_right(tree, new);
+                            printf("Extended tree with new edge: %c\n", a);
+                            // TODO Continue here
+                            // If no matching is found, need to create a new right
+                            // edge
+                        } else {
+                            printf("Doing nothing..\n");
+                        }
                     } else {
+                        printf("Matching found but not exact\n");
                         // TODO If a matching is found, need to insert a new leaf
                         // node.
                     }
                 }
-
-
-
-                /* if (!extended) { */
-                /*     char *mark = malloc(sizeof(char) * STRING_INIT_LEN); */
-                /*     sprintf(mark, "%c", a); */
-                /*     EdgePointer right_edge = edge_from_string(mark); */
-                /*     stree_extend_edge_right(tree, right_edge); */
-                /*     printf("No matching sibling. Create new edge with: %s\n", */
-                /*             right_edge->lbl->mark); */
-                /* } */
 
             } else {
 
