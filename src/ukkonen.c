@@ -25,7 +25,9 @@ STree ukkonen_naive() {
 
             if (tm.m.success) {
 
-                // TODO have to extend where the matching stopped.
+                // TODO The following assumes that the tree is only one level.
+                // Might need to chang things for larger trees. Check T7 for
+                // example.
                 printf("Matched %s of the label\n", tm.m.match);
 
                 if (tm.m.match) {
