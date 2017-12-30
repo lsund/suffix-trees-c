@@ -28,26 +28,32 @@ STree ukkonen_naive() {
                 // TODO have to extend where the matching stopped.
                 printf("Matched %s of the label\n", tm.m.match);
 
-                if (match_type(tm.m) == EXACT) {
-                    label_extend_letter(end->lbl, a);
-                    printf("Extended edge with %c. Result: %s\n", a, end->lbl->mark);
-                } else {
-                    if (!tm.m.match) {
-                        if (!stree_branch_with(tree, a)) {
-                            printf("No matching\n");
-                            // TODO Might not add at root
-                            stree_extend_edge_right(tree, edge_from_letter(a));
-                            printf("Extended tree with new edge: %c\n", a);
-                        } else {
-                            printf("Doing nothing..\n");
-                        }
+                if (tm.m.match) {
+
+                    // Some part of the label was matched
+
+                    if (match_type(tm.m) == EXACT) {
+                        label_extend_letter(end->lbl, a);
+                        printf("Extended edge with %c. Result: %s\n", a, end->lbl->mark);
                     } else {
-                        printf("Matching found but not perfect: %s %s\n",
-                                tm.m.match, tm.m.rest_left);
-                        printf("Label: %s\n", tree->lbl->mark);
+                        // Insert new child node
                         edge_split(tree, tm.m.match);
                         stree_extend_edge_right(tree->child, edge_from_letter(a));
                     }
+
+                } else {
+
+                    // No part of the label was matched
+
+                    if (!stree_branch_with(tree, a)) {
+                        printf("No matching\n");
+                        // TODO Might not add at root
+                        stree_extend_edge_right(tree, edge_from_letter(a));
+                        printf("Extended tree with new edge: %c\n", a);
+                    } else {
+                        printf("Doing nothing..\n");
+                    }
+
                 }
 
             } else {
