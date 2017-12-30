@@ -69,7 +69,6 @@ STree stree_init(const char *t)
 
 TreeMatching stree_find(STree tree, const char *c)
 {
-    // TODO Rewrite everything
     Matching m = match(tree->lbl->mark, c);
 
     TreeMatching ret;
@@ -109,7 +108,7 @@ TreeMatching stree_find(STree tree, const char *c)
 }
 
 
-int stree_branch_with(STree tree, char c)
+int stree_sibling_with(STree tree, char c)
 {
     EdgePointer probe = tree;
     while(probe) {
@@ -121,6 +120,18 @@ int stree_branch_with(STree tree, char c)
     return 0;
 }
 
+
+int stree_child_with(STree tree, char c)
+{
+    EdgePointer probe = tree->child;
+    while(probe) {
+        if (*probe->lbl->mark == c) {
+            return 1;
+        }
+        probe = probe->right;
+    }
+    return 0;
+}
 
 
 void stree_extend_edge_below(STree tree, const EdgePointer ext)

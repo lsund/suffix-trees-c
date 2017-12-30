@@ -26,6 +26,13 @@ char *utest_matching_match()
     mu_assert("Partial match left #6", m4.rest_right == NULL);
     mu_assert("Partial match left #7", strcmp(m4.rest_left, "er") == 0);
     mu_assert("Partial match left #8", match_type(m4) == PARTIAL_RIGHT);
+
+
+    Matching m5 = match("a", "abaa");
+    mu_assert("Match", strcmp(m5.match, "a") == 0);
+
+
+
     return NULL;
 }
 

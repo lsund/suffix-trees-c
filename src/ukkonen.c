@@ -7,7 +7,7 @@ STree ukkonen_naive() {
     /* size_t len = strlen(text); */
     /* for (unsigned long i = 1; i <= len; i++) { */
         /* for(unsigned long j = 0; j < i; j++) { */
-    for (unsigned long i = 3; i <= 5; i++) {
+    for (unsigned long i = 3; i <= 6; i++) {
         for(unsigned long j = 0; j < i - 1; j++) {
         printf("\n-------Step: %zu, Phase %zu-----\n\n", i - 2, j);
 
@@ -25,18 +25,30 @@ STree ukkonen_naive() {
 
             if (tm.m.success) {
 
+                // x = abaababa
+                //
+                // abaab
+                // baa
+                // aa
+                // a
+                //
                 // TODO The following assumes that the tree is only one level.
                 // Might need to chang things for larger trees. Check T7 for
                 // example.
-                printf("Matched %s of the label\n", tm.m.match);
 
                 if (tm.m.match) {
+
+                    printf("Matched %s\n", tm.m.match);
 
                     // Some part of the label was matched
 
                     if (match_type(tm.m) == EXACT) {
-                        label_extend_letter(end->lbl, a);
-                        printf("Extended edge with %c. Result: %s\n", a, end->lbl->mark);
+                        if (!stree_child_with(end, a)) {
+                            label_extend_letter(end->lbl, a);
+                            printf("Extended edge with %c. Result: %s\n", a, end->lbl->mark);
+                        } else {
+                            printf("Doing nothing...\n");
+                        }
                     } else {
                         // Insert new child node
                         edge_split(tree, tm.m.match);
@@ -47,7 +59,7 @@ STree ukkonen_naive() {
 
                     // No part of the label was matched
 
-                    if (!stree_branch_with(tree, a)) {
+                    if (!stree_sibling_with(tree, a)) {
                         printf("No matching\n");
                         // TODO Might not add at root
                         stree_extend_edge_right(tree, edge_from_letter(a));
