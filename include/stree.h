@@ -30,7 +30,9 @@ typedef struct treematching {
 
 const char *edge_str(const EdgePointer e);
 
-EdgePointer edge_from_mark(char *mark);
+EdgePointer edge_from_letter(char c);
+
+EdgePointer edge_from_string(char *string);
 
 EdgePointer edge_from_label(const Label lbl);
 

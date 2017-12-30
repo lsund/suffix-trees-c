@@ -4,10 +4,18 @@
 // Edge
 
 
-EdgePointer edge_from_mark(char *mark)
+EdgePointer edge_from_letter(char c)
+{
+    char *cs = malloc(sizeof(char) * 2);
+    *cs = c;
+    return edge_from_string(cs);
+}
+
+
+EdgePointer edge_from_string(char *string)
 {
     EdgePointer ret;
-    Label lbl = label(mark);
+    Label lbl = label(string);
     ret = malloc(sizeof(Edge));
     ret->lbl = lbl;
     ret->child = NULL;

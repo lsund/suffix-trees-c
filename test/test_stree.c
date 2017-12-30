@@ -4,11 +4,11 @@
 
 char *utest_stree_find()
 {
-    EdgePointer t = edge_from_mark("he");
-    EdgePointer t2 = edge_from_mark("ll");
-    EdgePointer t3 = edge_from_mark("o");
-    EdgePointer t4 = edge_from_mark("as");
-    EdgePointer t5 = edge_from_mark("j");
+    EdgePointer t = edge_from_string("he");
+    EdgePointer t2 = edge_from_string("ll");
+    EdgePointer t3 = edge_from_string("o");
+    EdgePointer t4 = edge_from_string("as");
+    EdgePointer t5 = edge_from_string("j");
     stree_extend(t, t2);
     stree_extend(t2, t3);
     stree_extend(t2, t4);

@@ -6,7 +6,7 @@
 int main()
 {
 
-    STree root = edge_from_mark("root");;
+    STree root = edge_from_string("root");;
     STree u = ukkonen_naive();
 
     stree_extend_edge_below(root, u);

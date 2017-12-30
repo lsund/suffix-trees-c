@@ -34,12 +34,15 @@ STree ukkonen_naive() {
                 } else {
                     if (!tm.m.match) {
                         printf("No matching\n");
+                        EdgePointer new = edge_from_letter(a);
+                        stree_extend_edge_right(tree, new);
                         // TODO Continue here
                         // If no matching is found, need to create a new right
                         // edge
-                        // If a matching is found, need to insert a new leaf
-                        // node.
                         return NULL;
+                    } else {
+                        // TODO If a matching is found, need to insert a new leaf
+                        // node.
                     }
                 }
 
@@ -48,7 +51,7 @@ STree ukkonen_naive() {
                 /* if (!extended) { */
                 /*     char *mark = malloc(sizeof(char) * STRING_INIT_LEN); */
                 /*     sprintf(mark, "%c", a); */
-                /*     EdgePointer right_edge = edge_from_mark(mark); */
+                /*     EdgePointer right_edge = edge_from_string(mark); */
                 /*     stree_extend_edge_right(tree, right_edge); */
                 /*     printf("No matching sibling. Create new edge with: %s\n", */
                 /*             right_edge->lbl->mark); */
