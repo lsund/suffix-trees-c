@@ -74,7 +74,7 @@ TreeMatching stree_find(STree tree, const char *c)
 
     TreeMatching ret;
     ret.m = matching_empty();
-    ret.tree = NULL;
+    ret.end = NULL;
 
     switch (match_type(m)) {
         case NONE:
@@ -97,11 +97,11 @@ TreeMatching stree_find(STree tree, const char *c)
             // The whole c was matched but ended up in the middle of the tree
             // label.
             ret.m = m;
-            ret.tree = tree;
+            ret.end = tree;
             return ret;
         case EXACT:
             ret.m = m;
-            ret.tree = tree;
+            ret.end = tree;
             return ret;
     }
 

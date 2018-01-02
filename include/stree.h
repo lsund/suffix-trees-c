@@ -21,7 +21,7 @@ typedef struct edge {
 } Edge, *EdgePointer, *STree;
 
 typedef struct treematching {
-    STree tree;
+    EdgePointer end;
     Matching m;
 } TreeMatching;
 

@@ -6,8 +6,10 @@
 int main()
 {
 
+    char *text = "abaababa";
+
     STree root = edge_from_string("root");;
-    STree u = ukkonen_naive();
+    STree u = ukkonen_naive(text);
 
     stree_extend_edge_below(root, u);
 
