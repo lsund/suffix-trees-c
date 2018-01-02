@@ -1,124 +1,60 @@
 
 #include "ukkonen.h"
 
-#define MAX_IT 9
+
+static void extend_end(EdgePointer end, const char a)
+{
+    if (!stree_child_with(end, a)) {
+        label_extend_letter(end->lbl, a);
+    }
+}
+
+
+static void split_end(TreeMatching tm, const char a)
+{
+    size_t k = strlen(tm.m.match);
+    int next_character_matches = tm.tree->lbl->mark[k] == a;
+
+    if (!next_character_matches) {
+        edge_split(tm.tree, tm.m.match);
+        stree_extend_edge_right( tm.tree->child, edge_from_letter(a));
+    }
+}
+
 
 STree ukkonen_naive() {
+
     char *text = "abaababa";
+    size_t len = strlen(text);
     STree tree = stree_init(text);
-    /* size_t len = strlen(text); */
-    /* for (unsigned long i = 1; i <= len; i++) { */
-        /* for(unsigned long j = 0; j < i; j++) { */
-    for (unsigned long i = 3; i <= MAX_IT; i++) {
-        for(unsigned long j = 0; j < i - 1; j++) {
-        printf("\n-------Step: %zu, Phase %zu-----\n\n", i - 2, j);
+    char t[8];
 
-            char t[8];
-            char t_init[8];
-            size_t t_len = i - j - 1;
+    for (unsigned long i = 1; i <= len - 1; i++) {
+        for(unsigned long j = 0; j <= i; j++) {
 
-            sstring(t, j, t_len, text);
-            sstring(t_init, j, t_len - 1, text);
-            char a = t[t_len - 1];
+            sstring(t, j, i - j, text);
+            char a = text[i];
 
-            printf("Finding %s in %s\n", t_init, tree->lbl->mark);
-            TreeMatching tm = stree_find(tree, t_init);
+            TreeMatching tm = stree_find(tree, t);
             STree end = tm.tree;
 
-            if (tm.m.success) {
+            if (tm.m.match) {
 
-                // x = abaababa
-                //
-                // abaaba
-                // baaba
-                // aaba
-                // aba
-                // ba
-                // a
-                //
-                // TODO The following assumes that the tree is only one level.
-                // Might need to chang things for larger trees. Check T7 for
-                // example.
-
-                if (tm.m.match) {
-
-                    printf("Matched %s\n", tm.m.match);
-
-                    // Some part of the label was matched
-
-                    if (match_type(tm.m) == EXACT) {
-                        if (!stree_child_with(end, a)) {
-                            label_extend_letter(end->lbl, a);
-                            printf("Extended edge with %c. Result: %s\n", a,
-                                    end->lbl->mark); }
-                        else {
-                            printf("Child with %c already exists. Doing nothing...\n",
-                                    a);
-                        }
-                    } else {
-                        size_t o = strlen(tm.m.match);
-                        if (end->lbl->mark[o] == a) {
-                            printf("Next character is the right one. Doing nothing...\n");
-                        } else {
-                                printf("Splitting edge with new marking: %c\n", a);
-                                // Insert new child node
-                                printf("Arising from edge: %s\n", end->lbl->mark);
-                                edge_split(end, tm.m.match);
-                                stree_extend_edge_right(
-                                        end->child,
-                                        edge_from_letter(a));
-                        }
-                    }
-
+                if (match_type(tm.m) == EXACT) {
+                    extend_end(end, a);
                 } else {
-
-                    // No part of the label was matched
-
-                    if (!stree_sibling_with(tree, a)) {
-                        printf("No matching\n");
-                        // TODO Might not add at root
-                        stree_extend_edge_right(tree, edge_from_letter(a));
-                        printf("Extended tree with new edge: %c\n", a);
-                    } else {
-                        printf("%c already exists in branch root. Doing nothing..\n", a);
-                    }
-
+                    split_end(tm, a);
                 }
 
             } else {
 
-                printf("\nNot matched: label: %s, char: %c\n\n", tree->lbl->mark, a);
-                printf("Trying right sibling...\n");
-
-                EdgePointer probe = tree;
-                int matching_branch = 0;
-                while (probe) {
-                    if (probe->lbl->mark[0] == a) {
-                        matching_branch = 1;
-                        break;
-                    }
-                    probe = probe->right;
-                }
-                if (!matching_branch) {
-                } else {
-                    printf("Doing nothing\n");
+                if (!stree_sibling_with(tree, a)) {
+                    stree_extend_edge_right(tree, edge_from_letter(a));
                 }
             }
         }
     }
     return tree;
 }
-
-
-// Construct tree I1
-// for i from 1 to m - 1 do
-//      begin phase i + 1
-//      for j from 1 to i + 1
-//          begin extension j
-//          find the end of the path from the root labaled S[j..i] in the
-//          current tree. If needed, extend that path by adding acharacter
-//          S(i+1)
-//      end
-// end
 
 
