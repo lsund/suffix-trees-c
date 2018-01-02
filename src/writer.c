@@ -19,7 +19,7 @@ static void write_stree_aux(EdgePointer probe, char *acc)
 static void write_stree(const STree tree, char *acc)
 {
     EdgePointer probe = tree;
-    strcat(acc, edge_str(probe));
+    strcat(acc, edge_str(tree));
     write_stree_aux(probe->child, acc);
     strcat(acc, "]");
 }
@@ -28,6 +28,7 @@ static void write_stree(const STree tree, char *acc)
 void write_stree_to_file(const STree tree, const char *path)
 {
     char *res = malloc(sizeof(char) * 128);
+    *res = '\0';
     write_stree(tree, res);
 
     FILE *f = fopen(path, "w");

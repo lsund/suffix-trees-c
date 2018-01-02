@@ -39,13 +39,11 @@ void label_extend(Label lbl, const char c)
         lbl->mark    = NULL;
         lbl->mark    = malloc(sizeof(char) * lbl->max_len * 2);
 
-        sprintf(lbl->mark, "%s", tmp);
+        sprintf(lbl->mark, "%s%c", tmp, c);
     }
 
+    sprintf(lbl->mark, "%s%c", lbl->mark, c);
     lbl->len++;
-    char buf[2];
-    buf[0] = c;
-    strcat(lbl->mark, buf);
 }
 
 
