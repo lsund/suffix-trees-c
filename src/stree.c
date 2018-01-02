@@ -81,6 +81,7 @@ TreeMatching stree_find(STree tree, const char *c)
             // The first character of c could not be matched with any character
             // in the label of the tree
             if (tree->right) {
+                printf("Trying sibling\n");
                 return stree_find(tree->right, c);
             } else {
                 return ret;
@@ -89,6 +90,7 @@ TreeMatching stree_find(STree tree, const char *c)
             // The whole marking of the tree label was matched, but something
             // in c is left. Try to continue with child nodes.
             if (tree->child) {
+                printf("Trying child\n");
                 return stree_find(tree->child, m.rest_right);
             } else {
                 return ret;

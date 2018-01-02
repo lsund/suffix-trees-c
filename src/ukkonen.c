@@ -1,7 +1,7 @@
 
 #include "ukkonen.h"
 
-#define MAX_IT 7
+#define MAX_IT 9
 
 STree ukkonen_naive() {
     char *text = "abaababa";
@@ -60,11 +60,12 @@ STree ukkonen_naive() {
                         if (end->lbl->mark[o] == a) {
                             printf("Next character is the right one. Doing nothing...\n");
                         } else {
-                                printf("Splitting edge\n");
+                                printf("Splitting edge with new marking: %c\n", a);
                                 // Insert new child node
-                                edge_split(tree, tm.m.match);
+                                printf("Arising from edge: %s\n", end->lbl->mark);
+                                edge_split(end, tm.m.match);
                                 stree_extend_edge_right(
-                                        tree->child,
+                                        end->child,
                                         edge_from_letter(a));
                         }
                     }
