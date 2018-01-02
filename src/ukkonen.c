@@ -5,7 +5,7 @@
 static void extend_end(TreeMatching tm, const char a)
 {
     if (!stree_child_with(tm.end, a)) {
-        label_extend_letter(tm.end->lbl, a);
+        label_extend(tm.end->lbl, a);
     }
 }
 
@@ -44,13 +44,12 @@ STree ukkonen_naive(const char *text) {
                 } else {
                     split_end(tm, a);
                 }
-            } else {
-                if (!stree_sibling_with(tree, a)) {
-                    stree_extend_edge_right(tree, edge_from_letter(a));
-                }
+            } else if (!stree_sibling_with(tree, a)) {
+                stree_extend_edge_right(tree, edge_from_letter(a));
             }
         }
     }
+
     return tree;
 }
 

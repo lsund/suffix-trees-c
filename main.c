@@ -15,5 +15,7 @@ int main()
 
     write_stree_to_file(root, "../suffix-trees-haskell/data/sample");
 
+    stree_destroy(root);
+
     return 0;
 }

@@ -52,4 +52,6 @@ void stree_extend_edge_below(STree base, const EdgePointer ext);
 
 void stree_extend_edge_right(STree base, const EdgePointer ext);
 
+void stree_destroy(STree tree);
+
 #endif

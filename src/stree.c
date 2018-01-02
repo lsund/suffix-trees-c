@@ -170,3 +170,18 @@ void stree_extend_edge_right(STree tree, const EdgePointer ext)
     }
     probe->right = ext;
 }
+
+
+void stree_destroy(STree tree)
+{
+    if (!tree) return;
+
+    if (tree->child) {
+        stree_destroy(tree->child);
+    } else if (tree->right) {
+        stree_destroy(tree->right);
+    } else {
+        label_destroy(tree->lbl);
+        free(tree);
+    }
+}

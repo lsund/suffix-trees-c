@@ -18,7 +18,8 @@ Label label_maxlen(const char *mark, size_t maxlen);
 
 Label label(const char *mark);
 
-void label_extend(const Label lbl, const char *mark);
+void label_extend(const Label lbl, const char c);
 
-void label_extend_letter(Label lbl, const char mark);
+void label_destroy(Label lbl);
+
 #endif

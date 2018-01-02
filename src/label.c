@@ -27,20 +27,10 @@ Label label(const char *mark)
 }
 
 
-void label_extend_letter(Label lbl, const char mark)
-{
-    char buf[2];
-    buf[0] = mark;
-    label_extend(lbl, buf);
-}
-
-
-void label_extend(Label lbl, const char *mark)
+void label_extend(Label lbl, const char c)
 {
 
-    size_t mark_len = strlen(mark);
-
-    if (lbl->len + mark_len > lbl->max_len) {
+    if (lbl->len + 1 > lbl->max_len) {
         char tmp[lbl->len];
         sprintf(tmp, "%s", lbl->mark);
 
@@ -52,6 +42,16 @@ void label_extend(Label lbl, const char *mark)
         sprintf(lbl->mark, "%s", tmp);
     }
 
-    lbl->len += mark_len;
-    strcat(lbl->mark, mark);
+    lbl->len++;
+    char buf[2];
+    buf[0] = c;
+    strcat(lbl->mark, buf);
+}
+
+
+void label_destroy(Label lbl)
+{
+    if (!lbl) return;
+    free(lbl->mark);
+    free(lbl);
 }

@@ -19,5 +19,8 @@ run: all
 runtest: test
 	./bin/test
 
+memcheck: all
+	make && valgrind --leak-check=full ./bin/main
+
 dirs:
 	mkdir -p bin
