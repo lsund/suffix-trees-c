@@ -61,15 +61,15 @@ const char *edge_str(const EdgePointer e)
 }
 
 
-void edge_split(EdgePointer e, char *s)
+void edge_split(EdgePointer e, LabelPointer lbl)
 {
     size_t len = e->lbl->len;
     char *mark = e->lbl->mark;
 
-    Matching m = match(e->lbl->mark, s);
+    Matching m = match(e->lbl, lbl);
     EdgePointer child = edge_from_substring(m.size, len, mark);
 
-    edge_update_label(e, 0, m.size, s);
+    edge_update_label(e, 0, m.size, lbl->mark);
     stree_extend_edge_below(e, child);
 }
 
@@ -84,10 +84,10 @@ STree stree_init(const char *t)
 }
 
 
-TreeMatching stree_find(STree tree, char *mark)
+TreeMatching stree_find(STree tree, LabelPointer lbl)
 {
 
-    Matching m = match(tree->lbl->mark, mark);
+    Matching m = match(tree->lbl, lbl);
 
     TreeMatching ret;
     ret.m = matching_empty();
@@ -98,7 +98,7 @@ TreeMatching stree_find(STree tree, char *mark)
             // The first character of c could not be matched with any character
             // in the label of the tree
             if (tree->right) {
-                return stree_find(tree->right, mark);
+                return stree_find(tree->right, lbl);
             } else {
                 return ret;
             }
@@ -107,8 +107,9 @@ TreeMatching stree_find(STree tree, char *mark)
             // in c is left. Try to continue with child nodes.
             if (tree->child) {
                 char *rest = malloc(sizeof(char) * STRING_INIT_LEN);
-                sstring(rest, m.size, strlen(mark), mark);
-                return stree_find(tree->child, rest);
+                sstring(rest, m.size, strlen(lbl->mark), lbl->mark);
+                LabelPointer tmp = label(rest); // TODO change this
+                return stree_find(tree->child, tmp);
             } else {
                 return ret;
             }

@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "label.h"
 #include "util.h"
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -30,6 +31,6 @@ Matching matching_empty();
 
 MatchType match_type(const Matching match);
 
-Matching match(char *a, char *b);
+Matching match(LabelPointer left, LabelPointer right);
 
 #endif

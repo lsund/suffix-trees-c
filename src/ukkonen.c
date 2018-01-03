@@ -16,9 +16,10 @@ static void split_end(TreeMatching tm, const char a)
     int next_character_matches = tm.end->lbl->mark[tm.m.size] == a;
     char *new = malloc(sizeof(char) * STRING_INIT_LEN);
     sstring(new, 0, tm.m.size, tm.end->lbl->mark);
+    LabelPointer lbl = label(new);
 
     if (!next_character_matches) {
-        edge_split(tm.end, new);
+        edge_split(tm.end, lbl);
         stree_extend_edge_right( tm.end->child, edge_from_letter(a));
     }
 }
@@ -39,7 +40,7 @@ STree ukkonen_naive(const char *text) {
             sstring(mark, j, i - j, text);
             LabelPointer lbl = label(mark);
 
-            TreeMatching tm = stree_find(tree, mark);
+            TreeMatching tm = stree_find(tree, lbl);
 
             if (tm.m.size) {
 

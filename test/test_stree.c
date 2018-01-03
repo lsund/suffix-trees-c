@@ -14,7 +14,7 @@ char *utest_stree_match_letter()
 char *utest_edge_split()
 {
     EdgePointer t = edge_from_string("abaa");
-    edge_split(t, "a");
+    edge_split(t, label("a"));
     mu_assert("split 1", strcmp(t->lbl->mark, "a") == 0);
     mu_assert("split 2", strcmp(t->child->lbl->mark, "baa") == 0);
     return NULL;
@@ -52,14 +52,14 @@ char *utest_stree_find()
     stree_extend_edge_below(t2, t4);
     stree_extend_edge_below(t, t5);
 
-    TreeMatching tm = stree_find(t, "he");
-    TreeMatching tm1 = stree_find(t, "h");
-    TreeMatching tm2 = stree_find(t, "hej");
-    TreeMatching tm3 = stree_find(t, "hello");
-    TreeMatching tm4 = stree_find(t, "hellas");
-    TreeMatching tm5 = stree_find(t, "hel");
-    TreeMatching tm6 = stree_find(t, "hella");
-    TreeMatching tm7 = stree_find(t, "");
+    TreeMatching tm = stree_find(t, label("he"));
+    TreeMatching tm1 = stree_find(t,label("h"));
+    TreeMatching tm2 = stree_find(t,label("hej"));
+    TreeMatching tm3 = stree_find(t,label("hello"));
+    TreeMatching tm4 = stree_find(t,label("hellas"));
+    TreeMatching tm5 = stree_find(t,label("hel"));
+    TreeMatching tm6 = stree_find(t,label("hella"));
+    TreeMatching tm7 = stree_find(t,label(""));
 
     mu_assert("End should exist #1", tm.end);
     mu_assert("End should exist #2", tm1.end);

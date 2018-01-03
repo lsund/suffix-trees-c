@@ -27,18 +27,18 @@ MatchType match_type(const Matching match)
 }
 
 
-Matching match(char *left, char *right)
+Matching match(LabelPointer left, LabelPointer right)
 {
 
     Matching ret;
     int size, max_len, rlen, llen;
 
     size = 0;
-    llen= strlen(left);
-    rlen = strlen(right);
+    llen= strlen(left->mark);
+    rlen = strlen(right->mark);
     max_len = rlen > llen ? rlen : llen;
 
-    while (size < max_len && right[size] == left[size]) {
+    while (size < max_len && right->mark[size] == left->mark[size]) {
         size++;
     }
 
