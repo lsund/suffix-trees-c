@@ -13,9 +13,9 @@ static void extend_end(TreeMatching tm, const char a)
 
 static void split_end(TreeMatching tm, const char a)
 {
-    int next_character_matches = tm.end->lbl->mark[tm.m.match_both] == a;
+    int next_character_matches = tm.end->lbl->mark[tm.m.size] == a;
     char *new = malloc(sizeof(char) * STRING_INIT_LEN);
-    sstring(new, 0, tm.m.match_both, tm.end->lbl->mark);
+    sstring(new, 0, tm.m.size, tm.end->lbl->mark);
 
     if (!next_character_matches) {
         edge_split(tm.end, new);
@@ -40,7 +40,7 @@ STree ukkonen_naive(const char *text) {
 
             TreeMatching tm = stree_find(tree, marking);
 
-            if (tm.m.match_both) {
+            if (tm.m.size) {
 
                 if (match_type(tm.m) == EXACT) {
                     extend_end(tm, a);
@@ -50,8 +50,6 @@ STree ukkonen_naive(const char *text) {
             } else if (!stree_sibling_with(tree, a)) {
                 stree_extend_edge_right(tree, edge_from_letter(a));
             }
-
-            treematching_destroy(tm);
         }
     }
     free(marking);

@@ -54,6 +54,4 @@ void stree_extend_edge_right(STree base, const EdgePointer ext);
 
 void stree_destroy(STree tree);
 
-void treematching_destroy(TreeMatching tm);
-
 #endif

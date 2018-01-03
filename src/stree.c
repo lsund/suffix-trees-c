@@ -44,8 +44,8 @@ void edge_split(EdgePointer e, char *s)
     char *new_m = malloc(sizeof(char) * STRING_INIT_LEN);
     char *child_m = malloc(sizeof(char) * STRING_INIT_LEN);
 
-    sstring(new_m, 0, m.match_both, s);
-    sstring(child_m, m.match_both, strlen(e->lbl->mark), e->lbl->mark);
+    sstring(new_m, 0, m.size, s);
+    sstring(child_m, m.size, strlen(e->lbl->mark), e->lbl->mark);
 
     e->lbl = label(new_m);
     EdgePointer child = edge_from_string(child_m);
@@ -93,7 +93,7 @@ TreeMatching stree_find(STree tree, char *marking)
             // in c is left. Try to continue with child nodes.
             if (tree->child) {
                 char *rest = malloc(sizeof(char) * STRING_INIT_LEN);
-                sstring(rest, m.match_both, strlen(marking), marking);
+                sstring(rest, m.size, strlen(marking), marking);
                 return stree_find(tree->child, rest);
             } else {
                 return ret;
@@ -180,13 +180,6 @@ void stree_extend_edge_right(STree tree, const EdgePointer ext)
 
     probe->right = ext;
 }
-
-
-void treematching_destroy(TreeMatching tm)
-{
-    matching_destroy(tm.m);
-}
-
 
 void stree_destroy(STree tree)
 {
