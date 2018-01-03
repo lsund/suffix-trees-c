@@ -8,7 +8,7 @@ EdgePointer edge_from_letter(char c)
 {
     char *mark = malloc(sizeof(char) * 8);
     sprintf(mark, "%c", c);
-    Label lbl = label(mark);
+    LabelPointer lbl = label(mark);
     return edge_from_label(lbl);
 }
 
@@ -17,7 +17,7 @@ EdgePointer edge_from_string(char *s)
 {
     char *mark = malloc(sizeof(char) * STRING_INIT_LEN);
     sprintf(mark, "%s", s);
-    Label lbl = label(mark);
+    LabelPointer lbl = label(mark);
     return edge_from_label(lbl);
 }
 
@@ -26,12 +26,12 @@ EdgePointer edge_from_substring(int i, int n, char *s)
 {
     char *mark = malloc(sizeof(char) * STRING_INIT_LEN);
     sstring(mark, i, n, s);
-    Label lbl = label(mark);
+    LabelPointer lbl = label(mark);
     return edge_from_label(lbl);
 }
 
 
-EdgePointer edge_from_label(const Label lbl)
+EdgePointer edge_from_label(const LabelPointer lbl)
 {
     EdgePointer ret;
     ret = malloc(sizeof(Edge));
@@ -84,10 +84,10 @@ STree stree_init(const char *t)
 }
 
 
-TreeMatching stree_find(STree tree, char *marking)
+TreeMatching stree_find(STree tree, char *mark)
 {
 
-    Matching m = match(tree->lbl->mark, marking);
+    Matching m = match(tree->lbl->mark, mark);
 
     TreeMatching ret;
     ret.m = matching_empty();
@@ -98,16 +98,16 @@ TreeMatching stree_find(STree tree, char *marking)
             // The first character of c could not be matched with any character
             // in the label of the tree
             if (tree->right) {
-                return stree_find(tree->right, marking);
+                return stree_find(tree->right, mark);
             } else {
                 return ret;
             }
         case PARTIAL_RIGHT:
-            // The whole marking of the tree label was matched, but something
+            // The whole mark of the tree label was matched, but something
             // in c is left. Try to continue with child nodes.
             if (tree->child) {
                 char *rest = malloc(sizeof(char) * STRING_INIT_LEN);
-                sstring(rest, m.size, strlen(marking), marking);
+                sstring(rest, m.size, strlen(mark), mark);
                 return stree_find(tree->child, rest);
             } else {
                 return ret;

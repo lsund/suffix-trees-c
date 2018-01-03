@@ -12,14 +12,13 @@
 typedef struct label {
     char *mark;
     size_t len;
-} *Label;
+    int i;
+} *LabelPointer;
 
-Label label_maxlen(char *mark, size_t maxlen);
+LabelPointer label(char *mark);
 
-Label label(char *mark);
+void label_extend(const LabelPointer lbl, const char c);
 
-void label_extend(const Label lbl, const char c);
-
-void label_destroy(Label lbl);
+void label_destroy(LabelPointer lbl);
 
 #endif

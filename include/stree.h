@@ -15,7 +15,7 @@
 // This represents both the edge itself and a suffix tree due to its recursive
 // nature.
 typedef struct edge {
-    Label lbl;
+    LabelPointer lbl;
     struct edge *child;
     struct edge *right;
 } Edge, *EdgePointer, *STree;
@@ -34,7 +34,7 @@ EdgePointer edge_from_letter(const char c);
 
 EdgePointer edge_from_string(char *string);
 
-EdgePointer edge_from_label(const Label lbl);
+EdgePointer edge_from_label(const LabelPointer lbl);
 
 void edge_update_label(EdgePointer e, int i, int n, char *s);
 

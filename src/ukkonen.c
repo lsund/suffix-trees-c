@@ -28,7 +28,7 @@ STree ukkonen_naive(const char *text) {
 
     size_t len = strlen(text);
     STree tree = stree_init(text);
-    char *marking = malloc(sizeof(char) * 128);
+    char *mark = malloc(sizeof(char) * 128);
 
     for (unsigned long i = 1; i <= len - 1; i++) {
 
@@ -36,9 +36,10 @@ STree ukkonen_naive(const char *text) {
 
         for(unsigned long j = 0; j <= i; j++) {
 
-            sstring(marking, j, i - j, text);
+            sstring(mark, j, i - j, text);
+            LabelPointer lbl = label(mark);
 
-            TreeMatching tm = stree_find(tree, marking);
+            TreeMatching tm = stree_find(tree, mark);
 
             if (tm.m.size) {
 
@@ -52,7 +53,7 @@ STree ukkonen_naive(const char *text) {
             }
         }
     }
-    free(marking);
+    free(mark);
     return tree;
 }
 
