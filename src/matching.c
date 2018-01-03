@@ -3,8 +3,9 @@
 Matching matching_empty()
 {
     Matching ret;
-    ret.size = 0;
-    ret.left = ret.right = 0;
+    ret.size  = 0;
+    ret.left  = 0;
+    ret.right = 0;
     return ret;
 }
 
@@ -30,20 +31,20 @@ Matching match(char *left, char *right)
 {
 
     Matching ret;
-    int size, max_len, right_len, left_len;
+    int size, max_len, rlen, llen;
 
     size = 0;
-    left_len= strlen(left);
-    right_len = strlen(right);
-    max_len = right_len > left_len ? right_len : left_len;
+    llen= strlen(left);
+    rlen = strlen(right);
+    max_len = rlen > llen ? rlen : llen;
 
     while (size < max_len && right[size] == left[size]) {
         size++;
     }
 
-    ret.left = left_len - size;
-    ret.right = right_len - size;
-    ret.size = size;
+    ret.size  = size;
+    ret.left  = llen - size;
+    ret.right = rlen - size;
 
     return ret;
 }
