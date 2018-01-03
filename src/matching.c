@@ -34,12 +34,12 @@ Matching match(LabelPointer left, LabelPointer right)
     int size, max_len, rlen, llen;
 
     size    = 0;
-    llen    = strlen(left->mark)  - left-> o;
-    rlen    = strlen(right->mark) - right->o;
+    llen    = left->n - left->i;
+    rlen    = right->n - right->i;
     max_len = rlen > llen ? rlen : llen;
 
     while  (size < max_len &&
-            right->mark[right->o + size] == left->mark[left->o + size])
+            right->mark[right->i + size] == left->mark[left->i + size])
     {
         size++;
     }

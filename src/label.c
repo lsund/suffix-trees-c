@@ -4,9 +4,12 @@
 LabelPointer label(char *mark)
 {
     LabelPointer ret = malloc(sizeof(struct label));
+    size_t len       = strlen(mark);
+
     ret->mark        = mark;
-    ret->len         = strlen(mark);
-    ret->o           = 0;
+    ret->len         = len;
+    ret->i           = 0;
+    ret->n           = len;
 
     return ret;
 }
@@ -19,6 +22,15 @@ void label_extend(LabelPointer lbl, const char c)
     free(lbl->mark);
     lbl->mark = new;
     lbl->len++;
+    lbl->n++;
+}
+
+
+void label_print(LabelPointer lbl)
+{
+    char *tmp = lbl->mark;
+    tmp[lbl->n] = '\0';
+    printf("%s i:%d n:%d len:%zu\n", tmp, lbl->i, lbl->n, lbl->len);
 }
 
 

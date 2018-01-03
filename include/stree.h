@@ -38,7 +38,7 @@ EdgePointer edge_from_label(const LabelPointer lbl);
 
 void edge_update_label(EdgePointer e, int i, int n, char *s);
 
-void edge_split(EdgePointer e, LabelPointer lbl);
+void edge_split(TreeMatching tm);
 
 TreeMatching stree_find(STree tree, LabelPointer lbl);
 

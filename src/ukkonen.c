@@ -14,12 +14,9 @@ static void extend_end(TreeMatching tm, const char a)
 static void split_end(TreeMatching tm, const char a)
 {
     int next_character_matches = tm.end->lbl->mark[tm.m.size] == a;
-    char *new = malloc(sizeof(char) * STRING_INIT_LEN);
-    sstring(new, 0, tm.m.size, tm.end->lbl->mark);
-    LabelPointer lbl = label(new);
 
     if (!next_character_matches) {
-        edge_split(tm.end, lbl);
+        edge_split(tm);
         stree_extend_edge_right( tm.end->child, edge_from_letter(a));
     }
 }

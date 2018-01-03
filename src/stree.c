@@ -43,14 +43,6 @@ EdgePointer edge_from_label(const LabelPointer lbl)
 }
 
 
-void edge_update_label(EdgePointer e, int i, int n, char *s)
-{
-    char *mark = malloc(sizeof(char) * STRING_INIT_LEN);
-    sstring(mark, i, n, s);
-    e->lbl = label(mark);
-}
-
-
 ///////////////////////////////////////////////////////////////////////////////
 // Edge Functions
 
@@ -61,16 +53,22 @@ const char *edge_str(const EdgePointer e)
 }
 
 
-void edge_split(EdgePointer e, LabelPointer lbl)
+void edge_split(TreeMatching tm)
 {
-    size_t len = e->lbl->len;
-    char *mark = e->lbl->mark;
+    size_t len = tm.end->lbl->len;
+    char *mark = tm.end->lbl->mark;
 
-    Matching m = match(e->lbl, lbl);
-    EdgePointer child = edge_from_substring(m.size, len, mark);
+    char *new = malloc(sizeof(char) * STRING_INIT_LEN);
+    sstring(new, 0, tm.m.size, tm.end->lbl->mark);
+    /* LabelPointer newlabel = label(new); */
 
-    edge_update_label(e, 0, m.size, lbl->mark);
-    stree_extend_edge_below(e, child);
+    tm.end->lbl->n = tm.m.size;
+    // TODO Need to replace all accesses to lbl->mark with correct indexed gets
+    tm.end->lbl->mark = new;
+
+    EdgePointer child = edge_from_substring(tm.m.size, len, mark);
+
+    stree_extend_edge_below(tm.end, child);
 }
 
 
@@ -106,7 +104,7 @@ TreeMatching stree_find(STree tree, LabelPointer lbl)
             // The whole mark of the tree label was matched, but something
             // in c is left. Try to continue with child nodes.
             if (tree->child) {
-                lbl->o += m.size;
+                lbl->i += m.size;
                 return stree_find(tree->child, lbl);
             } else {
                 return ret;

@@ -7,13 +7,18 @@ char *utest_matching_match_offset()
     LabelPointer lbl = label("test");
     LabelPointer lbl2 = label("abctest");
     LabelPointer lbl3 = label("te");
+    LabelPointer lbl4 = label("abctestabc");
     Matching m0 = match(lbl, lbl2);
     mu_assert("No offset #1", match_type(m0) == NONE);
-    lbl2->o += 3;
+    lbl2->i += 3;
     Matching m1 = match(lbl, lbl2);
     mu_assert("offset #1", match_type(m1) == EXACT);
     Matching m2 = match(lbl3, lbl2);
     mu_assert("offset #2", match_type(m2) == PARTIAL_RIGHT);
+    lbl4->n -= 3;
+    lbl4->i += 3;
+    Matching m3 = match(lbl4, lbl);
+    mu_assert("offset #3", match_type(m3) == EXACT);
 
     return NULL;
 }

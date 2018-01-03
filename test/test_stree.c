@@ -11,15 +11,6 @@ char *utest_stree_match_letter()
 }
 
 
-char *utest_edge_split()
-{
-    EdgePointer t = edge_from_string("abaa");
-    edge_split(t, label("a"));
-    mu_assert("split 1", strcmp(t->lbl->mark, "a") == 0);
-    mu_assert("split 2", strcmp(t->child->lbl->mark, "baa") == 0);
-    return NULL;
-}
-
 char *utest_stree_sibling_with()
 {
     EdgePointer t1 = edge_from_string("a");
@@ -86,7 +77,6 @@ char *utest_stree_find()
 char *test_stree()
 {
     mu_run_utest(utest_stree_find);
-    /* mu_run_utest(utest_stree_sibling_with); */
-    /* mu_run_utest(utest_edge_split); */
+    mu_run_utest(utest_stree_sibling_with);
     return NULL;
 }
