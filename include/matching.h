@@ -33,9 +33,5 @@ MatchType match_type(const Matching match);
 
 Matching match(char *a, char *b);
 
-int matched_fully_left(Matching m);
-
-int matched_fully_right(Matching m);
-
 void matching_destroy(Matching m);
 #endif
