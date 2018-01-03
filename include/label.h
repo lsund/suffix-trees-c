@@ -11,7 +11,7 @@
 typedef struct label {
     char *mark;
     size_t len;
-    int i;
+    int o;                  // offset
 } *LabelPointer;
 
 LabelPointer label(char *mark);

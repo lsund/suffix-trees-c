@@ -1,6 +1,23 @@
 #include "test.h"
 #include "matching.h"
 
+
+char *utest_matching_match_offset()
+{
+    LabelPointer lbl = label("test");
+    LabelPointer lbl2 = label("abctest");
+    LabelPointer lbl3 = label("te");
+    Matching m0 = match(lbl, lbl2);
+    mu_assert("No offset #1", match_type(m0) == NONE);
+    lbl2->o += 3;
+    Matching m1 = match(lbl, lbl2);
+    mu_assert("offset #1", match_type(m1) == EXACT);
+    Matching m2 = match(lbl3, lbl2);
+    mu_assert("offset #2", match_type(m2) == PARTIAL_RIGHT);
+
+    return NULL;
+}
+
 char *utest_matching_match()
 {
     Matching m0 = match(label("xest"), label("test"));
@@ -47,5 +64,6 @@ char *utest_matching_match()
 char *test_matching()
 {
     mu_run_utest(utest_matching_match);
+    mu_run_utest(utest_matching_match_offset);
     return NULL;
 }

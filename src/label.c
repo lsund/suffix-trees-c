@@ -6,7 +6,7 @@ LabelPointer label(char *mark)
     LabelPointer ret = malloc(sizeof(struct label));
     ret->mark        = mark;
     ret->len         = strlen(mark);
-    ret->i           = 0;
+    ret->o           = 0;
 
     return ret;
 }

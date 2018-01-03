@@ -106,10 +106,8 @@ TreeMatching stree_find(STree tree, LabelPointer lbl)
             // The whole mark of the tree label was matched, but something
             // in c is left. Try to continue with child nodes.
             if (tree->child) {
-                char *rest = malloc(sizeof(char) * STRING_INIT_LEN);
-                sstring(rest, m.size, strlen(lbl->mark), lbl->mark);
-                LabelPointer tmp = label(rest); // TODO change this
-                return stree_find(tree->child, tmp);
+                lbl->o += m.size;
+                return stree_find(tree->child, lbl);
             } else {
                 return ret;
             }
