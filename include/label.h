@@ -11,12 +11,12 @@
 
 typedef struct label {
     char *mark;
-    size_t len, max_len;
+    size_t len;
 } *Label;
 
-Label label_maxlen(const char *mark, size_t maxlen);
+Label label_maxlen(char *mark, size_t maxlen);
 
-Label label(const char *mark);
+Label label(char *mark);
 
 void label_extend(const Label lbl, const char c);
 

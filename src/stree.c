@@ -12,7 +12,7 @@ EdgePointer edge_from_letter(char c)
 }
 
 
-EdgePointer edge_from_string(const char *string)
+EdgePointer edge_from_string(char *string)
 {
     Label lbl = label(string);
     return edge_from_label(lbl);
@@ -37,11 +37,19 @@ const char *edge_str(const EdgePointer e)
 }
 
 
-void edge_split(EdgePointer e, const char *s)
+void edge_split(EdgePointer e, char *s)
 {
     Matching m = match(e->lbl->mark, s);
-    e->lbl = label(m.match);
-    EdgePointer child = edge_from_string(m.rest_left);
+
+    char *new_m = malloc(sizeof(char) * STRING_INIT_LEN);
+    char *child_m = malloc(sizeof(char) * STRING_INIT_LEN);
+
+    sstring(new_m, 0, m.match_both, s);
+    sstring(child_m, m.match_both, strlen(e->lbl->mark), e->lbl->mark);
+
+    e->lbl = label(new_m);
+    EdgePointer child = edge_from_string(child_m);
+
     stree_extend_edge_below(e, child);
 }
 
@@ -54,18 +62,18 @@ STree stree_init(const char *t)
 {
     char *mark = malloc(sizeof(char) * STRING_INIT_LEN);
     sprintf(mark, "%c", t[0]);
-    Label l =label(mark);
+    Label lbl = label(mark);
 
-    EdgePointer ret = edge_from_label(l);
+    EdgePointer ret = edge_from_label(lbl);
 
     return ret;
 }
 
 
-TreeMatching stree_find(STree tree, const char *c)
+TreeMatching stree_find(STree tree, char *marking)
 {
 
-    Matching m = match(tree->lbl->mark, c);
+    Matching m = match(tree->lbl->mark, marking);
 
     TreeMatching ret;
     ret.m = matching_empty();
@@ -76,19 +84,21 @@ TreeMatching stree_find(STree tree, const char *c)
             // The first character of c could not be matched with any character
             // in the label of the tree
             if (tree->right) {
-                return stree_find(tree->right, c);
-            } else {
-                return ret;
-            }
-        case PARTIAL_LEFT:
-            // The whole marking of the tree label was matched, but something
-            // in c is left. Try to continue with child nodes.
-            if (tree->child) {
-                return stree_find(tree->child, m.rest_right);
+                return stree_find(tree->right, marking);
             } else {
                 return ret;
             }
         case PARTIAL_RIGHT:
+            // The whole marking of the tree label was matched, but something
+            // in c is left. Try to continue with child nodes.
+            if (tree->child) {
+                char *rest = malloc(sizeof(char) * STRING_INIT_LEN);
+                sstring(rest, m.match_both, strlen(marking), marking);
+                return stree_find(tree->child, rest);
+            } else {
+                return ret;
+            }
+        case PARTIAL_LEFT:
             // The whole c was matched but ended up in the middle of the tree
             // label.
             ret.m = m;
@@ -172,15 +182,21 @@ void stree_extend_edge_right(STree tree, const EdgePointer ext)
 }
 
 
+void treematching_destroy(TreeMatching tm)
+{
+    matching_destroy(tm.m);
+}
+
+
 void stree_destroy(STree tree)
 {
-    if (!tree) return;
-
-    if (tree->child) {
-        stree_destroy(tree->child);
-    } else if (tree->right) {
-        stree_destroy(tree->right);
-    } else {
+    if (tree) {
+        if (tree->child) {
+            stree_destroy(tree->child);
+        }
+        if (tree->right) {
+            stree_destroy(tree->right);
+        }
         label_destroy(tree->lbl);
         free(tree);
     }

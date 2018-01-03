@@ -19,10 +19,8 @@ typedef enum { NONE, EXACT, PARTIAL_RIGHT, PARTIAL_LEFT } MatchType;
 
 
 typedef struct matching {
-    int success;
-    const char *match;
-    const char *rest_left;
-    const char *rest_right;
+    int success, unmatched_left, unmatched_right;
+    int match_both;
 } Matching;
 
 
@@ -33,9 +31,11 @@ Matching matching_empty();
 
 MatchType match_type(const Matching match);
 
-Matching match(const char *a, const char *b);
+Matching match(char *a, char *b);
 
 int matched_fully_left(Matching m);
 
 int matched_fully_right(Matching m);
+
+void matching_destroy(Matching m);
 #endif

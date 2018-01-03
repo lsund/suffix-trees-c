@@ -2,6 +2,7 @@
 
 void sstring(char *dst, const int i, const int n, const char *src)
 {
+    *dst = '\0';
     char tmp[n + 1];
     memcpy(tmp, &src[i], n);
     tmp[n] = '\0';

@@ -32,13 +32,13 @@ const char *edge_str(const EdgePointer e);
 
 EdgePointer edge_from_letter(const char c);
 
-EdgePointer edge_from_string(const char *string);
+EdgePointer edge_from_string(char *string);
 
 EdgePointer edge_from_label(const Label lbl);
 
-void edge_split(EdgePointer e, const char *s);
+void edge_split(EdgePointer e, char *s);
 
-TreeMatching stree_find(STree tree, const char *m);
+TreeMatching stree_find(STree tree, char *marking);
 
 EdgePointer stree_init(const char *t);
 
@@ -53,5 +53,7 @@ void stree_extend_edge_below(STree base, const EdgePointer ext);
 void stree_extend_edge_right(STree base, const EdgePointer ext);
 
 void stree_destroy(STree tree);
+
+void treematching_destroy(TreeMatching tm);
 
 #endif

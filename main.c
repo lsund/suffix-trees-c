@@ -6,16 +6,20 @@
 int main()
 {
 
+    char *root = malloc(sizeof(char) * 16);
+
     char *text = "abaababa";
 
-    STree root = edge_from_string("root");;
+    sprintf(root, "%s", "root");
+
+    STree r = edge_from_string(root);;
     STree u = ukkonen_naive(text);
 
-    stree_extend_edge_below(root, u);
+    stree_extend_edge_below(r, u);
 
-    write_stree_to_file(root, "../suffix-trees-haskell/data/sample");
+    write_stree_to_file(r, "../suffix-trees-haskell/data/sample");
 
-    stree_destroy(root);
+    stree_destroy(r);
 
     return 0;
 }

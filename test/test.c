@@ -21,12 +21,12 @@ static char *test()
     mu_run_test(test_util);
     mu_message(MODULE, "label\n");
     mu_run_test(test_label);
+    mu_message(MODULE,"matching\n");
+    mu_run_test(test_matching);
     mu_message(MODULE,"stree\n");
     mu_run_test(test_stree);
     /* mu_message(MODULE,"ukkonen\n"); */
     /* mu_run_test(test_ukkonen); */
-    mu_message(MODULE,"matching\n");
-    mu_run_test(test_matching);
     return 0;
 }
 
