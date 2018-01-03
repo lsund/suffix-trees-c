@@ -1,20 +1,32 @@
 #include "stree.h"
 
 ///////////////////////////////////////////////////////////////////////////////
-// Edge
+// Allocs
 
 
 EdgePointer edge_from_letter(char c)
 {
-    char *cs = malloc(sizeof(char) * 8);
-    sprintf(cs, "%c", c);
-    return edge_from_string(cs);
+    char *mark = malloc(sizeof(char) * 8);
+    sprintf(mark, "%c", c);
+    Label lbl = label(mark);
+    return edge_from_label(lbl);
 }
 
 
-EdgePointer edge_from_string(char *string)
+EdgePointer edge_from_string(char *s)
 {
-    Label lbl = label(string);
+    char *mark = malloc(sizeof(char) * STRING_INIT_LEN);
+    sprintf(mark, "%s", s);
+    Label lbl = label(mark);
+    return edge_from_label(lbl);
+}
+
+
+EdgePointer edge_from_substring(int i, int n, char *s)
+{
+    char *mark = malloc(sizeof(char) * STRING_INIT_LEN);
+    sstring(mark, i, n, s);
+    Label lbl = label(mark);
     return edge_from_label(lbl);
 }
 
@@ -31,6 +43,18 @@ EdgePointer edge_from_label(const Label lbl)
 }
 
 
+void edge_update_label(EdgePointer e, int i, int n, char *s)
+{
+    char *mark = malloc(sizeof(char) * STRING_INIT_LEN);
+    sstring(mark, i, n, s);
+    e->lbl = label(mark);
+}
+
+
+///////////////////////////////////////////////////////////////////////////////
+// Edge Functions
+
+
 const char *edge_str(const EdgePointer e)
 {
     return e->lbl->mark;
@@ -39,17 +63,13 @@ const char *edge_str(const EdgePointer e)
 
 void edge_split(EdgePointer e, char *s)
 {
+    size_t len = e->lbl->len;
+    char *mark = e->lbl->mark;
+
     Matching m = match(e->lbl->mark, s);
+    EdgePointer child = edge_from_substring(m.size, len, mark);
 
-    char *new_m = malloc(sizeof(char) * STRING_INIT_LEN);
-    char *child_m = malloc(sizeof(char) * STRING_INIT_LEN);
-
-    sstring(new_m, 0, m.size, s);
-    sstring(child_m, m.size, strlen(e->lbl->mark), e->lbl->mark);
-
-    e->lbl = label(new_m);
-    EdgePointer child = edge_from_string(child_m);
-
+    edge_update_label(e, 0, m.size, s);
     stree_extend_edge_below(e, child);
 }
 
@@ -60,13 +80,7 @@ void edge_split(EdgePointer e, char *s)
 
 STree stree_init(const char *t)
 {
-    char *mark = malloc(sizeof(char) * STRING_INIT_LEN);
-    sprintf(mark, "%c", t[0]);
-    Label lbl = label(mark);
-
-    EdgePointer ret = edge_from_label(lbl);
-
-    return ret;
+    return edge_from_letter(t[0]);
 }
 
 

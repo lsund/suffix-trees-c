@@ -6,13 +6,9 @@
 int main()
 {
 
-    char *root = malloc(sizeof(char) * 16);
-
     char *text = "abaababa";
 
-    sprintf(root, "%s", "root");
-
-    STree r = edge_from_string(root);;
+    STree r = edge_from_string("root");;
     STree u = ukkonen_naive(text);
 
     stree_extend_edge_below(r, u);
