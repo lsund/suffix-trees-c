@@ -55,18 +55,11 @@ const char *edge_str(const EdgePointer e)
 
 void edge_split(TreeMatching tm)
 {
-    size_t len = tm.end->lbl->len;
-    char *mark = tm.end->lbl->mark;
-
-    char *new = malloc(sizeof(char) * STRING_INIT_LEN);
-    sstring(new, 0, tm.m.size, tm.end->lbl->mark);
-    /* LabelPointer newlabel = label(new); */
-    /* printf("new: %s size: %d\n", new, tm.m.size); */
 
     tm.end->lbl->n = tm.m.size;
-    // TODO Need to replace all accesses to lbl->mark with correct indexed gets
-    /* tm.end->lbl->mark = new; */
 
+    size_t len = tm.end->lbl->len;
+    char *mark = tm.end->lbl->mark;
     EdgePointer child = edge_from_substring(tm.m.size, len, mark);
 
     stree_extend_edge_below(tm.end, child);

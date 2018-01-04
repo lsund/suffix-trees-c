@@ -45,6 +45,7 @@ void write_stree_to_file(const STree tree, const char *path)
     } else {
         printf("Could not open file.\n");
     }
+    fclose(f);
     free(res);
 }
 

@@ -38,6 +38,7 @@ STree ukkonen_naive(const char *text) {
             LabelPointer lbl = label(mark);
 
             TreeMatching tm = stree_find(tree, lbl);
+            free(lbl);
 
             if (tm.m.size) {
 
