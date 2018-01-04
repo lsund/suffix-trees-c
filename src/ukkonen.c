@@ -16,8 +16,8 @@ static void split_end(TreeMatching tm, const char a)
     int next_character_matches = label_char_at(tm.end->lbl, tm.m.size) == a;
 
     if (!next_character_matches) {
-        edge_split(tm);
-        stree_extend_edge_right( tm.end->child, edge_from_letter(a));
+        stree_split(tm);
+        stree_extend_edge_right(tm.end->child, edge_from_letter(a));
     }
 }
 
@@ -47,6 +47,7 @@ STree ukkonen_naive(const char *text) {
                 } else {
                     split_end(tm, a);
                 }
+
             } else if (!stree_sibling_with(tree, a)) {
                 stree_extend_edge_right(tree, edge_from_letter(a));
             }

@@ -1,74 +1,5 @@
 #include "stree.h"
 
-///////////////////////////////////////////////////////////////////////////////
-// Allocs
-
-
-EdgePointer edge_from_letter(char c)
-{
-    char *mark = malloc(sizeof(char) * 8);
-    sprintf(mark, "%c", c);
-    LabelPointer lbl = label(mark);
-    return edge_from_label(lbl);
-}
-
-
-EdgePointer edge_from_string(char *s)
-{
-    char *mark = malloc(sizeof(char) * STRING_INIT_LEN);
-    sprintf(mark, "%s", s);
-    LabelPointer lbl = label(mark);
-    return edge_from_label(lbl);
-}
-
-
-EdgePointer edge_from_substring(int i, int n, char *s)
-{
-    char *mark = malloc(sizeof(char) * STRING_INIT_LEN);
-    sstring(mark, i, n, s);
-    LabelPointer lbl = label(mark);
-    return edge_from_label(lbl);
-}
-
-
-EdgePointer edge_from_label(const LabelPointer lbl)
-{
-    EdgePointer ret;
-    ret = malloc(sizeof(Edge));
-    ret->lbl = lbl;
-    ret->child = NULL;
-    ret->right = NULL;
-
-    return ret;
-}
-
-
-///////////////////////////////////////////////////////////////////////////////
-// Edge Functions
-
-
-const char *edge_str(const EdgePointer e)
-{
-    return e->lbl->mark;
-}
-
-
-void edge_split(TreeMatching tm)
-{
-
-    tm.end->lbl->n = tm.m.size;
-
-    size_t len = tm.end->lbl->len;
-    char *mark = tm.end->lbl->mark;
-    EdgePointer child = edge_from_substring(tm.m.size, len, mark);
-
-    stree_extend_edge_below(tm.end, child);
-}
-
-
-///////////////////////////////////////////////////////////////////////////////
-// Suffix Tree
-
 
 STree stree_init(const char *t)
 {
@@ -172,6 +103,20 @@ void stree_extend_edge_right(STree tree, const EdgePointer ext)
 
     probe->right = ext;
 }
+
+
+void stree_split(TreeMatching tm)
+{
+
+    tm.end->lbl->n = tm.m.size;
+
+    size_t len = tm.end->lbl->len;
+    char *mark = tm.end->lbl->mark;
+    EdgePointer child = edge_from_substring(tm.m.size, len, mark);
+
+    stree_extend_edge_below(tm.end, child);
+}
+
 
 void stree_destroy(STree tree)
 {
