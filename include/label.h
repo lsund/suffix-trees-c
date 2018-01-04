@@ -7,6 +7,7 @@
 #include <stdio.h>
 
 #include "config.h"
+#include "util.h"
 
 typedef struct label {
     char *mark;
@@ -15,6 +16,8 @@ typedef struct label {
 } *LabelPointer;
 
 LabelPointer label(char *mark);
+
+char label_char_at(LabelPointer lbl, int i);
 
 void label_extend(const LabelPointer lbl, const char c);
 

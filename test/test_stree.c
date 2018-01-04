@@ -3,14 +3,6 @@
 #include "stree.h"
 
 
-char *utest_stree_match_letter()
-{
-    /* EdgePointer t = edge_from_string("aab"); */
-    /* stree_match_letter(t, 'a'); */
-    return NULL;
-}
-
-
 char *utest_stree_sibling_with()
 {
     EdgePointer t1 = edge_from_string("a");

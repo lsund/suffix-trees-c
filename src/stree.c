@@ -61,10 +61,11 @@ void edge_split(TreeMatching tm)
     char *new = malloc(sizeof(char) * STRING_INIT_LEN);
     sstring(new, 0, tm.m.size, tm.end->lbl->mark);
     /* LabelPointer newlabel = label(new); */
+    /* printf("new: %s size: %d\n", new, tm.m.size); */
 
     tm.end->lbl->n = tm.m.size;
     // TODO Need to replace all accesses to lbl->mark with correct indexed gets
-    tm.end->lbl->mark = new;
+    /* tm.end->lbl->mark = new; */
 
     EdgePointer child = edge_from_substring(tm.m.size, len, mark);
 
@@ -132,7 +133,7 @@ int stree_sibling_with(STree tree, char c)
     EdgePointer probe = tree;
 
     while(probe) {
-        if (*probe->lbl->mark == c) {
+        if (label_char_at(probe->lbl, 0) == c) {
             return 1;
         }
         probe = probe->right;
@@ -145,25 +146,12 @@ int stree_child_with(STree tree, char c)
 {
     EdgePointer probe = tree->child;
     while(probe) {
-        if (*probe->lbl->mark == c) {
+        if (label_char_at(probe->lbl, 0) == c) {
             return 1;
         }
         probe = probe->right;
     }
     return 0;
-}
-
-
-int stree_match_letter(STree tree, size_t o, char c)
-{
-    size_t len = tree->lbl->len;
-    if (o > len) {
-        return runtime_error("stree_match_letter: offset longer than length");
-    } else if (o == len) {
-        return stree_child_with(tree, c);
-    } else {
-        return tree->lbl->mark[o + 1] == c;
-    }
 }
 
 

@@ -15,6 +15,16 @@ LabelPointer label(char *mark)
 }
 
 
+char label_char_at(LabelPointer lbl, int i)
+{
+    if (i > lbl->n) {
+        /* printf("%s %d %d\n", lbl->mark, i, lbl->n); */
+        runtime_error("Index out of bounds");
+    }
+    return *(lbl->mark + lbl->i + i);
+}
+
+
 void label_extend(LabelPointer lbl, const char c)
 {
     char *new = malloc(sizeof(char) * (lbl->len + 3));
@@ -32,6 +42,11 @@ void label_print(LabelPointer lbl)
     tmp[lbl->n] = '\0';
     printf("%s i:%d n:%d len:%zu\n", tmp, lbl->i, lbl->n, lbl->len);
 }
+
+
+/* void label_string(LabelPointer lbl) */
+/* { */
+/* } */
 
 
 void label_destroy(LabelPointer lbl)

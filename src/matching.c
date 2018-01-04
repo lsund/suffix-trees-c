@@ -31,17 +31,25 @@ Matching match(LabelPointer left, LabelPointer right)
 {
 
     Matching ret;
-    int size, max_len, rlen, llen;
+    int size, min_len, rlen, llen;
+    char lc, rc;
 
     size    = 0;
     llen    = left->n - left->i;
     rlen    = right->n - right->i;
-    max_len = rlen > llen ? rlen : llen;
+    min_len = rlen > llen ? llen : rlen;
 
-    while  (size < max_len &&
-            right->mark[right->i + size] == left->mark[left->i + size])
-    {
-        size++;
+    while  (size < min_len) {
+
+        rc = label_char_at(right, size);
+        lc = label_char_at(left, size);
+
+        if (rc != lc) {
+            break;
+        } else {
+            size++;
+        }
+
     }
 
     ret.size  = size;

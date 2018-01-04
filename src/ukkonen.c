@@ -13,7 +13,7 @@ static void extend_end(TreeMatching tm, const char a)
 
 static void split_end(TreeMatching tm, const char a)
 {
-    int next_character_matches = tm.end->lbl->mark[tm.m.size] == a;
+    int next_character_matches = label_char_at(tm.end->lbl, tm.m.size) == a;
 
     if (!next_character_matches) {
         edge_split(tm);
