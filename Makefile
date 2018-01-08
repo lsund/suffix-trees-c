@@ -20,7 +20,7 @@ runtest: test
 	./bin/test
 
 memcheck: all
-	make && valgrind --leak-check=full --show-leak-kinds=all ./bin/main
+	valgrind --leak-check=full --show-leak-kinds=all ./bin/main
 
 dirs:
 	mkdir -p bin

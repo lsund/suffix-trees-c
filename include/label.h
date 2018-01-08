@@ -12,7 +12,7 @@
 typedef struct label {
     char *mark;
     size_t len;
-    int i, n;                  // offset TODO add one more
+    int i, n;
 } *LabelPointer;
 
 LabelPointer label(char *mark);
