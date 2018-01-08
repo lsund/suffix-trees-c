@@ -4,6 +4,7 @@
 static void write_stree_aux(EdgePointer probe, char *acc)
 {
     strcat(acc, "[");
+
     while (probe) {
 
         const char *mark = edge_str(probe);
@@ -16,9 +17,17 @@ static void write_stree_aux(EdgePointer probe, char *acc)
         strcat(acc, buf);
         write_stree_aux(probe->child, acc);
         if (probe->right) {
-            strcat(acc, "],");
+            if (probe->leaf_number != -1) {
+                sprintf(acc, "%s%d],", acc, probe->leaf_number);
+            } else {
+                sprintf(acc, "%s],", acc);
+            }
         } else {
-            strcat(acc, "]");
+            if (probe->leaf_number != -1) {
+                sprintf(acc, "%s%d]", acc, probe->leaf_number);
+            } else {
+                sprintf(acc, "%s]", acc);
+            }
         }
         probe = probe->right;
     }
@@ -29,6 +38,9 @@ void write(const STree tree, char *s)
     EdgePointer probe = tree;
     strcat(s, edge_str(tree));
     write_stree_aux(probe->child, s);
+    if (probe->leaf_number != -1) {
+        sprintf(s, "%s%d", s, probe->leaf_number);
+    }
     strcat(s, "]");
 }
 

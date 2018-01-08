@@ -21,3 +21,8 @@ int runtime_error(const char *msg)
     return -99;
 }
 
+int char_to_int(char c)
+{
+    return c - 48;
+}
+

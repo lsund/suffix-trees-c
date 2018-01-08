@@ -3,7 +3,7 @@
 
 STree stree_init(const char *t)
 {
-    return edge_new_leaf(t[0], 1);
+    return edge_new_leaf(t[0], 0);
 }
 
 
@@ -81,6 +81,7 @@ int stree_child_with(STree tree, char c)
 
 void stree_extend_edge_below(STree tree, const EdgePointer ext)
 {
+    int tmp = tree->leaf_number;
     if (!tree->child) {
         tree->child = ext;
     } else {
@@ -89,6 +90,10 @@ void stree_extend_edge_below(STree tree, const EdgePointer ext)
             probe = probe->right;
         }
         probe->right = ext;
+    }
+    tree->leaf_number = -1;
+    if (ext->leaf_number == -1) {
+        ext->leaf_number = tmp;
     }
 }
 

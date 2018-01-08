@@ -11,4 +11,6 @@ void sstring(char *dst, const int i, const int n, const char *src);
 
 void extend(char *s, char c);
 
+int char_to_int(char c);
+
 #endif

@@ -41,12 +41,12 @@ STree ukkonen_naive(const char *text) {
                     extend_end(tm, a);
                 } else {
                     if (label_char_at(tm.end->lbl, tm.m.size) != a) {
-                        split_end(tm, a, j + 1);
+                        split_end(tm, a, j);
                     }
                 }
 
             } else if (!stree_sibling_with(tree, a)) {
-                stree_extend_edge_right(tree, edge_new_leaf(a, j + 1));
+                stree_extend_edge_right(tree, edge_new_leaf(a, j));
             }
         }
     }
