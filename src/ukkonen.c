@@ -5,20 +5,15 @@
 static void extend_end(TreeMatching tm, const char a)
 {
     if (!stree_child_with(tm.end, a)) {
-
         label_extend(tm.end->lbl, a);
     }
 }
 
 
-static void split_end(TreeMatching tm, const char a)
+static void split_end(TreeMatching tm, const char a, int i)
 {
-    int next_character_matches = label_char_at(tm.end->lbl, tm.m.size) == a;
-
-    if (!next_character_matches) {
-        stree_split(tm);
-        stree_extend_edge_right(tm.end->child, edge_from_letter(a));
-    }
+    stree_split(tm);
+    stree_extend_edge_right(tm.end->child, edge_new_leaf(a, i));
 }
 
 
@@ -45,16 +40,20 @@ STree ukkonen_naive(const char *text) {
                 if (match_type(tm.m) == EXACT) {
                     extend_end(tm, a);
                 } else {
-                    split_end(tm, a);
+                    if (label_char_at(tm.end->lbl, tm.m.size) != a) {
+                        split_end(tm, a, j + 1);
+                    }
                 }
 
             } else if (!stree_sibling_with(tree, a)) {
-                stree_extend_edge_right(tree, edge_from_letter(a));
+                stree_extend_edge_right(tree, edge_new_leaf(a, j + 1));
             }
         }
     }
     free(mark);
-    return tree;
+    STree r = edge_from_string("R");
+    stree_extend_edge_below(r, tree);
+    return r;
 }
 
 

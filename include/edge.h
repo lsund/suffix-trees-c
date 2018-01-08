@@ -18,13 +18,14 @@ typedef struct edge {
     LabelPointer lbl;
     struct edge *child;
     struct edge *right;
+    int leaf_number;
 } Edge, *EdgePointer;
 
 const char *edge_str(const EdgePointer e);
 
 EdgePointer edge_empty();
 
-EdgePointer edge_from_letter(const char c);
+EdgePointer edge_new_leaf(const char c, int k);
 
 EdgePointer edge_from_substring(int i, int n, char *s);
 

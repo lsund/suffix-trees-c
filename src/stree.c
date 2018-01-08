@@ -3,7 +3,7 @@
 
 STree stree_init(const char *t)
 {
-    return edge_from_letter(t[0]);
+    return edge_new_leaf(t[0], 1);
 }
 
 

@@ -5,23 +5,14 @@
 // Allocs
 
 
-EdgePointer edge_empty()
-{
-    EdgePointer ret;
-    ret        = malloc(sizeof(Edge));
-    ret->lbl   = NULL;
-    ret->child = NULL;
-    ret->right = NULL;
-    return ret;
-}
-
-
-EdgePointer edge_from_letter(char c)
+EdgePointer edge_new_leaf(char c, int k)
 {
     char *mark = malloc(sizeof(char) * 8);
     sprintf(mark, "%c", c);
     LabelPointer lbl = label(mark);
-    return edge_from_label(lbl);
+    EdgePointer ret = edge_from_label(lbl);
+    ret->leaf_number = k;
+    return ret;
 }
 
 
@@ -46,10 +37,11 @@ EdgePointer edge_from_substring(int i, int n, char *s)
 EdgePointer edge_from_label(const LabelPointer lbl)
 {
     EdgePointer ret;
-    ret = malloc(sizeof(Edge));
-    ret->lbl = lbl;
-    ret->child = NULL;
-    ret->right = NULL;
+    ret              = malloc(sizeof(Edge));
+    ret->lbl         = lbl;
+    ret->child       = NULL;
+    ret->right       = NULL;
+    ret->leaf_number = -1;
 
     return ret;
 }

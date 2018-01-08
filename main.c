@@ -8,14 +8,11 @@ int main()
 
     char *text = "abaababa";
 
-    STree r = edge_from_string("root");;
     STree u = ukkonen_naive(text);
 
-    stree_extend_edge_below(r, u);
+    write_file(u, "../suffix-trees-haskell/data/sample");
 
-    write_file(r, "../suffix-trees-haskell/data/sample");
-
-    stree_destroy(r);
+    stree_destroy(u);
 
     return 0;
 }
