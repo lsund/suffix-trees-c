@@ -22,6 +22,8 @@ typedef struct edge {
 
 const char *edge_str(const EdgePointer e);
 
+EdgePointer edge_empty();
+
 EdgePointer edge_from_letter(const char c);
 
 EdgePointer edge_from_substring(int i, int n, char *s);

@@ -13,7 +13,7 @@ int main()
 
     stree_extend_edge_below(r, u);
 
-    write_stree_to_file(r, "../suffix-trees-haskell/data/sample");
+    write_file(r, "../suffix-trees-haskell/data/sample");
 
     stree_destroy(r);
 

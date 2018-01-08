@@ -5,6 +5,17 @@
 // Allocs
 
 
+EdgePointer edge_empty()
+{
+    EdgePointer ret;
+    ret        = malloc(sizeof(Edge));
+    ret->lbl   = NULL;
+    ret->child = NULL;
+    ret->right = NULL;
+    return ret;
+}
+
+
 EdgePointer edge_from_letter(char c)
 {
     char *mark = malloc(sizeof(char) * 8);
