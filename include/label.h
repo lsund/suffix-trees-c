@@ -17,6 +17,11 @@ typedef struct label {
 
 LabelPointer label(char *mark);
 
+// Shrink label at the left side
+void label_shrink_left(LabelPointer lbl, int k);
+
+void label_set_right(LabelPointer lbl, int k);
+
 char label_char_at(LabelPointer lbl, int i);
 
 void label_extend(const LabelPointer lbl, const char c);

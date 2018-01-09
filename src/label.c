@@ -15,6 +15,18 @@ LabelPointer label(char *mark)
 }
 
 
+void label_shrink_left(LabelPointer lbl, int k)
+{
+    lbl->i += k;
+}
+
+
+void label_set_right(LabelPointer lbl, int k)
+{
+    lbl->n = k;
+}
+
+
 char label_char_at(LabelPointer lbl, int i)
 {
     if (i > lbl->n) {

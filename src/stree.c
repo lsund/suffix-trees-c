@@ -29,7 +29,7 @@ TreeMatching stree_find(STree tree, LabelPointer lbl)
             // The whole mark of the tree label was matched, but something
             // in c is left. Try to continue with child nodes.
             if (tree->child) {
-                lbl->i += m.size;
+                label_shrink_left(lbl, m.size);
                 return stree_find(tree->child, lbl);
             } else {
                 return ret;
@@ -113,7 +113,7 @@ void stree_extend_edge_right(STree tree, const EdgePointer ext)
 void stree_split(TreeMatching tm)
 {
 
-    tm.end->lbl->n = tm.m.size;
+    label_set_right(tm.end->lbl, tm.m.size);
 
     size_t len = tm.end->lbl->len;
     char *mark = tm.end->lbl->mark;
