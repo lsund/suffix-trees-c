@@ -35,14 +35,14 @@ char *utest_stree_find()
     stree_extend_edge_below(t2, t4);
     stree_extend_edge_below(t, t5);
 
-    TreeMatching tm = stree_find(t, label("he"));
-    TreeMatching tm1 = stree_find(t,label("h"));
-    TreeMatching tm2 = stree_find(t,label("hej"));
-    TreeMatching tm3 = stree_find(t,label("hello"));
-    TreeMatching tm4 = stree_find(t,label("hellas"));
-    TreeMatching tm5 = stree_find(t,label("hel"));
-    TreeMatching tm6 = stree_find(t,label("hella"));
-    TreeMatching tm7 = stree_find(t,label(""));
+    TreeMatching tm = stree_find(t, label_full("he"));
+    TreeMatching tm1 = stree_find(t,label_full("h"));
+    TreeMatching tm2 = stree_find(t,label_full("hej"));
+    TreeMatching tm3 = stree_find(t,label_full("hello"));
+    TreeMatching tm4 = stree_find(t,label_full("hellas"));
+    TreeMatching tm5 = stree_find(t,label_full("hel"));
+    TreeMatching tm6 = stree_find(t,label_full("hella"));
+    TreeMatching tm7 = stree_find(t,label_full(""));
 
     mu_assert("End should exist #1", tm.end);
     mu_assert("End should exist #2", tm1.end);
@@ -53,14 +53,14 @@ char *utest_stree_find()
     mu_assert("End should exist #7", tm6.end);
     mu_assert("End should exist #8", tm7.end);
 
-    mu_assert("control of label #1", strcmp(tm.end->lbl->mark, "he") == 0);
-    mu_assert("control of label #2", strcmp(tm1.end->lbl->mark, "he") == 0);
-    mu_assert("control of label #3", strcmp(tm2.end->lbl->mark, "j") == 0);
-    mu_assert("control of label #4", strcmp(tm3.end->lbl->mark, "o") == 0);
-    mu_assert("control of label #5", strcmp(tm4.end->lbl->mark, "as") == 0);
-    mu_assert("control of label #6", strcmp(tm5.end->lbl->mark, "ll") == 0);
-    mu_assert("control of label #7", strcmp(tm6.end->lbl->mark, "as") == 0);
-    mu_assert("control of label #8", strcmp(tm7.end->lbl->mark, "he") == 0);
+    mu_assert("control of label #1", strcmp(tm.end->lbl->text, "he") == 0);
+    mu_assert("control of label #2", strcmp(tm1.end->lbl->text, "he") == 0);
+    mu_assert("control of label #3", strcmp(tm2.end->lbl->text, "j") == 0);
+    mu_assert("control of label #4", strcmp(tm3.end->lbl->text, "o") == 0);
+    mu_assert("control of label #5", strcmp(tm4.end->lbl->text, "as") == 0);
+    mu_assert("control of label #6", strcmp(tm5.end->lbl->text, "ll") == 0);
+    mu_assert("control of label #7", strcmp(tm6.end->lbl->text, "as") == 0);
+    mu_assert("control of label #8", strcmp(tm7.end->lbl->text, "he") == 0);
 
     return NULL;
 }

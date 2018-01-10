@@ -5,13 +5,31 @@
 
 char *utest_ukkonen()
 {
-    STree t;
-    char *input = "abaababa";
-    char *s = malloc(sizeof(char) * STRING_INIT_LEN * 2);
-    char *s_actual = "R[a[ba[ababa[],ba[]],ababa[]],ba[ababa[],ba[]]]";
-    t = ukkonen_naive(input);
-    write(t, s);
+    STree tree;
+    char *input, *s_actual;
+    char s[STRING_INIT_LEN];
+    s[0] = '\0';
+
+    input = "a";
+    s_actual = "R[a0[]]";
+    tree = ukkonen_naive(input);
+    write(tree, s);
     mu_assert("Should equal #1", strcmp(s_actual, s) == 0);
+
+    s[0] = '\0';
+    input = "ab";
+    s_actual = "R[ab0[],b1[]]";
+    tree = ukkonen_naive(input);
+    write(tree, s);
+    printf("%s\n%s\n%zu\n%zu\n", s, s_actual, strlen(s), strlen(s_actual));
+    mu_assert("Should equal #2", strcmp(s_actual, s) == 0);
+
+    /* input = "abaababa"; */
+    /* s_actual = "R[a[ba[ababa[],ba[]],ababa[]],ba[ababa[],ba[]]]"; */
+    /* t = ukkonen_naive(input); */
+    /* write(tree, s); */
+    /* mu_assert("Should equal #1", strcmp(s_actual, s) == 0); */
+    /* free(s); */
 
     return NULL;
 }

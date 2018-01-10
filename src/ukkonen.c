@@ -5,7 +5,7 @@
 static void extend_end(TreeMatching tm, const char a)
 {
     if (!stree_child_with(tm.end, a)) {
-        label_extend(tm.end->lbl, a);
+        label_extend(tm.end->lbl);
     }
 }
 
@@ -29,8 +29,8 @@ STree ukkonen_naive(const char *text) {
 
         for(unsigned long j = 0; j <= i; j++) {
 
-            sstring(mark, j, i - j, text);
-            LabelPointer lbl = label(mark);
+            /* sstring(mark, j, i - j, text); */
+            LabelPointer lbl = label(text, j, i);
 
             TreeMatching tm = stree_find(tree, lbl);
             free(lbl);

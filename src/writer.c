@@ -7,14 +7,10 @@ static void write_stree(EdgePointer probe, char *acc)
 
     while (probe) {
 
-        const char *mark = edge_str(probe);
-        int i = probe->lbl->i;
-        int n = probe->lbl->j;
-        char buf[n - i + 2];
-        memcpy(buf, &mark[i], n);
-        buf[n] = '\0';
+        char mark[64];
+        edge_mark(probe, mark);
 
-        strcat(acc, buf);
+        strcat(acc, mark);
         if (probe->leaf_number != -1) {
             sprintf(acc, "%s%d", acc, probe->leaf_number);
         }
@@ -27,8 +23,13 @@ static void write_stree(EdgePointer probe, char *acc)
 
 void write(const STree tree, char *s)
 {
+
     EdgePointer probe = tree;
-    strcat(s, edge_str(tree));
+
+    char mark[64];
+    edge_mark(probe, mark);
+    strcat(s, mark);
+
     if (probe->leaf_number != -1) {
         sprintf(s, "%s%d", s, probe->leaf_number);
     }
@@ -39,8 +40,7 @@ void write(const STree tree, char *s)
 
 void write_file(const STree tree, const char *path)
 {
-    char *res = malloc(sizeof(char) * 256);
-    *res = '\0';
+    char *res = calloc(256, sizeof(char));
     write(tree, res);
 
     FILE *f = fopen(path, "w");
