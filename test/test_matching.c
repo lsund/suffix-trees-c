@@ -4,21 +4,34 @@
 
 char *utest_matching_match_offset()
 {
-    LabelPointer lbl = label_full("test");
+    LabelPointer lbl1 = label_full("test");
     LabelPointer lbl2 = label_full("abctest");
     LabelPointer lbl3 = label_full("te");
     LabelPointer lbl4 = label_full("abctestabc");
-    Matching m0 = match(lbl, lbl2);
+
+    Matching m0 = match(lbl1, lbl2);
     mu_assert("No offset #1", match_type(m0) == NONE);
     lbl2->i += 3;
-    Matching m1 = match(lbl, lbl2);
+    Matching m1 = match(lbl1, lbl2);
     mu_assert("offset #1", match_type(m1) == EXACT);
     Matching m2 = match(lbl3, lbl2);
     mu_assert("offset #2", match_type(m2) == PARTIAL_RIGHT);
     lbl4->j -= 3;
     lbl4->i += 3;
-    Matching m3 = match(lbl4, lbl);
+    Matching m3 = match(lbl4, lbl1);
     mu_assert("offset #3", match_type(m3) == EXACT);
+
+
+    const char *text = "abcab";
+
+    lbl1 = label(text, 0, 5);  // abcab
+    lbl2  = label(text, 0, 2); // ab
+
+    Matching m4 = match(lbl1, lbl2);
+    mu_assert("Offset #4", match_type(m4) == PARTIAL_LEFT);
+
+    m4 = match(lbl2, lbl1);
+    mu_assert("Offset #5", match_type(m4) == PARTIAL_RIGHT);
 
     return NULL;
 }

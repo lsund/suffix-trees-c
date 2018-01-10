@@ -113,11 +113,10 @@ void stree_extend_edge_right(STree tree, const EdgePointer ext)
 void stree_split(TreeMatching tm)
 {
 
+    int j = tm.end->lbl->j;
     label_set_right(tm.end->lbl, tm.m.size);
 
-    size_t len = tm.end->lbl->len;
-    const char *mark = tm.end->lbl->text;
-    EdgePointer child = edge_from_substring(tm.m.size, len, mark);
+    EdgePointer child = edge_from_substring(tm.m.size, j, tm.end->lbl->text);
 
     stree_extend_edge_below(tm.end, child);
 }
