@@ -35,8 +35,8 @@ Matching match(LabelPointer left, LabelPointer right)
     char lc, rc;
 
     size    = 0;
-    llen    = left->n - left->i;
-    rlen    = right->n - right->i;
+    llen    = left->j - left->i;
+    rlen    = right->j - right->i;
     min_len = rlen > llen ? llen : rlen;
 
     while  (size < min_len) {

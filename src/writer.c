@@ -1,7 +1,7 @@
 
 #include "writer.h"
 
-static void write_stree_aux(EdgePointer probe, char *acc)
+static void write_stree(EdgePointer probe, char *acc)
 {
     strcat(acc, "[");
 
@@ -9,7 +9,7 @@ static void write_stree_aux(EdgePointer probe, char *acc)
 
         const char *mark = edge_str(probe);
         int i = probe->lbl->i;
-        int n = probe->lbl->n;
+        int n = probe->lbl->j;
         char buf[n - i + 2];
         memcpy(buf, &mark[i], n);
         buf[n] = '\0';
@@ -18,7 +18,7 @@ static void write_stree_aux(EdgePointer probe, char *acc)
         if (probe->leaf_number != -1) {
             sprintf(acc, "%s%d", acc, probe->leaf_number);
         }
-        write_stree_aux(probe->child, acc);
+        write_stree(probe->child, acc);
         char *end = probe->right ? "]," : "]";
         strcat(acc, end);
         probe = probe->right;
@@ -29,7 +29,7 @@ void write(const STree tree, char *s)
 {
     EdgePointer probe = tree;
     strcat(s, edge_str(tree));
-    write_stree_aux(probe->child, s);
+    write_stree(probe->child, s);
     if (probe->leaf_number != -1) {
         sprintf(s, "%s%d", s, probe->leaf_number);
     }

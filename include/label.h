@@ -11,10 +11,12 @@
 
 typedef struct label {
     char *mark;
+    const char *text;
     size_t len;
-    int i, n;
+    int i, j;
 } *LabelPointer;
 
+LabelPointer label2(const char *text, int i, int n);
 LabelPointer label(char *mark);
 
 // Shrink label at the left side
@@ -27,6 +29,7 @@ char label_char_at(LabelPointer lbl, int i);
 void label_extend(const LabelPointer lbl, const char c);
 
 void label_print(LabelPointer lbl);
+void label_print2(LabelPointer lbl);
 
 void label_destroy(LabelPointer lbl);
 

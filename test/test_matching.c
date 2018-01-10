@@ -15,7 +15,7 @@ char *utest_matching_match_offset()
     mu_assert("offset #1", match_type(m1) == EXACT);
     Matching m2 = match(lbl3, lbl2);
     mu_assert("offset #2", match_type(m2) == PARTIAL_RIGHT);
-    lbl4->n -= 3;
+    lbl4->j -= 3;
     lbl4->i += 3;
     Matching m3 = match(lbl4, lbl);
     mu_assert("offset #3", match_type(m3) == EXACT);
