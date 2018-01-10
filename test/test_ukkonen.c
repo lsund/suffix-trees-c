@@ -21,6 +21,21 @@ char *utest_ukkonen()
     s_actual = "R[ab0[],b1[]]";
     tree = ukkonen_naive(input);
     write(tree, s);
+    mu_assert("Should equal #2", strcmp(s_actual, s) == 0);
+
+    s[0] = '\0';
+    input = "aba";
+    s_actual = "R[aba0[],ba1[]]";
+    tree = ukkonen_naive(input);
+    write(tree, s);
+    mu_assert("Should equal #2", strcmp(s_actual, s) == 0);
+
+    // TODO make below work
+    s[0] = '\0';
+    input = "abab";
+    s_actual = "R[a[baa0[],a3[]],baa1[]]";
+    tree = ukkonen_naive(input);
+    write(tree, s);
     printf("%s\n%s\n%zu\n%zu\n", s, s_actual, strlen(s), strlen(s_actual));
     mu_assert("Should equal #2", strcmp(s_actual, s) == 0);
 

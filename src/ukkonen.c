@@ -10,10 +10,10 @@ static void extend_end(TreeMatching tm, const char a)
 }
 
 
-static void split_end(TreeMatching tm, const char a, int i)
+static void split_end(TreeMatching tm, const char a, int k)
 {
     stree_split(tm);
-    stree_extend_edge_right(tm.end->child, edge_new_leaf(a, i));
+    stree_extend_edge_right(tm.end->child, edge_new_leaf(a, k));
 }
 
 
@@ -41,12 +41,15 @@ STree ukkonen_naive(const char *text) {
                     extend_end(tm, a);
                 } else {
                     if (label_char_at(tm.end->lbl, tm.m.size) != a) {
+                        printf("Hello");
+                        // TODO Not getting into this clause
                         split_end(tm, a, j);
                     }
                 }
 
             } else if (!stree_sibling_with(tree, a)) {
-                stree_extend_edge_right(tree, edge_new_leaf(a, j));
+                /* stree_extend_edge_right(tree, edge_new_leaf(a, j)); */
+                stree_extend_edge_right(tree, edge_leaf(text, j, j + 1, j));
             }
         }
     }

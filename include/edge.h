@@ -23,9 +23,9 @@ typedef struct edge {
 
 void edge_mark(const EdgePointer e, char *mark);
 
-EdgePointer edge_leaf(char *text, int i, int j, int k);
+EdgePointer edge_leaf(const char *text, int i, int j, int k);
 
-EdgePointer edge(char *text, int i, int j);
+EdgePointer edge(const char *text, int i, int j);
 
 EdgePointer edge_new_leaf(const char c, int k);
 

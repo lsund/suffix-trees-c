@@ -4,7 +4,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 // Allocs
 
-EdgePointer edge_leaf(char *text, int i, int j, int k)
+EdgePointer edge_leaf(const char *text, int i, int j, int k)
 {
     LabelPointer lbl = label(text, i, j);
     EdgePointer ret = edge_from_label(lbl);
@@ -12,7 +12,7 @@ EdgePointer edge_leaf(char *text, int i, int j, int k)
     return ret;
 }
 
-EdgePointer edge(char *text, int i, int j)
+EdgePointer edge(const char *text, int i, int j)
 {
     return edge_leaf(text, i, j, -1);
 }
