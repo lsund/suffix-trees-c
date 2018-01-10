@@ -29,10 +29,10 @@ void write(const STree tree, char *s)
 {
     EdgePointer probe = tree;
     strcat(s, edge_str(tree));
-    write_stree(probe->child, s);
     if (probe->leaf_number != -1) {
         sprintf(s, "%s%d", s, probe->leaf_number);
     }
+    write_stree(probe->child, s);
     strcat(s, "]");
 }
 

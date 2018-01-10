@@ -23,10 +23,12 @@ static char *test()
     mu_run_test(test_label);
     mu_message(MODULE,"matching\n");
     mu_run_test(test_matching);
+    mu_message(MODULE, "writer\n");
+    mu_run_test(test_writer);
     mu_message(MODULE, "reader\n");
     mu_run_test(test_reader);
-    mu_message(MODULE,"stree\n");
-    mu_run_test(test_stree);
+    /* mu_message(MODULE,"stree\n"); */
+    /* mu_run_test(test_stree); */
     /* mu_message(MODULE,"ukkonen\n"); */
     /* mu_run_test(test_ukkonen); */
     return 0;

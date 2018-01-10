@@ -16,6 +16,7 @@ char *test_label();
 char *test_matching();
 char *test_util();
 char *test_reader();
+char *test_writer();
 
 enum MessageOption {
     MODULE,

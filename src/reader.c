@@ -4,22 +4,24 @@
 int read_edge(const int o, const char *s, EdgePointer *e)
 {
     int i = 0;
-    while (s[i + o] != '[')
+    while (s[i + o] != '[' && !isdigit(s[i + o]))
     {
         i++;
     }
 
+    char *mark = malloc(sizeof(char) * STRING_INIT_LEN);
+    sstring(mark, o, i, s);
+
+
     int leaf_number = -1;
-    if (isdigit(s[o + 2])) {
-        leaf_number = char_to_int(s[o + 2]);
+    if (isdigit(s[i + o])) {
+        leaf_number = char_to_int(s[i + o]);
     }
 
-    char *lbl = malloc(sizeof(char) * STRING_INIT_LEN);
-    sstring(lbl, o, i, s);
-    *e = edge_from_string(lbl);
+    *e = edge_from_string(mark);
     (*e)->leaf_number = leaf_number;
 
-    return o + i + 1;
+    return leaf_number == -1 ? o + i + 1 : o + i + 2;
 }
 
 void read(const char *s, STree *tree)
@@ -30,12 +32,12 @@ void read(const char *s, STree *tree)
     parent = e;
     *tree = e;
     while (s[o]) {
-        if (!isdigit(s[o])) {
+        if (s[o] != ']') {
             o = read_edge(o, s, &e);
             stree_extend_edge_below(parent, e);
             parent = e;
-        } else if (s[o + 2] == ',') {
-            o = read_edge(o += 3, s, &sibling);
+        } else if (s[o + 1] == ',') {
+            o = read_edge(o += 2, s, &sibling);
             stree_extend_edge_right(parent, sibling);
             parent = sibling;
         } else {

@@ -11,54 +11,53 @@ char *utest_read()
     s = "root[a[a1[],c[x2[],y3[]]]]";
     read(s, &tree);
     write(tree, t);
-    printf("%s %s\n", s, t);
     mu_assert("Should equal #1", strcmp(s, t) == 0);
     free(t);
 
     t = malloc(sizeof(char) * STRING_INIT_LEN);
-    s = "root[a[b[1],c[d[2],e[3]]]]";
+    s = "root[a[b1[],c[d2[],e3[]]]]";
     read(s, &tree);
     write(tree, t);
     mu_assert("Should equal #2", strcmp(s, t) == 0);
     free(t);
 
     t = malloc(sizeof(char) * STRING_INIT_LEN);
-    s = "root[a[b[1],c[1],d[2]]]";
+    s = "root[a[b1[],c3[],d2[]]]";
     read(s, &tree);
     write(tree, t);
     mu_assert("Should equal #3", strcmp(s, t) == 0);
     free(t);
 
     t = malloc(sizeof(char) * STRING_INIT_LEN);
-    s = "root[a[1],x[2],c[3]]";
+    s = "root[a1[],x2[],c3[]]";
     read(s, &tree);
     write(tree, t);
     mu_assert("Should equal #4", strcmp(s, t) == 0);
     free(t);
 
     t = malloc(sizeof(char) * STRING_INIT_LEN);
-    s = "root[1]";
+    s = "root1[]";
     read(s, &tree);
     write(tree, t);
     mu_assert("Should equal #5", strcmp(s, t) == 0);
     free(t);
 
     t = malloc(sizeof(char) * STRING_INIT_LEN);
-    s = "root[b[1]]";
+    s = "r[b1[]]";
     read(s, &tree);
     write(tree, t);
     mu_assert("Should equal #6", strcmp(s, t) == 0);
     free(t);
 
     t = malloc(sizeof(char) * STRING_INIT_LEN);
-    s = "root[b[1],c[2]]";
+    s = "root[b1[],c2[]]";
     read(s, &tree);
     write(tree, t);
     mu_assert("Should equal #7", strcmp(s, t) == 0);
     free(t);
 
     t = malloc(sizeof(char) * STRING_INIT_LEN);
-    s = "root[b[c[d[1]]]]";
+    s = "root[b[c[d1[]]]]";
     read(s, &tree);
     write(tree, t);
     mu_assert("Should equal #8", strcmp(s, t) == 0);
