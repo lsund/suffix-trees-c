@@ -15,20 +15,12 @@ static void write_stree_aux(EdgePointer probe, char *acc)
         buf[n] = '\0';
 
         strcat(acc, buf);
-        write_stree_aux(probe->child, acc);
-        if (probe->right) {
-            if (probe->leaf_number != -1) {
-                sprintf(acc, "%s%d],", acc, probe->leaf_number);
-            } else {
-                sprintf(acc, "%s],", acc);
-            }
-        } else {
-            if (probe->leaf_number != -1) {
-                sprintf(acc, "%s%d]", acc, probe->leaf_number);
-            } else {
-                sprintf(acc, "%s]", acc);
-            }
+        if (probe->leaf_number != -1) {
+            sprintf(acc, "%s%d", acc, probe->leaf_number);
         }
+        write_stree_aux(probe->child, acc);
+        char *end = probe->right ? "]," : "]";
+        strcat(acc, end);
         probe = probe->right;
     }
 }
