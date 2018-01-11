@@ -113,10 +113,16 @@ void stree_extend_edge_right(STree tree, const EdgePointer ext)
 void stree_split(TreeMatching tm)
 {
 
+    /* printf("%d\n", tm.m.size); */
     int j = tm.end->lbl->j;
-    label_set_right(tm.end->lbl, tm.m.size);
+    label_set_right(tm.end->lbl, tm.m.size + tm.end->lbl->i);
+    /* printf("%d %d\n", tm.end->lbl->i, tm.end->lbl->j); */
 
-    EdgePointer child = edge(tm.end->lbl->text, tm.m.size, j);
+    EdgePointer child = edge(tm.end->lbl->text, tm.m.size + tm.end->lbl->i, j);
+    /* printf("above: "); */
+    /* label_print(tm.end->lbl); */
+    /* printf("below: "); */
+    /* label_print(child->lbl); */
 
     stree_extend_edge_below(tm.end, child);
 }
