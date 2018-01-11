@@ -4,17 +4,18 @@
 ///////////////////////////////////////////////////////////////////////////////
 // Allocs
 
+EdgePointer edge(const char *text, int i, int j)
+{
+    return edge_leaf(text, i, j, -1);
+}
+
+
 EdgePointer edge_leaf(const char *text, int i, int j, int k)
 {
     LabelPointer lbl = label(text, i, j);
     EdgePointer ret = edge_from_label(lbl);
     ret->leaf_number = k;
     return ret;
-}
-
-EdgePointer edge(const char *text, int i, int j)
-{
-    return edge_leaf(text, i, j, -1);
 }
 
 
@@ -29,10 +30,6 @@ EdgePointer edge_from_label(const LabelPointer lbl)
 
     return ret;
 }
-
-
-///////////////////////////////////////////////////////////////////////////////
-// Edge Functions
 
 
 void edge_mark(const EdgePointer e, char *mark)

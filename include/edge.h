@@ -21,14 +21,12 @@ typedef struct edge {
     int leaf_number;
 } Edge, *EdgePointer;
 
-void edge_mark(const EdgePointer e, char *mark);
-
 EdgePointer edge_leaf(const char *text, int i, int j, int k);
 
 EdgePointer edge(const char *text, int i, int j);
 
-EdgePointer edge_new_leaf(const char c, int k);
-
 EdgePointer edge_from_label(const LabelPointer lbl);
+
+void edge_mark(const EdgePointer e, char *mark);
 
 #endif
