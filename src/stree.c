@@ -116,7 +116,7 @@ void stree_split(TreeMatching tm)
     int j = tm.end->lbl->j;
     label_set_right(tm.end->lbl, tm.m.size);
 
-    EdgePointer child = edge_from_substring(tm.m.size, j, tm.end->lbl->text);
+    EdgePointer child = edge(tm.end->lbl->text, tm.m.size, j);
 
     stree_extend_edge_below(tm.end, child);
 }

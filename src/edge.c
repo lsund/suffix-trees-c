@@ -18,15 +18,15 @@ EdgePointer edge(const char *text, int i, int j)
 }
 
 
-EdgePointer edge_new_leaf(char c, int k)
-{
-    char *mark = malloc(sizeof(char) * 8);
-    sprintf(mark, "%c", c);
-    LabelPointer lbl = label_full(mark);
-    EdgePointer ret = edge_from_label(lbl);
-    ret->leaf_number = k;
-    return ret;
-}
+/* EdgePointer edge_new_leaf(char c, int k) */
+/* { */
+/*     char *mark = malloc(sizeof(char) * 8); */
+/*     sprintf(mark, "%c", c); */
+/*     LabelPointer lbl = label_full(mark); */
+/*     EdgePointer ret = edge_from_label(lbl); */
+/*     ret->leaf_number = k; */
+/*     return ret; */
+/* } */
 
 
 EdgePointer edge_from_string(char *s)

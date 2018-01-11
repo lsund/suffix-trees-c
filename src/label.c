@@ -68,8 +68,9 @@ void label_extend(LabelPointer lbl)
 
 void label_print(LabelPointer lbl)
 {
-    const char *tmp = lbl->text;
-    printf ("%.*s\n", lbl->j - lbl->i, tmp + lbl->i);
+    char tmp[STRING_INIT_LEN];
+    label_mark(lbl, tmp);
+    printf("%s\n", tmp);
 }
 
 
