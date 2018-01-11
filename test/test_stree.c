@@ -5,10 +5,11 @@
 
 char *utest_stree_sibling_with()
 {
-    EdgePointer t1 = edge_from_string("a");
-    EdgePointer t2 = edge_from_string("b");
-    EdgePointer t3 = edge_from_string("c");
-    EdgePointer t4 = edge_from_string("d");
+    char *text = "abcd";
+    EdgePointer t1 = edge(text, 0, 1);
+    EdgePointer t2 = edge(text, 1, 2);
+    EdgePointer t3 = edge(text, 2, 3);
+    EdgePointer t4 = edge(text, 3, 4);
 
     stree_extend_edge_right(t1, t2);
     stree_extend_edge_right(t1, t3);
@@ -25,26 +26,27 @@ char *utest_stree_sibling_with()
 
 char *utest_stree_find()
 {
-    EdgePointer t = edge_from_string("he");
-    EdgePointer t2 = edge_from_string("ll");
-    EdgePointer t3 = edge_from_string("o");
-    EdgePointer t4 = edge_from_string("as");
-    EdgePointer t5 = edge_from_string("j");
-    stree_extend_edge_below(t, t2);
+    char *text = "helloasj";
+    EdgePointer t1 = edge(text, 0, 2);
+    EdgePointer t2 = edge(text, 2, 4);
+    EdgePointer t3 = edge(text, 4, 5);
+    EdgePointer t4 = edge(text, 5, 7);
+    EdgePointer t5 = edge(text, 7, 8);
+    stree_extend_edge_below(t1, t2);
     stree_extend_edge_below(t2, t3);
     stree_extend_edge_below(t2, t4);
-    stree_extend_edge_below(t, t5);
+    stree_extend_edge_below(t1, t5);
 
-    TreeMatching tm = stree_find(t, label_full("he"));
-    TreeMatching tm1 = stree_find(t,label_full("h"));
-    TreeMatching tm2 = stree_find(t,label_full("hej"));
-    TreeMatching tm3 = stree_find(t,label_full("hello"));
-    TreeMatching tm4 = stree_find(t,label_full("hellas"));
-    TreeMatching tm5 = stree_find(t,label_full("hel"));
-    TreeMatching tm6 = stree_find(t,label_full("hella"));
-    TreeMatching tm7 = stree_find(t,label_full(""));
+    TreeMatching tm0 = stree_find(t1,label_full("he"));
+    TreeMatching tm1 = stree_find(t1,label_full("h"));
+    TreeMatching tm2 = stree_find(t1,label_full("hej"));
+    TreeMatching tm3 = stree_find(t1,label_full("hello"));
+    TreeMatching tm4 = stree_find(t1,label_full("hellas"));
+    TreeMatching tm5 = stree_find(t1,label_full("hel"));
+    TreeMatching tm6 = stree_find(t1,label_full("hella"));
+    TreeMatching tm7 = stree_find(t1,label_full(""));
 
-    mu_assert("End should exist #1", tm.end);
+    mu_assert("End should exist #1", tm0.end);
     mu_assert("End should exist #2", tm1.end);
     mu_assert("End should exist #3", tm2.end);
     mu_assert("End should exist #4", tm3.end);
@@ -53,14 +55,23 @@ char *utest_stree_find()
     mu_assert("End should exist #7", tm6.end);
     mu_assert("End should exist #8", tm7.end);
 
-    mu_assert("control of label #1", strcmp(tm.end->lbl->text, "he") == 0);
-    mu_assert("control of label #2", strcmp(tm1.end->lbl->text, "he") == 0);
-    mu_assert("control of label #3", strcmp(tm2.end->lbl->text, "j") == 0);
-    mu_assert("control of label #4", strcmp(tm3.end->lbl->text, "o") == 0);
-    mu_assert("control of label #5", strcmp(tm4.end->lbl->text, "as") == 0);
-    mu_assert("control of label #6", strcmp(tm5.end->lbl->text, "ll") == 0);
-    mu_assert("control of label #7", strcmp(tm6.end->lbl->text, "as") == 0);
-    mu_assert("control of label #8", strcmp(tm7.end->lbl->text, "he") == 0);
+    char tmp[64];
+    label_mark(tm0.end->lbl, tmp);
+    mu_assert("control of label #1", strcmp(tmp, "he") == 0);
+    label_mark(tm1.end->lbl, tmp);
+    mu_assert("control of label #2", strcmp(tmp, "he") == 0);
+    label_mark(tm2.end->lbl, tmp);
+    mu_assert("control of label #3", strcmp(tmp, "j") == 0);
+    label_mark(tm3.end->lbl, tmp);
+    mu_assert("control of label #4", strcmp(tmp, "o") == 0);
+    label_mark(tm4.end->lbl, tmp);
+    mu_assert("control of label #5", strcmp(tmp, "as") == 0);
+    label_mark(tm5.end->lbl, tmp);
+    mu_assert("control of label #6", strcmp(tmp, "ll") == 0);
+    label_mark(tm6.end->lbl, tmp);
+    mu_assert("control of label #7", strcmp(tmp, "as") == 0);
+    label_mark(tm7.end->lbl, tmp);
+    mu_assert("control of label #8", strcmp(tmp, "he") == 0);
 
     return NULL;
 }

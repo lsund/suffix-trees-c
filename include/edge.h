@@ -31,8 +31,6 @@ EdgePointer edge_new_leaf(const char c, int k);
 
 EdgePointer edge_from_substring(int i, int n, const char *s);
 
-EdgePointer edge_from_string(char *string);
-
 EdgePointer edge_from_label(const LabelPointer lbl);
 
 #endif

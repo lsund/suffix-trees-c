@@ -12,7 +12,7 @@ char *utest_write()
     mu_assert("Should equal #1", strcmp(s, t) == 0);
     free(s);
 
-    stree_extend_edge_below(tree, edge_from_string("a"));
+    stree_extend_edge_below(tree, edge("a", 0, 1));
     s = malloc(sizeof(char) * STRING_INIT_LEN * 5);
     write(tree, s);
     t = "r[a0[]]";

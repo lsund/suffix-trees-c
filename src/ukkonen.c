@@ -52,7 +52,7 @@ STree ukkonen_naive(const char *text) {
         }
     }
     free(mark);
-    STree r = edge_from_string("R");
+    STree r = edge("R", 0, 1);
     stree_extend_edge_below(r, tree);
     return r;
 }

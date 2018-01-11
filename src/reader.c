@@ -17,8 +17,9 @@ int read_edge(const int o, const char *s, EdgePointer *e)
     if (isdigit(s[i + o])) {
         leaf_number = char_to_int(s[i + o]);
     }
+    EdgePointer new_edge = edge(s, o, o + i);
 
-    *e = edge_from_string(mark);
+    *e = new_edge;
     (*e)->leaf_number = leaf_number;
 
     return leaf_number == -1 ? o + i + 1 : o + i + 2;
