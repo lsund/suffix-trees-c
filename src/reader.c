@@ -9,10 +9,6 @@ int read_edge(const int o, const char *s, EdgePointer *e)
         i++;
     }
 
-    char *mark = malloc(sizeof(char) * STRING_INIT_LEN);
-    sstring(mark, o, i, s);
-
-
     int leaf_number = -1;
     if (isdigit(s[i + o])) {
         leaf_number = char_to_int(s[i + o]);

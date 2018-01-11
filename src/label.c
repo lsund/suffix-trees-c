@@ -19,20 +19,6 @@ LabelPointer label(const char *text, int i, int j)
 }
 
 
-/* LabelPointer label(char *mark) */
-/* { */
-/*     LabelPointer ret = malloc(sizeof(struct label)); */
-/*     size_t len       = strlen(mark); */
-
-/*     ret->mark        = mark; */
-/*     ret->len         = len; */
-/*     ret->i           = 0; */
-/*     ret->j           = len; */
-
-/*     return ret; */
-/* } */
-
-
 void label_mark(LabelPointer lbl, char *mark)
 {
     sstring(mark, lbl->i, lbl->j - lbl->i, lbl->text);
@@ -68,7 +54,7 @@ void label_extend(LabelPointer lbl)
 
 void label_print(LabelPointer lbl)
 {
-    char tmp[STRING_INIT_LEN];
+    char tmp[STRING_MAX_LEN];
     label_mark(lbl, tmp);
     printf("%s\n", tmp);
 }

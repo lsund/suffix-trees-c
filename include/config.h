@@ -10,5 +10,5 @@
 #define ANSI_COLOR_GREY     "\x1b[37m"
 #define ANSI_COLOR_RESET    "\x1b[0m"
 
-#define STRING_INIT_LEN     256
+#define STRING_MAX_LEN     256
 

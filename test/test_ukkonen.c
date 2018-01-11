@@ -7,7 +7,7 @@ char *utest_ukkonen()
 {
     STree tree;
     char *input, *s_actual, *s_actual2;
-    char s[STRING_INIT_LEN];
+    char s[STRING_MAX_LEN];
     s[0] = '\0';
 
     input = "a";

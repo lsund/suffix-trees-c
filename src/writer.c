@@ -12,7 +12,9 @@ static void write_stree(EdgePointer probe, char *acc)
 
         strcat(acc, mark);
         if (probe->leaf_number != -1) {
-            sprintf(acc, "%s%d", acc, probe->leaf_number);
+            char tmp[STRING_MAX_LEN];
+            sprintf(tmp, "%d", probe->leaf_number);
+            strcat(acc, tmp);
         }
         write_stree(probe->child, acc);
         char *end = probe->right ? "]," : "]";
