@@ -18,15 +18,6 @@ EdgePointer edge(const char *text, int i, int j)
 }
 
 
-EdgePointer edge_from_substring(int i, int n, const char *s)
-{
-    char *mark = malloc(sizeof(char) * STRING_INIT_LEN);
-    sstring(mark, i, n, s);
-    LabelPointer lbl = label_full(mark);
-    return edge_from_label(lbl);
-}
-
-
 EdgePointer edge_from_label(const LabelPointer lbl)
 {
     EdgePointer ret;
