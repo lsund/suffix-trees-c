@@ -1,0 +1,7 @@
+Variable names
+
+e    : edge
+l    : label
+tree : suffix tree
+s, t : string (t is used more for a mutable, temporary value)
+c    : char
