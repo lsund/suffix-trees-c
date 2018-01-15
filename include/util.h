@@ -11,4 +11,6 @@ void sstring(char *dst, const int i, const int n, const char *src);
 
 int char_to_int(char c);
 
+void permute(char *a, int i, int n, char *dst);
+
 #endif

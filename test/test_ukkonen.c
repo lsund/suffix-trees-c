@@ -3,7 +3,8 @@
 #include "reader.h"
 #include "writer.h"
 
-char *utest_ukkonen()
+
+char *utest_adv_alg_example()
 {
     STree tree;
     char *input, *s_actual, *s_actual2;
@@ -116,8 +117,24 @@ char *utest_ukkonen()
 }
 
 
+char *utest_stefan_kurz_example()
+{
+    /* STree tree; */
+    /* char *input, *s_actual; */
+    /* char s[STRING_MAX_LEN]; */
+    /* s[0] = '\0'; */
+
+    /* input = "acbcabcac"; */
+    /* s_actual = "R[a0[]]"; */
+    /* tree = ukkonen_naive(input); */
+    /* write(tree, s); */
+    /* mu_assert("Should equal #1", strcmp(s_actual, s) == 0); */
+    return NULL;
+}
+
+
 char *test_ukkonen()
 {
-    mu_run_utest(utest_ukkonen);
+    mu_run_utest(utest_adv_alg_example);
     return NULL;
 }

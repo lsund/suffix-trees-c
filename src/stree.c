@@ -6,7 +6,7 @@ STree stree_init(const char *t)
     return edge_leaf(t, 0, 1, 0);
 }
 
-
+// TODO rename to scan_prefix
 TreeMatching stree_find(STree tree, Label l)
 {
 
@@ -66,7 +66,7 @@ int stree_es_with(STree tree, char c)
 }
 
 
-int stree_ec_with(STree tree, char c)
+int stree_child_with(STree tree, char c)
 {
     Edge probe = tree->ec;
     while(probe) {
@@ -98,7 +98,7 @@ void stree_extend_edge_below(STree tree, const Edge ext)
 }
 
 
-void stree_extend_edge_es(STree tree, const Edge ext)
+void stree_extend_edge_sibling(STree tree, const Edge ext)
 {
     Edge probe = tree;
 
@@ -112,19 +112,42 @@ void stree_extend_edge_es(STree tree, const Edge ext)
 
 void stree_split(TreeMatching tm)
 {
-
-    /* printf("%d\n", tm.m.size); */
     int j = tm.end->l->j;
     label_set_right(tm.end->l, tm.m.n + tm.end->l->i);
-    /* printf("%d %d\n", tm.end->l->i, tm.end->l->j); */
 
     Edge ec = edge(tm.end->l->s, tm.m.n + tm.end->l->i, j);
-    /* printf("above: "); */
-    /* label_print(tm.end->l); */
-    /* printf("below: "); */
-    /* label_print(ec->l); */
 
     stree_extend_edge_below(tm.end, ec);
+}
+
+
+void stree_permute(STree tree, int i)
+{
+    // TODO Test this
+    Edge probe = tree->ec;
+    int n = 0;
+
+    while (probe) {
+        probe = probe->es;
+        n++;
+    }
+
+    char s[100];
+    char chosen_permutation[64];
+
+    char *set = "123";
+
+    strcpy(s, set);
+    int len     = strlen(set);
+    size_t size = sizeof(char) * len;
+
+    char *all_permutations = malloc(10000);
+
+    permute(s, 0, strlen(s), all_permutations);
+
+    strncpy(chosen_permutation, all_permutations + (i * size), size);
+    printf("%s\n", chosen_permutation);
+
 }
 
 

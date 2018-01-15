@@ -11,9 +11,9 @@ char *utest_stree_es_with()
     Edge t3 = edge(text, 2, 3);
     Edge t4 = edge(text, 3, 4);
 
-    stree_extend_edge_es(t1, t2);
-    stree_extend_edge_es(t1, t3);
-    stree_extend_edge_es(t1, t4);
+    stree_extend_edge_sibling(t1, t2);
+    stree_extend_edge_sibling(t1, t3);
+    stree_extend_edge_sibling(t1, t4);
 
     mu_assert("Branches 1", stree_es_with(t1, 'a'));
     mu_assert("Branches 2", stree_es_with(t1, 'b'));
@@ -77,9 +77,25 @@ char *utest_stree_find()
 }
 
 
+char *utest_stree_swap()
+{
+    char *text = "ab";
+    Edge t1 = edge("root", 0, 4);
+    Edge t2 = edge(text, 0, 1);
+    Edge t3 = edge(text, 1, 2);
+
+    stree_extend_edge_below(t1, t2);
+    stree_extend_edge_sibling(t2, t3);
+
+    stree_permute(t1, 4);
+    return NULL;
+}
+
+
 char *test_stree()
 {
     mu_run_utest(utest_stree_find);
     mu_run_utest(utest_stree_es_with);
+    mu_run_utest(utest_stree_swap);
     return NULL;
 }

@@ -45,7 +45,7 @@ void read(const char *s, STree *tree)
         } else if (s[o + 1] == ',') {
 
             o = read_edge(o += 2, s, &es);
-            stree_extend_edge_es(ep, es);
+            stree_extend_edge_sibling(ep, es);
             ep = es;
 
         } else {
