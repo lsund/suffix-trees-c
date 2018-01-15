@@ -88,12 +88,24 @@ char *utest_stree_swap()
     stree_extend_edge_below(t1, t2);
     stree_extend_edge_sibling(t2, t3);
 
-    printf("child: %p\n", t1->ec);
     stree_permute(t1, 1);
-    printf("child: %p\n", t1->ec);
-    /* char tmp[64]; */
-    /* edge_mark(t1, tmp); */
-    /* printf("%s\n", tmp); */
+
+    char tmp[64];
+    label_mark(t1->l, tmp);
+    mu_assert("Permuted tree #1", strcmp(tmp, "r") == 0);
+
+    label_mark(t1->ec->l, tmp);
+    mu_assert("Permuted tree #2", strcmp(tmp, "b") == 0);
+
+    label_mark(t1->ec->es->l, tmp);
+    mu_assert("Permuted tree #3", strcmp(tmp, "a") == 0);
+
+    mu_assert("Permuted tree #4", !t1->ec->es->es);
+
+    /* t1 = edge("r", 0, 1); */
+    /* t2 = edge(text, 0, 1); */
+    /* t3 = edge(text, 1, 2); */
+
     return NULL;
 }
 

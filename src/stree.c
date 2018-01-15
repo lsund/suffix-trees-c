@@ -132,14 +132,9 @@ void stree_permute(STree tree, int i)
         probe = probe->es;
         n++;
     }
-    /* probe = tree->ec; */
-    /* while (probe) { */
-    /*     label_print(probe->l); */
-    /*     probe = probe->es; */
-    /* } */
 
-    char s[1000];
-    char p[64];
+    char s[STRING_MAX_LEN];
+    char p[STRING_MAX_LEN];
 
     char *set = "01";
     strcpy(s, set);
@@ -153,19 +148,12 @@ void stree_permute(STree tree, int i)
         order[j] = char_to_int(p[j]);
     }
 
-    /* for (j = 0; j < strlen(set) - 1; j++) */
-    /* { */
-    /*     printf("order[%zu]: %d order[%zu]: %d\n", j, order[j], j + 1, order[j + 1]); */
-    /* } */
-
+    tree->ec = siblings[order[0]];
     for (j = 0; j < strlen(set) - 1; j++)
     {
-        siblings[order[j]]->es = siblings[order[j] + 1];
+        siblings[order[j]]->es = siblings[order[j + 1]];
     }
     siblings[order[strlen(set) - 1]]->es = NULL;
-    tree->ec = siblings[order[0]];
-
-
 
 }
 
