@@ -77,14 +77,14 @@ char *utest_ukkonen()
 
     Edge el, ell, elll, elr, ellr, er, err, erl;
 
-    el   = tree->child;
-    ell  = tree->child->child;
-    elll = tree->child->child->child;
-    ellr = tree->child->child->child->sibling;
-    elr  = tree->child->child->sibling;
-    er   = tree->child->sibling;
-    err  = tree->child->sibling->child->sibling;
-    erl  = tree->child->sibling->child;
+    el   = tree->ec;
+    ell  = tree->ec->ec;
+    elll = tree->ec->ec->ec;
+    ellr = tree->ec->ec->ec->es;
+    elr  = tree->ec->ec->es;
+    er   = tree->ec->es;
+    err  = tree->ec->es->ec->es;
+    erl  = tree->ec->es->ec;
 
     edge_mark(el, l);
     mu_assert("Local inspect #1", strcmp(l, "a") == 0);

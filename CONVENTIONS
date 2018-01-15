@@ -1,13 +1,21 @@
-Variable names
+-- Variable names
 
-e    : edge
-l    : label
-tree : suffix tree
-s, t : string (t is used more for a mutable, temporary value)
-c    : char
-m    : matching
+e         : edge
+ec        : ec to e
+es        : es to e
+ep        : parent to e
+l         : label
+tree      : suffix tree
+s, t      : string (t is used more for a mutable, temporary value)
+c         : char
+m         : matching
+x1,x2     : similar variables in the same context
+i,j       : indexing integers
+n, m      : size integers
+k         : other integers
+o         : offset
 
-Style
+-- Style
 
 Two spaces between functions in c files
 One space between functions in h files

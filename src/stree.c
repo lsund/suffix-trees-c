@@ -20,17 +20,17 @@ TreeMatching stree_find(STree tree, Label l)
         case NONE:
             // The first character of c could not be matched with any character
             // in the label of the tree
-            if (tree->sibling) {
-                return stree_find(tree->sibling, l);
+            if (tree->es) {
+                return stree_find(tree->es, l);
             } else {
                 return ret;
             }
         case PARTIAL_RIGHT:
             // The whole mark of the tree label was matched, but something
-            // in c is left. Try to continue with child nodes.
-            if (tree->child) {
+            // in c is left. Try to continue with ec nodes.
+            if (tree->ec) {
                 label_shrink_left(l, m.n);
-                return stree_find(tree->child, l);
+                return stree_find(tree->ec, l);
             } else {
                 return ret;
             }
@@ -50,7 +50,7 @@ TreeMatching stree_find(STree tree, Label l)
 }
 
 
-int stree_sibling_with(STree tree, char c)
+int stree_es_with(STree tree, char c)
 {
     if (!tree) return 1;
 
@@ -60,20 +60,20 @@ int stree_sibling_with(STree tree, char c)
         if (label_char_at(probe->l, 0) == c) {
             return 1;
         }
-        probe = probe->sibling;
+        probe = probe->es;
     }
     return 0;
 }
 
 
-int stree_child_with(STree tree, char c)
+int stree_ec_with(STree tree, char c)
 {
-    Edge probe = tree->child;
+    Edge probe = tree->ec;
     while(probe) {
         if (label_char_at(probe->l, 0) == c) {
             return 1;
         }
-        probe = probe->sibling;
+        probe = probe->es;
     }
     return 0;
 }
@@ -82,14 +82,14 @@ int stree_child_with(STree tree, char c)
 void stree_extend_edge_below(STree tree, const Edge ext)
 {
     int tmp = tree->k;
-    if (!tree->child) {
-        tree->child = ext;
+    if (!tree->ec) {
+        tree->ec = ext;
     } else {
-        Edge probe = tree->child;
-        while (probe->sibling) {
-            probe = probe->sibling;
+        Edge probe = tree->ec;
+        while (probe->es) {
+            probe = probe->es;
         }
-        probe->sibling = ext;
+        probe->es = ext;
     }
     tree->k = -1;
     if (ext->k == -1) {
@@ -98,15 +98,15 @@ void stree_extend_edge_below(STree tree, const Edge ext)
 }
 
 
-void stree_extend_edge_sibling(STree tree, const Edge ext)
+void stree_extend_edge_es(STree tree, const Edge ext)
 {
     Edge probe = tree;
 
-    while (probe->sibling) {
-        probe = probe->sibling;
+    while (probe->es) {
+        probe = probe->es;
     }
 
-    probe->sibling = ext;
+    probe->es = ext;
 }
 
 
@@ -118,24 +118,24 @@ void stree_split(TreeMatching tm)
     label_set_right(tm.end->l, tm.m.n + tm.end->l->i);
     /* printf("%d %d\n", tm.end->l->i, tm.end->l->j); */
 
-    Edge child = edge(tm.end->l->s, tm.m.n + tm.end->l->i, j);
+    Edge ec = edge(tm.end->l->s, tm.m.n + tm.end->l->i, j);
     /* printf("above: "); */
     /* label_print(tm.end->l); */
     /* printf("below: "); */
-    /* label_print(child->l); */
+    /* label_print(ec->l); */
 
-    stree_extend_edge_below(tm.end, child);
+    stree_extend_edge_below(tm.end, ec);
 }
 
 
 void stree_destroy(STree tree)
 {
     if (tree) {
-        if (tree->child) {
-            stree_destroy(tree->child);
+        if (tree->ec) {
+            stree_destroy(tree->ec);
         }
-        if (tree->sibling) {
-            stree_destroy(tree->sibling);
+        if (tree->es) {
+            stree_destroy(tree->es);
         }
         label_destroy(tree->l);
         free(tree);

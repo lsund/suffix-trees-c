@@ -16,8 +16,8 @@
 // nature.
 typedef struct edge {
     Label l;
-    struct edge *child;
-    struct edge *sibling;
+    struct edge *ec;
+    struct edge *es;
     int k;
 } *Edge;
 

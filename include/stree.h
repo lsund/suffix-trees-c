@@ -17,13 +17,13 @@ TreeMatching stree_find(STree tree, Label l);
 
 Edge stree_init(const char *t);
 
-int stree_sibling_with(STree tree, char c);
+int stree_es_with(STree tree, char c);
 
-int stree_child_with(STree tree, char c);
+int stree_ec_with(STree tree, char c);
 
 void stree_extend_edge_below(STree base, const Edge ext);
 
-void stree_extend_edge_sibling(STree base, const Edge ext);
+void stree_extend_edge_es(STree base, const Edge ext);
 
 void stree_split(TreeMatching tm);
 

@@ -3,7 +3,7 @@
 #include "stree.h"
 
 
-char *utest_stree_sibling_with()
+char *utest_stree_es_with()
 {
     char *text = "abcd";
     Edge t1 = edge(text, 0, 1);
@@ -11,16 +11,16 @@ char *utest_stree_sibling_with()
     Edge t3 = edge(text, 2, 3);
     Edge t4 = edge(text, 3, 4);
 
-    stree_extend_edge_sibling(t1, t2);
-    stree_extend_edge_sibling(t1, t3);
-    stree_extend_edge_sibling(t1, t4);
+    stree_extend_edge_es(t1, t2);
+    stree_extend_edge_es(t1, t3);
+    stree_extend_edge_es(t1, t4);
 
-    mu_assert("Branches 1", stree_sibling_with(t1, 'a'));
-    mu_assert("Branches 2", stree_sibling_with(t1, 'b'));
-    mu_assert("Branches 3", stree_sibling_with(t1, 'c'));
-    mu_assert("Branches 4", stree_sibling_with(t1, 'd'));
-    mu_assert("Branches 5", !stree_sibling_with(t1, 'e'));
-    mu_assert("Branches 6", stree_sibling_with(t2, 'c'));
+    mu_assert("Branches 1", stree_es_with(t1, 'a'));
+    mu_assert("Branches 2", stree_es_with(t1, 'b'));
+    mu_assert("Branches 3", stree_es_with(t1, 'c'));
+    mu_assert("Branches 4", stree_es_with(t1, 'd'));
+    mu_assert("Branches 5", !stree_es_with(t1, 'e'));
+    mu_assert("Branches 6", stree_es_with(t2, 'c'));
     return NULL;
 }
 
@@ -80,6 +80,6 @@ char *utest_stree_find()
 char *test_stree()
 {
     mu_run_utest(utest_stree_find);
-    mu_run_utest(utest_stree_sibling_with);
+    mu_run_utest(utest_stree_es_with);
     return NULL;
 }
