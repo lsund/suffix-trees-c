@@ -123,24 +123,49 @@ void stree_split(TreeMatching tm)
 
 void stree_permute(STree tree, int i)
 {
-    // TODO Test this
-    Edge probe = tree->ec;
     int n = 0;
 
+    Edge siblings[64];
+    Edge probe = tree->ec;
     while (probe) {
+        siblings[n] = probe;
         probe = probe->es;
         n++;
     }
+    /* probe = tree->ec; */
+    /* while (probe) { */
+    /*     label_print(probe->l); */
+    /*     probe = probe->es; */
+    /* } */
 
     char s[1000];
     char p[64];
 
-    char *set = "123";
+    char *set = "01";
     strcpy(s, set);
 
     nth_permutation(i, s, p);
 
-    printf("%s\n", p);
+    size_t j;
+    int order[64];
+    for (j = 0; j < strlen(set); j++)
+    {
+        order[j] = char_to_int(p[j]);
+    }
+
+    /* for (j = 0; j < strlen(set) - 1; j++) */
+    /* { */
+    /*     printf("order[%zu]: %d order[%zu]: %d\n", j, order[j], j + 1, order[j + 1]); */
+    /* } */
+
+    for (j = 0; j < strlen(set) - 1; j++)
+    {
+        siblings[order[j]]->es = siblings[order[j] + 1];
+    }
+    siblings[order[strlen(set) - 1]]->es = NULL;
+    tree->ec = siblings[order[0]];
+
+
 
 }
 

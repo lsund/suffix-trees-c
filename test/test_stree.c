@@ -1,6 +1,7 @@
 
 #include "test.h"
 #include "stree.h"
+#include "edge.h"
 
 
 char *utest_stree_es_with()
@@ -80,14 +81,19 @@ char *utest_stree_find()
 char *utest_stree_swap()
 {
     char *text = "ab";
-    Edge t1 = edge("root", 0, 4);
+    Edge t1 = edge("r", 0, 1);
     Edge t2 = edge(text, 0, 1);
     Edge t3 = edge(text, 1, 2);
 
     stree_extend_edge_below(t1, t2);
     stree_extend_edge_sibling(t2, t3);
 
-    stree_permute(t1, 2);
+    printf("child: %p\n", t1->ec);
+    stree_permute(t1, 1);
+    printf("child: %p\n", t1->ec);
+    /* char tmp[64]; */
+    /* edge_mark(t1, tmp); */
+    /* printf("%s\n", tmp); */
     return NULL;
 }
 
