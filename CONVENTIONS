@@ -5,3 +5,9 @@ l    : label
 tree : suffix tree
 s, t : string (t is used more for a mutable, temporary value)
 c    : char
+m    : matching
+
+Style
+
+Two spaces between functions in c files
+One space between functions in h files

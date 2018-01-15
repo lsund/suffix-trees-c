@@ -2,60 +2,53 @@
 
 Matching matching_empty()
 {
-    Matching ret;
-    ret.size  = 0;
-    ret.left  = 0;
-    ret.right = 0;
-    return ret;
+    Matching m;
+    m.n  = 0;
+    m.l  = 0;
+    m.r = 0;
+
+    return m;
 }
 
-MatchType match_type(const Matching match)
+MatchType match_type(const Matching m)
 {
-    if (match.size) {
-        if (!match.left && !match.right) {
-            return EXACT;
-        } else {
-            return match.left ? PARTIAL_LEFT : PARTIAL_RIGHT;
-        }
+    MatchType partial = m.l ? PARTIAL_LEFT : PARTIAL_RIGHT;
+
+    if (m.n) {
+        return !m.l && !m.r ? EXACT : partial;
     } else {
-        if (match.left && match.right) {
-            return NONE;
-        } else {
-            return match.left ? PARTIAL_LEFT : PARTIAL_RIGHT;
-        }
+        return m.l && m.r ? NONE : partial;
     }
 }
 
 
-Matching match(Label left, Label right)
+Matching match(const Label l1, const Label l2)
 {
 
-    Matching ret;
-    int size, min_len, rlen, llen;
+    Matching m;
+    int min, n2, n1;
     char lc, rc;
 
-    size    = 0;
-    llen    = left->j - left->i;
-    rlen    = right->j - right->i;
-    min_len = rlen > llen ? llen : rlen;
+    m.n = 0;
+    n1 = l1->j - l1->i;
+    n2 = l2->j - l2->i;
+    min  = n2 > n1 ? n1 : n2;
 
-    while  (size < min_len) {
+    while  (m.n < min) {
 
-        rc = label_char_at(right, size);
-        lc = label_char_at(left, size);
+        rc = label_char_at(l2, m.n);
+        lc = label_char_at(l1, m.n);
 
         if (rc != lc) {
             break;
         } else {
-            size++;
+            m.n++;
         }
 
     }
 
-    ret.size  = size;
-    ret.left  = llen - size;
-    ret.right = rlen - size;
+    m.l  = n1 - m.n;
+    m.r = n2 - m.n;
 
-
-    return ret;
+    return m;
 }

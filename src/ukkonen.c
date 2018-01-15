@@ -13,7 +13,7 @@ static void extend_end(TreeMatching tm, const char a)
 static void split_end(TreeMatching tm, int k, Label l)
 {
     stree_split(tm);
-    Edge new_leaf = edge_leaf(l->s, l->i + tm.m.size, l->i + tm.m.size + 1, k);
+    Edge new_leaf = edge_leaf(l->s, l->i + tm.m.n, l->i + tm.m.n + 1, k);
     stree_extend_edge_sibling(tm.end->child, new_leaf);
 }
 
@@ -32,13 +32,13 @@ STree ukkonen_naive(const char *text) {
             Label l = label(text, j, i);
             TreeMatching tm = stree_find(tree, l);
 
-            if (tm.m.size) {
+            if (tm.m.n) {
 
                 // Check that matching works
                 if (match_type(tm.m) == EXACT) {
                     extend_end(tm, a);
                 } else {
-                    char last = label_char_at(tm.end->l, tm.m.size);
+                    char last = label_char_at(tm.end->l, tm.m.n);
                     if (last != a) {
                         split_end(tm, j, l);
                     }

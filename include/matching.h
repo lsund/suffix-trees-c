@@ -20,7 +20,9 @@ typedef enum { NONE, EXACT, PARTIAL_RIGHT, PARTIAL_LEFT } MatchType;
 
 
 typedef struct matching {
-    int size, left, right;
+    int n;
+    int l;
+    int r;
 } Matching;
 
 
@@ -29,8 +31,8 @@ typedef struct matching {
 
 Matching matching_empty();
 
-MatchType match_type(const Matching match);
+MatchType match_type(const Matching m);
 
-Matching match(Label left, Label right);
+Matching match(const Label l1, const Label l2);
 
 #endif

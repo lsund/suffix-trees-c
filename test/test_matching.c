@@ -45,26 +45,26 @@ char *utest_matching_match()
     mu_assert("No match #2", match_type(m) == NONE);
 
     Matching m2 = match(label_full("xest"), label_full("xest"));
-    mu_assert("Exact match 1", m2.size == 4);
-    mu_assert("Exact match 2", m2.left == 0);
-    mu_assert("Exact match 3", m2.right == 0);
+    mu_assert("Exact match 1", m2.n == 4);
+    mu_assert("Exact match 2", m2.l == 0);
+    mu_assert("Exact match 3", m2.r == 0);
     mu_assert("Exact match 4", match_type(m2) == EXACT);
 
     Matching m3 = match(label_full("xest"), label_full("xester"));
-    mu_assert("Partial match left #1", m3.size == 4);
-    mu_assert("Partial match left #2", m3.left == 0);
-    mu_assert("Partial match left #3", m3.right == 2);
-    mu_assert("Partial match left #4", match_type(m3) == PARTIAL_RIGHT);
+    mu_assert("Partial match l #1", m3.n == 4);
+    mu_assert("Partial match l #2", m3.l == 0);
+    mu_assert("Partial match l #3", m3.r == 2);
+    mu_assert("Partial match l #4", match_type(m3) == PARTIAL_RIGHT);
 
     Matching m4 = match(label_full("xester"), label_full("xest"));
-    mu_assert("Partial match left #5", m4.size == 4);
-    mu_assert("Partial match left #6", m4.right == 0);
-    mu_assert("Partial match left #7", m4.left == 2);
-    mu_assert("Partial match left #8", match_type(m4) == PARTIAL_LEFT);
+    mu_assert("Partial match l #5", m4.n == 4);
+    mu_assert("Partial match l #6", m4.r == 0);
+    mu_assert("Partial match l #7", m4.l == 2);
+    mu_assert("Partial match l #8", match_type(m4) == PARTIAL_LEFT);
 
 
     Matching m5 = match(label_full("a"), label_full("abaa"));
-    mu_assert("Match", m5.size == 1);
+    mu_assert("Match", m5.n == 1);
 
     Matching m6 = match(label_full("he"), label_full(""));
     Matching m7 = match(label_full(""), label_full("he"));
@@ -72,7 +72,7 @@ char *utest_matching_match()
     mu_assert("Partial match #9", match_type(m6) == PARTIAL_LEFT);
     mu_assert("Partial match #10", match_type(m7) == PARTIAL_RIGHT);
 
-    // Considered partial left. Not a situation that occurs in the algorithm
+    // Considered partial l. Not a situation that occurs in the algorithm
     Matching m8 = match(label_full("abcde"), label_full("abcxx"));
     mu_assert("Partial match #11", match_type(m8) == PARTIAL_LEFT);
 

@@ -29,7 +29,7 @@ TreeMatching stree_find(STree tree, Label l)
             // The whole mark of the tree label was matched, but something
             // in c is left. Try to continue with child nodes.
             if (tree->child) {
-                label_shrink_left(l, m.size);
+                label_shrink_left(l, m.n);
                 return stree_find(tree->child, l);
             } else {
                 return ret;
@@ -115,10 +115,10 @@ void stree_split(TreeMatching tm)
 
     /* printf("%d\n", tm.m.size); */
     int j = tm.end->l->j;
-    label_set_right(tm.end->l, tm.m.size + tm.end->l->i);
+    label_set_right(tm.end->l, tm.m.n + tm.end->l->i);
     /* printf("%d %d\n", tm.end->l->i, tm.end->l->j); */
 
-    Edge child = edge(tm.end->l->s, tm.m.size + tm.end->l->i, j);
+    Edge child = edge(tm.end->l->s, tm.m.n + tm.end->l->i, j);
     /* printf("above: "); */
     /* label_print(tm.end->l); */
     /* printf("below: "); */

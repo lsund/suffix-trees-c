@@ -31,7 +31,6 @@ char label_char_at(Label l, int i);
 void label_extend(const Label l);
 
 void label_print(Label l);
-void label_print2(Label l);
 
 void label_destroy(Label l);
 
