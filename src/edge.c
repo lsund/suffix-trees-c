@@ -31,5 +31,9 @@ Edge edge_from_label(const Label lbl)
 
 void edge_mark(const Edge e, char *mark)
 {
-    label_mark(e->lbl, mark);
+    if (e) {
+        label_mark(e->lbl, mark);
+    } else {
+        mark[0] = '\0';
+    }
 }
