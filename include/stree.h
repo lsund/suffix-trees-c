@@ -23,7 +23,7 @@ int stree_child_with(STree tree, char c);
 
 void stree_extend_edge_below(STree base, const Edge ext);
 
-void stree_extend_edge_right(STree base, const Edge ext);
+void stree_extend_edge_sibling(STree base, const Edge ext);
 
 void stree_split(TreeMatching tm);
 

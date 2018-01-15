@@ -80,11 +80,11 @@ char *utest_ukkonen()
     el   = tree->child;
     ell  = tree->child->child;
     elll = tree->child->child->child;
-    ellr = tree->child->child->child->right;
-    elr  = tree->child->child->right;
-    er   = tree->child->right;
-    err  = tree->child->right->child->right;
-    erl  = tree->child->right->child;
+    ellr = tree->child->child->child->sibling;
+    elr  = tree->child->child->sibling;
+    er   = tree->child->sibling;
+    err  = tree->child->sibling->child->sibling;
+    erl  = tree->child->sibling->child;
 
     edge_mark(el, lbl);
     mu_assert("Local inspect #1", strcmp(lbl, "a") == 0);

@@ -1,13 +1,13 @@
 #include "edge.h"
 
 
-Edge edge(const char *s, int i, int j)
+Edge edge(const char *s, const int i, const int j)
 {
     return edge_leaf(s, i, j, -1);
 }
 
 
-Edge edge_leaf(const char *s, int i, int j, int k)
+Edge edge_leaf(const char *s, const int i, const int j, const int k)
 {
     Label lbl = label(s, i, j);
     Edge ret = edge_from_label(lbl);
@@ -22,18 +22,18 @@ Edge edge_from_label(const Label lbl)
     ret              = malloc(sizeof(struct edge));
     ret->lbl         = lbl;
     ret->child       = NULL;
-    ret->right       = NULL;
+    ret->sibling     = NULL;
     ret->leaf_number = -1;
 
     return ret;
 }
 
 
-void edge_mark(const Edge e, char *mark)
+void edge_mark(const Edge e, char *t)
 {
     if (e) {
-        label_mark(e->lbl, mark);
+        label_mark(e->lbl, t);
     } else {
-        mark[0] = '\0';
+        t[0] = '\0';
     }
 }

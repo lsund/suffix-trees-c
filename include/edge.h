@@ -17,13 +17,13 @@
 typedef struct edge {
     Label lbl;
     struct edge *child;
-    struct edge *right;
+    struct edge *sibling;
     int leaf_number;
 } *Edge;
 
-Edge edge_leaf(const char *s, int i, int j, int k);
+Edge edge(const char *s, const int i, const int j);
 
-Edge edge(const char *s, int i, int j);
+Edge edge_leaf(const char *s, const int i, const int j, const int k);
 
 Edge edge_from_label(const Label lbl);
 

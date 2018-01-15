@@ -20,8 +20,8 @@ TreeMatching stree_find(STree tree, Label lbl)
         case NONE:
             // The first character of c could not be matched with any character
             // in the label of the tree
-            if (tree->right) {
-                return stree_find(tree->right, lbl);
+            if (tree->sibling) {
+                return stree_find(tree->sibling, lbl);
             } else {
                 return ret;
             }
@@ -60,7 +60,7 @@ int stree_sibling_with(STree tree, char c)
         if (label_char_at(probe->lbl, 0) == c) {
             return 1;
         }
-        probe = probe->right;
+        probe = probe->sibling;
     }
     return 0;
 }
@@ -73,7 +73,7 @@ int stree_child_with(STree tree, char c)
         if (label_char_at(probe->lbl, 0) == c) {
             return 1;
         }
-        probe = probe->right;
+        probe = probe->sibling;
     }
     return 0;
 }
@@ -86,10 +86,10 @@ void stree_extend_edge_below(STree tree, const Edge ext)
         tree->child = ext;
     } else {
         Edge probe = tree->child;
-        while (probe->right) {
-            probe = probe->right;
+        while (probe->sibling) {
+            probe = probe->sibling;
         }
-        probe->right = ext;
+        probe->sibling = ext;
     }
     tree->leaf_number = -1;
     if (ext->leaf_number == -1) {
@@ -98,15 +98,15 @@ void stree_extend_edge_below(STree tree, const Edge ext)
 }
 
 
-void stree_extend_edge_right(STree tree, const Edge ext)
+void stree_extend_edge_sibling(STree tree, const Edge ext)
 {
     Edge probe = tree;
 
-    while (probe->right) {
-        probe = probe->right;
+    while (probe->sibling) {
+        probe = probe->sibling;
     }
 
-    probe->right = ext;
+    probe->sibling = ext;
 }
 
 
@@ -134,8 +134,8 @@ void stree_destroy(STree tree)
         if (tree->child) {
             stree_destroy(tree->child);
         }
-        if (tree->right) {
-            stree_destroy(tree->right);
+        if (tree->sibling) {
+            stree_destroy(tree->sibling);
         }
         label_destroy(tree->lbl);
         free(tree);

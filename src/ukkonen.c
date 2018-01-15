@@ -14,7 +14,7 @@ static void split_end(TreeMatching tm, int k, Label lbl)
 {
     stree_split(tm);
     Edge new_leaf = edge_leaf(lbl->text, lbl->i + tm.m.size, lbl->i + tm.m.size + 1, k);
-    stree_extend_edge_right(tm.end->child, new_leaf);
+    stree_extend_edge_sibling(tm.end->child, new_leaf);
 }
 
 
@@ -45,7 +45,7 @@ STree ukkonen_naive(const char *text) {
                 }
 
             } else if (!stree_sibling_with(tree, a)) {
-                stree_extend_edge_right(tree, edge_leaf(text, j, j + 1, j));
+                stree_extend_edge_sibling(tree, edge_leaf(text, j, j + 1, j));
             }
             free(lbl);
         }

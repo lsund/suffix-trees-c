@@ -17,9 +17,9 @@ static void write_stree(Edge probe, char *acc)
             strcat(acc, tmp);
         }
         write_stree(probe->child, acc);
-        char *end = probe->right ? "]," : "]";
+        char *end = probe->sibling ? "]," : "]";
         strcat(acc, end);
-        probe = probe->right;
+        probe = probe->sibling;
     }
 }
 
