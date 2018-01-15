@@ -1,7 +1,7 @@
 
 #include "reader.h"
 
-int read_edge(const int o, const char *s, EdgePointer *e)
+int read_edge(const int o, const char *s, Edge *e)
 {
     int i = 0;
     while (s[i + o] != '[' && !isdigit(s[i + o]))
@@ -13,7 +13,7 @@ int read_edge(const int o, const char *s, EdgePointer *e)
     if (isdigit(s[i + o])) {
         leaf_number = char_to_int(s[i + o]);
     }
-    EdgePointer new_edge = edge(s, o, o + i);
+    Edge new_edge = edge(s, o, o + i);
 
     *e = new_edge;
     (*e)->leaf_number = leaf_number;
@@ -23,7 +23,7 @@ int read_edge(const int o, const char *s, EdgePointer *e)
 
 void read(const char *s, STree *tree)
 {
-    EdgePointer e, parent, sibling;
+    Edge e, parent, sibling;
     int o = read_edge(0, s, &e);
     e->leaf_number = 1;
     parent = e;

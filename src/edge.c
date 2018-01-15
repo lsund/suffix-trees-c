@@ -1,28 +1,25 @@
 #include "edge.h"
 
 
-///////////////////////////////////////////////////////////////////////////////
-// Allocs
-
-EdgePointer edge(const char *text, int i, int j)
+Edge edge(const char *s, int i, int j)
 {
-    return edge_leaf(text, i, j, -1);
+    return edge_leaf(s, i, j, -1);
 }
 
 
-EdgePointer edge_leaf(const char *text, int i, int j, int k)
+Edge edge_leaf(const char *s, int i, int j, int k)
 {
-    LabelPointer lbl = label(text, i, j);
-    EdgePointer ret = edge_from_label(lbl);
+    Label lbl = label(s, i, j);
+    Edge ret = edge_from_label(lbl);
     ret->leaf_number = k;
     return ret;
 }
 
 
-EdgePointer edge_from_label(const LabelPointer lbl)
+Edge edge_from_label(const Label lbl)
 {
-    EdgePointer ret;
-    ret              = malloc(sizeof(Edge));
+    Edge ret;
+    ret              = malloc(sizeof(struct edge));
     ret->lbl         = lbl;
     ret->child       = NULL;
     ret->right       = NULL;
@@ -32,7 +29,7 @@ EdgePointer edge_from_label(const LabelPointer lbl)
 }
 
 
-void edge_mark(const EdgePointer e, char *mark)
+void edge_mark(const Edge e, char *mark)
 {
     label_mark(e->lbl, mark);
 }

@@ -6,10 +6,10 @@
 char *utest_stree_sibling_with()
 {
     char *text = "abcd";
-    EdgePointer t1 = edge(text, 0, 1);
-    EdgePointer t2 = edge(text, 1, 2);
-    EdgePointer t3 = edge(text, 2, 3);
-    EdgePointer t4 = edge(text, 3, 4);
+    Edge t1 = edge(text, 0, 1);
+    Edge t2 = edge(text, 1, 2);
+    Edge t3 = edge(text, 2, 3);
+    Edge t4 = edge(text, 3, 4);
 
     stree_extend_edge_right(t1, t2);
     stree_extend_edge_right(t1, t3);
@@ -27,11 +27,11 @@ char *utest_stree_sibling_with()
 char *utest_stree_find()
 {
     char *text = "helloasj";
-    EdgePointer t1 = edge(text, 0, 2);
-    EdgePointer t2 = edge(text, 2, 4);
-    EdgePointer t3 = edge(text, 4, 5);
-    EdgePointer t4 = edge(text, 5, 7);
-    EdgePointer t5 = edge(text, 7, 8);
+    Edge t1 = edge(text, 0, 2);
+    Edge t2 = edge(text, 2, 4);
+    Edge t3 = edge(text, 4, 5);
+    Edge t4 = edge(text, 5, 7);
+    Edge t5 = edge(text, 7, 8);
     stree_extend_edge_below(t1, t2);
     stree_extend_edge_below(t2, t3);
     stree_extend_edge_below(t2, t4);

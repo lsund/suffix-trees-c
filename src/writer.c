@@ -1,7 +1,7 @@
 
 #include "writer.h"
 
-static void write_stree(EdgePointer probe, char *acc)
+static void write_stree(Edge probe, char *acc)
 {
     strcat(acc, "[");
 
@@ -26,7 +26,7 @@ static void write_stree(EdgePointer probe, char *acc)
 void write(const STree tree, char *s)
 {
 
-    EdgePointer probe = tree;
+    Edge probe = tree;
 
     char mark[64];
     edge_mark(probe, mark);

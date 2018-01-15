@@ -3,27 +3,27 @@
 
 #include "edge.h"
 
-typedef EdgePointer STree;
+typedef Edge STree;
 
 typedef struct treematching {
-    EdgePointer end;
+    Edge end;
     Matching m;
 } TreeMatching;
 
 ///////////////////////////////////////////////////////////////////////////////
 // Functions
 
-TreeMatching stree_find(STree tree, LabelPointer lbl);
+TreeMatching stree_find(STree tree, Label lbl);
 
-EdgePointer stree_init(const char *t);
+Edge stree_init(const char *t);
 
 int stree_sibling_with(STree tree, char c);
 
 int stree_child_with(STree tree, char c);
 
-void stree_extend_edge_below(STree base, const EdgePointer ext);
+void stree_extend_edge_below(STree base, const Edge ext);
 
-void stree_extend_edge_right(STree base, const EdgePointer ext);
+void stree_extend_edge_right(STree base, const Edge ext);
 
 void stree_split(TreeMatching tm);
 

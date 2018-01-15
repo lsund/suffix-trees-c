@@ -7,7 +7,7 @@ STree stree_init(const char *t)
 }
 
 
-TreeMatching stree_find(STree tree, LabelPointer lbl)
+TreeMatching stree_find(STree tree, Label lbl)
 {
 
     Matching m = match(tree->lbl, lbl);
@@ -54,7 +54,7 @@ int stree_sibling_with(STree tree, char c)
 {
     if (!tree) return 1;
 
-    EdgePointer probe = tree;
+    Edge probe = tree;
 
     while(probe) {
         if (label_char_at(probe->lbl, 0) == c) {
@@ -68,7 +68,7 @@ int stree_sibling_with(STree tree, char c)
 
 int stree_child_with(STree tree, char c)
 {
-    EdgePointer probe = tree->child;
+    Edge probe = tree->child;
     while(probe) {
         if (label_char_at(probe->lbl, 0) == c) {
             return 1;
@@ -79,13 +79,13 @@ int stree_child_with(STree tree, char c)
 }
 
 
-void stree_extend_edge_below(STree tree, const EdgePointer ext)
+void stree_extend_edge_below(STree tree, const Edge ext)
 {
     int tmp = tree->leaf_number;
     if (!tree->child) {
         tree->child = ext;
     } else {
-        EdgePointer probe = tree->child;
+        Edge probe = tree->child;
         while (probe->right) {
             probe = probe->right;
         }
@@ -98,9 +98,9 @@ void stree_extend_edge_below(STree tree, const EdgePointer ext)
 }
 
 
-void stree_extend_edge_right(STree tree, const EdgePointer ext)
+void stree_extend_edge_right(STree tree, const Edge ext)
 {
-    EdgePointer probe = tree;
+    Edge probe = tree;
 
     while (probe->right) {
         probe = probe->right;
@@ -118,7 +118,7 @@ void stree_split(TreeMatching tm)
     label_set_right(tm.end->lbl, tm.m.size + tm.end->lbl->i);
     /* printf("%d %d\n", tm.end->lbl->i, tm.end->lbl->j); */
 
-    EdgePointer child = edge(tm.end->lbl->text, tm.m.size + tm.end->lbl->i, j);
+    Edge child = edge(tm.end->lbl->text, tm.m.size + tm.end->lbl->i, j);
     /* printf("above: "); */
     /* label_print(tm.end->lbl); */
     /* printf("below: "); */

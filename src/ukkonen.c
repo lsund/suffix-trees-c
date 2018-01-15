@@ -10,10 +10,10 @@ static void extend_end(TreeMatching tm, const char a)
 }
 
 
-static void split_end(TreeMatching tm, int k, LabelPointer lbl)
+static void split_end(TreeMatching tm, int k, Label lbl)
 {
     stree_split(tm);
-    EdgePointer new_leaf = edge_leaf(lbl->text, lbl->i + tm.m.size, lbl->i + tm.m.size + 1, k);
+    Edge new_leaf = edge_leaf(lbl->text, lbl->i + tm.m.size, lbl->i + tm.m.size + 1, k);
     stree_extend_edge_right(tm.end->child, new_leaf);
 }
 
@@ -29,7 +29,7 @@ STree ukkonen_naive(const char *text) {
 
         for(unsigned long j = 0; j <= i; j++) {
 
-            LabelPointer lbl = label(text, j, i);
+            Label lbl = label(text, j, i);
             TreeMatching tm = stree_find(tree, lbl);
 
             if (tm.m.size) {

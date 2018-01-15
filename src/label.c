@@ -1,15 +1,15 @@
 #include "label.h"
 
 
-LabelPointer label_full(char *text)
+Label label_full(char *text)
 {
     return label(text, 0, strlen(text));
 }
 
 
-LabelPointer label(const char *text, int i, int j)
+Label label(const char *text, int i, int j)
 {
-    LabelPointer ret = malloc(sizeof(struct label));
+    Label ret = malloc(sizeof(struct label));
 
     ret->text = text;
     ret->i = i;
@@ -19,25 +19,25 @@ LabelPointer label(const char *text, int i, int j)
 }
 
 
-void label_mark(LabelPointer lbl, char *mark)
+void label_mark(Label lbl, char *mark)
 {
     sstring(mark, lbl->i, lbl->j - lbl->i, lbl->text);
 }
 
 
-void label_shrink_left(LabelPointer lbl, int k)
+void label_shrink_left(Label lbl, int k)
 {
     lbl->i += k;
 }
 
 
-void label_set_right(LabelPointer lbl, int k)
+void label_set_right(Label lbl, int k)
 {
     lbl->j = k;
 }
 
 
-char label_char_at(LabelPointer lbl, int i)
+char label_char_at(Label lbl, int i)
 {
     if (i > lbl->j) {
         runtime_error("Index out of bounds");
@@ -46,13 +46,13 @@ char label_char_at(LabelPointer lbl, int i)
 }
 
 
-void label_extend(LabelPointer lbl)
+void label_extend(Label lbl)
 {
     lbl->j++;
 }
 
 
-void label_print(LabelPointer lbl)
+void label_print(Label lbl)
 {
     char tmp[STRING_MAX_LEN];
     label_mark(lbl, tmp);
@@ -60,7 +60,7 @@ void label_print(LabelPointer lbl)
 }
 
 
-void label_destroy(LabelPointer lbl)
+void label_destroy(Label lbl)
 {
     free(lbl);
 }

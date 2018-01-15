@@ -4,10 +4,10 @@
 
 char *utest_matching_match_offset()
 {
-    LabelPointer lbl1 = label_full("test");
-    LabelPointer lbl2 = label_full("abctest");
-    LabelPointer lbl3 = label_full("te");
-    LabelPointer lbl4 = label_full("abctestabc");
+    Label lbl1 = label_full("test");
+    Label lbl2 = label_full("abctest");
+    Label lbl3 = label_full("te");
+    Label lbl4 = label_full("abctestabc");
 
     Matching m0 = match(lbl1, lbl2);
     mu_assert("No offset #1", match_type(m0) == NONE);

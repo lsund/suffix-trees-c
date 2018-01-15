@@ -27,7 +27,7 @@ MatchType match_type(const Matching match)
 }
 
 
-Matching match(LabelPointer left, LabelPointer right)
+Matching match(Label left, Label right)
 {
 
     Matching ret;

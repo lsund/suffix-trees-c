@@ -4,7 +4,7 @@
 
 char *utest_label_shrink_left()
 {
-    LabelPointer lbl = label("hello world", 0, 5);
+    Label lbl = label("hello world", 0, 5);
 
     char tmp[64];
 
@@ -22,7 +22,7 @@ char *utest_label_shrink_left()
 
 char *utest_label_set_right()
 {
-    LabelPointer lbl = label("hello world", 0, 5);
+    Label lbl = label("hello world", 0, 5);
 
     char tmp[64];
 
@@ -40,7 +40,7 @@ char *utest_label_set_right()
 
 char *utest_label_char_at()
 {
-    LabelPointer lbl = label("hello world", 1, 10);
+    Label lbl = label("hello world", 1, 10);
 
     mu_assert("Char at #1", label_char_at(lbl, 0) == 'e');
     mu_assert("Char at #1", label_char_at(lbl, 3) == 'o');
@@ -51,7 +51,7 @@ char *utest_label_char_at()
 
 char *utest_label_extend()
 {
-    LabelPointer lbl = label("hello world", 1, 5);
+    Label lbl = label("hello world", 1, 5);
     char tmp[64];
 
     label_mark(lbl, tmp);
@@ -69,7 +69,7 @@ char *utest_label_extend()
 
 char *utest_label()
 {
-    LabelPointer c = label_full("hello");
+    Label c = label_full("hello");
     mu_assert("Create label:", strcmp(c->text, "hello") == 0);
 
     return NULL;
