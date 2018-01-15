@@ -87,7 +87,7 @@ char *utest_stree_swap()
     stree_extend_edge_below(t1, t2);
     stree_extend_edge_sibling(t2, t3);
 
-    stree_permute(t1, 4);
+    stree_permute(t1, 2);
     return NULL;
 }
 

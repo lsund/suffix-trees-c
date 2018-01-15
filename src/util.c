@@ -21,26 +21,47 @@ int char_to_int(char c)
     return c - 48;
 }
 
-void swap(char *a, char *b)
+static void swap(char *a, char *b)
 {
     char t = *a;
     *a = *b;
     *b = t;
 }
 
-void permute(char *a, int i, int n, char *dst)
+static void permute(char *s, int i, int n, char *t)
 {
    if (i == (n - 1)) {
-       strcat(dst, a);
+       strcat(t, s);
 
    } else {
 
      for (int j = i; j < n; j++) {
-       swap((a + i), (a + j));
-       permute(a, i + 1, n, dst);
-       swap((a + i), (a + j));
+       swap((s + i), (s + j));
+       permute(s, i + 1, n, t);
+       swap((s + i), (s + j));
      }
 
    }
+}
+
+
+void all_permutations(char *s, char *t)
+{
+    permute(s, 0, strlen(s), t);
+}
+
+
+void nth_permutation(int i, char *s, char *t)
+{
+    int len, size;
+    char tmp[STRING_MAX_LEN];
+
+    len = strlen(s);
+    size = sizeof(char) * len;
+
+    tmp[0] = '\0';
+    all_permutations(s, tmp);
+    strncpy(t, tmp + (i * size), size);
+    t[len] = '\0';
 }
 

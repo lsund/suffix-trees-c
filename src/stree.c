@@ -132,21 +132,15 @@ void stree_permute(STree tree, int i)
         n++;
     }
 
-    char s[100];
-    char chosen_permutation[64];
+    char s[1000];
+    char p[64];
 
     char *set = "123";
-
     strcpy(s, set);
-    int len     = strlen(set);
-    size_t size = sizeof(char) * len;
 
-    char *all_permutations = malloc(10000);
+    nth_permutation(i, s, p);
 
-    permute(s, 0, strlen(s), all_permutations);
-
-    strncpy(chosen_permutation, all_permutations + (i * size), size);
-    printf("%s\n", chosen_permutation);
+    printf("%s\n", p);
 
 }
 
