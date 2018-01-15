@@ -70,7 +70,7 @@ char *utest_label_extend()
 char *utest_label()
 {
     Label c = label_full("hello");
-    mu_assert("Create label:", strcmp(c->text, "hello") == 0);
+    mu_assert("Create label:", strcmp(c->s, "hello") == 0);
 
     return NULL;
 }

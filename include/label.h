@@ -10,21 +10,21 @@
 #include "util.h"
 
 typedef struct label {
-    const char *text;
+    const char *s;
     size_t len;
     int i, j;
 } *Label;
 
-Label label(const char *text, int i, int n);
+Label label(const char *s, const int i, const int j);
 
 Label label_full(char *mark);
 
 void label_mark(Label l, char *mark);
 
 // Shrink label at the left side
-void label_shrink_left(Label l, int k);
+void label_shrink_left(Label l, const int n);
 
-void label_set_right(Label l, int k);
+void label_set_right(Label l, const int i);
 
 char label_char_at(Label l, int i);
 

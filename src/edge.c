@@ -10,23 +10,23 @@ Edge edge(const char *s, const int i, const int j)
 Edge edge_leaf(const char *s, const int i, const int j, const int k)
 {
     Label l = label(s, i, j);
-    Edge ret = edge_from_label(l);
-    ret->k = k;
+    Edge e = edge_from_label(l);
+    e->k = k;
 
-    return ret;
+    return e;
 }
 
 
 Edge edge_from_label(const Label l)
 {
-    Edge ret;
-    ret          = malloc(sizeof(struct edge));
-    ret->l     = l;
-    ret->child   = NULL;
-    ret->sibling = NULL;
-    ret->k       = -1;
+    Edge e;
+    e          = malloc(sizeof(struct edge));
+    e->l       = l;
+    e->child   = NULL;
+    e->sibling = NULL;
+    e->k       = -1;
 
-    return ret;
+    return e;
 }
 
 

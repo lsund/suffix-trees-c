@@ -13,7 +13,7 @@ static void extend_end(TreeMatching tm, const char a)
 static void split_end(TreeMatching tm, int k, Label l)
 {
     stree_split(tm);
-    Edge new_leaf = edge_leaf(l->text, l->i + tm.m.size, l->i + tm.m.size + 1, k);
+    Edge new_leaf = edge_leaf(l->s, l->i + tm.m.size, l->i + tm.m.size + 1, k);
     stree_extend_edge_sibling(tm.end->child, new_leaf);
 }
 

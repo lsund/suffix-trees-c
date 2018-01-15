@@ -118,7 +118,7 @@ void stree_split(TreeMatching tm)
     label_set_right(tm.end->l, tm.m.size + tm.end->l->i);
     /* printf("%d %d\n", tm.end->l->i, tm.end->l->j); */
 
-    Edge child = edge(tm.end->l->text, tm.m.size + tm.end->l->i, j);
+    Edge child = edge(tm.end->l->s, tm.m.size + tm.end->l->i, j);
     /* printf("above: "); */
     /* label_print(tm.end->l); */
     /* printf("below: "); */

@@ -1,48 +1,49 @@
 #include "label.h"
 
 
-Label label_full(char *text)
+Label label_full(char *s)
 {
-    return label(text, 0, strlen(text));
+    return label(s, 0, strlen(s));
 }
 
 
-Label label(const char *text, int i, int j)
+Label label(const char *s, const int i, const int j)
 {
-    Label ret = malloc(sizeof(struct label));
+    Label l = malloc(sizeof(struct label));
 
-    ret->text = text;
-    ret->i = i;
-    ret->j = j;
+    l->s = s;
+    l->i = i;
+    l->j = j;
 
-    return ret;
+    return l;
 }
 
 
-void label_mark(Label l, char *mark)
+void label_mark(Label l, char *t)
 {
-    sstring(mark, l->i, l->j - l->i, l->text);
+    sstring(t, l->i, l->j - l->i, l->s);
 }
 
 
-void label_shrink_left(Label l, int k)
+void label_shrink_left(Label l, const int n)
 {
-    l->i += k;
+    l->i += n;
 }
 
 
-void label_set_right(Label l, int k)
+void label_set_right(Label l, const int i)
 {
-    l->j = k;
+    l->j = i;
 }
 
 
-char label_char_at(Label l, int i)
+char label_char_at(Label l, const int i)
 {
     if (i > l->j) {
-        runtime_error("Index out of bounds");
+        return 0;
+    } else {
+        return *(l->s + l->i + i);
     }
-    return *(l->text + l->i + i);
 }
 
 
