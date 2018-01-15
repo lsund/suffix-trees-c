@@ -19,48 +19,48 @@ Label label(const char *text, int i, int j)
 }
 
 
-void label_mark(Label lbl, char *mark)
+void label_mark(Label l, char *mark)
 {
-    sstring(mark, lbl->i, lbl->j - lbl->i, lbl->text);
+    sstring(mark, l->i, l->j - l->i, l->text);
 }
 
 
-void label_shrink_left(Label lbl, int k)
+void label_shrink_left(Label l, int k)
 {
-    lbl->i += k;
+    l->i += k;
 }
 
 
-void label_set_right(Label lbl, int k)
+void label_set_right(Label l, int k)
 {
-    lbl->j = k;
+    l->j = k;
 }
 
 
-char label_char_at(Label lbl, int i)
+char label_char_at(Label l, int i)
 {
-    if (i > lbl->j) {
+    if (i > l->j) {
         runtime_error("Index out of bounds");
     }
-    return *(lbl->text + lbl->i + i);
+    return *(l->text + l->i + i);
 }
 
 
-void label_extend(Label lbl)
+void label_extend(Label l)
 {
-    lbl->j++;
+    l->j++;
 }
 
 
-void label_print(Label lbl)
+void label_print(Label l)
 {
     char tmp[STRING_MAX_LEN];
-    label_mark(lbl, tmp);
+    label_mark(l, tmp);
     printf("%s\n", tmp);
 }
 
 
-void label_destroy(Label lbl)
+void label_destroy(Label l)
 {
-    free(lbl);
+    free(l);
 }

@@ -13,7 +13,7 @@ typedef struct treematching {
 ///////////////////////////////////////////////////////////////////////////////
 // Functions
 
-TreeMatching stree_find(STree tree, Label lbl);
+TreeMatching stree_find(STree tree, Label l);
 
 Edge stree_init(const char *t);
 

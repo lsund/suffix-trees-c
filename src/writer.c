@@ -11,9 +11,9 @@ static void write_stree(Edge probe, char *acc)
         edge_mark(probe, mark);
 
         strcat(acc, mark);
-        if (probe->leaf_number != -1) {
+        if (probe->k != -1) {
             char tmp[STRING_MAX_LEN];
-            sprintf(tmp, "%d", probe->leaf_number);
+            sprintf(tmp, "%d", probe->k);
             strcat(acc, tmp);
         }
         write_stree(probe->child, acc);
@@ -32,8 +32,8 @@ void write(const STree tree, char *s)
     edge_mark(probe, mark);
     strcat(s, mark);
 
-    if (probe->leaf_number != -1) {
-        sprintf(s, "%s%d", s, probe->leaf_number);
+    if (probe->k != -1) {
+        sprintf(s, "%s%d", s, probe->k);
     }
     write_stree(probe->child, s);
     strcat(s, "]");

@@ -73,7 +73,7 @@ char *utest_ukkonen()
     pass = strcmp(s_actual, s) == 0 || strcmp(s_actual2, s) == 0;
     mu_assert("Should equal #7", pass);
 
-    char lbl[74];
+    char l[74];
 
     Edge el, ell, elll, elr, ellr, er, err, erl;
 
@@ -86,31 +86,31 @@ char *utest_ukkonen()
     err  = tree->child->sibling->child->sibling;
     erl  = tree->child->sibling->child;
 
-    edge_mark(el, lbl);
-    mu_assert("Local inspect #1", strcmp(lbl, "a") == 0);
-    edge_mark(ell, lbl);
-    mu_assert("Local inspect #2", strcmp(lbl, "ba") == 0);
-    edge_mark(elll, lbl);
-    mu_assert("Local inspect #3", strcmp(lbl, "ababa") == 0);
-    edge_mark(ellr, lbl);
-    mu_assert("Local inspect #4", strcmp(lbl, "ba") == 0);
-    edge_mark(elr, lbl);
-    mu_assert("Local inspect #5", strcmp(lbl, "ababa") == 0);
-    edge_mark(er, lbl);
-    mu_assert("Local inspect #6", strcmp(lbl, "ba") == 0);
-    edge_mark(erl, lbl);
-    mu_assert("Local inspect #7", strcmp(lbl, "ababa") == 0);
-    edge_mark(err, lbl);
-    mu_assert("Local inspect #8", strcmp(lbl, "ba") == 0);
+    edge_mark(el, l);
+    mu_assert("Local inspect #1", strcmp(l, "a") == 0);
+    edge_mark(ell, l);
+    mu_assert("Local inspect #2", strcmp(l, "ba") == 0);
+    edge_mark(elll, l);
+    mu_assert("Local inspect #3", strcmp(l, "ababa") == 0);
+    edge_mark(ellr, l);
+    mu_assert("Local inspect #4", strcmp(l, "ba") == 0);
+    edge_mark(elr, l);
+    mu_assert("Local inspect #5", strcmp(l, "ababa") == 0);
+    edge_mark(er, l);
+    mu_assert("Local inspect #6", strcmp(l, "ba") == 0);
+    edge_mark(erl, l);
+    mu_assert("Local inspect #7", strcmp(l, "ababa") == 0);
+    edge_mark(err, l);
+    mu_assert("Local inspect #8", strcmp(l, "ba") == 0);
 
-    mu_assert("Local inspect #9", el->leaf_number == -1);
-    mu_assert("Local inspect #10", ell->leaf_number == -1);
-    mu_assert("Local inspect #11", elll->leaf_number == 0);
-    mu_assert("Local inspect #12", ellr->leaf_number == 3);
-    mu_assert("Local inspect #13", elr->leaf_number == 2);
-    mu_assert("Local inspect #14", er->leaf_number == -1);
-    mu_assert("Local inspect #15", erl->leaf_number == 1);
-    mu_assert("Local inspect #16", err->leaf_number == 4);
+    mu_assert("Local inspect #9", el->k == -1);
+    mu_assert("Local inspect #10", ell->k == -1);
+    mu_assert("Local inspect #11", elll->k == 0);
+    mu_assert("Local inspect #12", ellr->k == 3);
+    mu_assert("Local inspect #13", elr->k == 2);
+    mu_assert("Local inspect #14", er->k == -1);
+    mu_assert("Local inspect #15", erl->k == 1);
+    mu_assert("Local inspect #16", err->k == 4);
 
     return NULL;
 }

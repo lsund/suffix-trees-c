@@ -9,23 +9,23 @@ int read_edge(const int o, const char *s, Edge *e)
         i++;
     }
 
-    int leaf_number = -1;
+    int k = -1;
     if (isdigit(s[i + o])) {
-        leaf_number = char_to_int(s[i + o]);
+        k = char_to_int(s[i + o]);
     }
     Edge new_edge = edge(s, o, o + i);
 
     *e = new_edge;
-    (*e)->leaf_number = leaf_number;
+    (*e)->k = k;
 
-    return leaf_number == -1 ? o + i + 1 : o + i + 2;
+    return k == -1 ? o + i + 1 : o + i + 2;
 }
 
 void read(const char *s, STree *tree)
 {
     Edge e, parent, sibling;
     int o = read_edge(0, s, &e);
-    e->leaf_number = 1;
+    e->k = 1;
     parent = e;
     *tree = e;
     while (s[o]) {

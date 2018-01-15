@@ -56,21 +56,21 @@ char *utest_stree_find()
     mu_assert("End should exist #8", tm7.end);
 
     char tmp[64];
-    label_mark(tm0.end->lbl, tmp);
+    label_mark(tm0.end->l, tmp);
     mu_assert("control of label #1", strcmp(tmp, "he") == 0);
-    label_mark(tm1.end->lbl, tmp);
+    label_mark(tm1.end->l, tmp);
     mu_assert("control of label #2", strcmp(tmp, "he") == 0);
-    label_mark(tm2.end->lbl, tmp);
+    label_mark(tm2.end->l, tmp);
     mu_assert("control of label #3", strcmp(tmp, "j") == 0);
-    label_mark(tm3.end->lbl, tmp);
+    label_mark(tm3.end->l, tmp);
     mu_assert("control of label #4", strcmp(tmp, "o") == 0);
-    label_mark(tm4.end->lbl, tmp);
+    label_mark(tm4.end->l, tmp);
     mu_assert("control of label #5", strcmp(tmp, "as") == 0);
-    label_mark(tm5.end->lbl, tmp);
+    label_mark(tm5.end->l, tmp);
     mu_assert("control of label #6", strcmp(tmp, "ll") == 0);
-    label_mark(tm6.end->lbl, tmp);
+    label_mark(tm6.end->l, tmp);
     mu_assert("control of label #7", strcmp(tmp, "as") == 0);
-    label_mark(tm7.end->lbl, tmp);
+    label_mark(tm7.end->l, tmp);
     mu_assert("control of label #8", strcmp(tmp, "he") == 0);
 
     return NULL;

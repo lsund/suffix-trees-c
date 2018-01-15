@@ -4,33 +4,33 @@
 
 char *utest_matching_match_offset()
 {
-    Label lbl1 = label_full("test");
-    Label lbl2 = label_full("abctest");
-    Label lbl3 = label_full("te");
-    Label lbl4 = label_full("abctestabc");
+    Label l1 = label_full("test");
+    Label l2 = label_full("abctest");
+    Label l3 = label_full("te");
+    Label l4 = label_full("abctestabc");
 
-    Matching m0 = match(lbl1, lbl2);
+    Matching m0 = match(l1, l2);
     mu_assert("No offset #1", match_type(m0) == NONE);
-    lbl2->i += 3;
-    Matching m1 = match(lbl1, lbl2);
+    l2->i += 3;
+    Matching m1 = match(l1, l2);
     mu_assert("offset #1", match_type(m1) == EXACT);
-    Matching m2 = match(lbl3, lbl2);
+    Matching m2 = match(l3, l2);
     mu_assert("offset #2", match_type(m2) == PARTIAL_RIGHT);
-    lbl4->j -= 3;
-    lbl4->i += 3;
-    Matching m3 = match(lbl4, lbl1);
+    l4->j -= 3;
+    l4->i += 3;
+    Matching m3 = match(l4, l1);
     mu_assert("offset #3", match_type(m3) == EXACT);
 
 
     const char *text = "abcab";
 
-    lbl1 = label(text, 0, 5);  // abcab
-    lbl2  = label(text, 0, 2); // ab
+    l1 = label(text, 0, 5);  // abcab
+    l2  = label(text, 0, 2); // ab
 
-    Matching m4 = match(lbl1, lbl2);
+    Matching m4 = match(l1, l2);
     mu_assert("Offset #4", match_type(m4) == PARTIAL_LEFT);
 
-    m4 = match(lbl2, lbl1);
+    m4 = match(l2, l1);
     mu_assert("Offset #5", match_type(m4) == PARTIAL_RIGHT);
 
     return NULL;
