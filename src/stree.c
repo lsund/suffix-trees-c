@@ -124,17 +124,19 @@ void stree_split(TreeMatching tm)
 void stree_permute(STree tree, int i)
 {
     int n = 0;
+    char s[STRING_MAX_LEN];
+    char p[STRING_MAX_LEN];
+    Edge siblings[64], probe;
 
-    Edge siblings[64];
-    Edge probe = tree->c;
+    probe = tree->c;
     while (probe) {
         siblings[n] = probe;
         probe = probe->s;
         n++;
     }
-
-    char s[STRING_MAX_LEN];
-    char p[STRING_MAX_LEN];
+    if (!n) {
+        return;
+    }
 
     char *set = "01";
     strcpy(s, set);

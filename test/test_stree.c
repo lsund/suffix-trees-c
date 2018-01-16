@@ -83,84 +83,144 @@ char *utest_stree_swap()
     char tmp[64];
     char *text = "abcdef";
 
-    // Flip a 3-node tree
-    Edge t1 = edge("r", 0, 1);
-    Edge t2 = edge(text, 0, 1);
-    Edge t3 = edge(text, 1, 2);
-    stree_extend_edge_below(t1, t2);
-    stree_extend_edge_sibling(t2, t3);
+    // Flip a 2-branching tree
+    Edge r = edge("r", 0, 1);
+    Edge a = edge(text, 0, 1);
+    Edge b = edge(text, 1, 2);
+    stree_extend_edge_below(r, a);
+    stree_extend_edge_sibling(a, b);
 
-    stree_permute(t1, 1);
+    stree_permute(r, 1);
 
-    label_mark(t1->l, tmp);
+    label_mark(r->l, tmp);
     mu_assert("Permuted tree #1", strcmp(tmp, "r") == 0);
-
-    label_mark(t1->c->l, tmp);
+    label_mark(r->c->l, tmp);
     mu_assert("Permuted tree #2", strcmp(tmp, "b") == 0);
-
-    label_mark(t1->c->s->l, tmp);
+    label_mark(r->c->s->l, tmp);
     mu_assert("Permuted tree #3", strcmp(tmp, "a") == 0);
+    mu_assert("Permuted tree #4", !r->c->s->s);
 
-    mu_assert("Permuted tree #4", !t1->c->s->s);
-
-    // No swap of a 3-node tree
-    t1 = edge("r", 0, 1);
-    t2 = edge(text, 0, 1);
-    t3 = edge(text, 1, 2);
-    stree_extend_edge_below(t1, t2);
-    stree_extend_edge_sibling(t2, t3);
-    stree_permute(t1, 0);
-
-    label_mark(t1->l, tmp);
+    // Flip back
+    stree_permute(r, 1);
+    label_mark(r->l, tmp);
     mu_assert("Permuted tree #5", strcmp(tmp, "r") == 0);
-
-    label_mark(t1->c->l, tmp);
+    label_mark(r->c->l, tmp);
     mu_assert("Permuted tree #6", strcmp(tmp, "a") == 0);
-
-    label_mark(t1->c->s->l, tmp);
+    label_mark(r->c->s->l, tmp);
     mu_assert("Permuted tree #7", strcmp(tmp, "b") == 0);
 
-    mu_assert("Permuted tree #8", !t1->c->s->s);
+    mu_assert("Permuted tree #8", !r->c->s->s);
 
-    // abcdef
-    // Flip a 7-node tree
-    t1 = edge("r", 0, 1);
-    Edge ta = edge(text, 0, 1);
-    Edge tb = edge(text, 1, 2);
-    Edge tc = edge(text, 2, 3);
-    Edge td = edge(text, 3, 4);
-    Edge te = edge(text, 4, 5);
-    Edge tf = edge(text, 5, 6);
-    stree_extend_edge_below(t1, ta);
-    stree_extend_edge_sibling(ta, tb);
-    stree_extend_edge_below(ta, tc);
-    stree_extend_edge_sibling(tc, td);
-    stree_extend_edge_below(tb, te);
-    stree_extend_edge_sibling(te, tf);
-    stree_permute(t1, 1);
+    // Flip with ID
+    stree_permute(r, 0);
+    label_mark(r->l, tmp);
+    mu_assert("Permuted tree #9", strcmp(tmp, "r") == 0);
+    label_mark(r->c->l, tmp);
+    mu_assert("Permuted tree #10", strcmp(tmp, "a") == 0);
+    label_mark(r->c->s->l, tmp);
+    mu_assert("Permuted tree #11", strcmp(tmp, "b") == 0);
+    mu_assert("Permuted tree #12", !r->c->s->s);
 
-    label_mark(t1->l, tmp);
-    mu_assert("Permuted tree #5", strcmp(tmp, "r") == 0);
+    // Flip a 2 branching tree, with depth 3
+    Edge c = edge(text, 2, 3);
+    Edge d = edge(text, 3, 4);
+    Edge e = edge(text, 4, 5);
+    Edge f = edge(text, 5, 6);
+    stree_extend_edge_below(a, c);
+    stree_extend_edge_sibling(c, d);
+    stree_extend_edge_below(b, e);
+    stree_extend_edge_sibling(e, f);
 
-    label_mark(t1->c->l, tmp);
-    mu_assert("Permuted tree #6", strcmp(tmp, "b") == 0);
+    stree_permute(r, 1);
 
-    label_mark(t1->c->s->l, tmp);
-    mu_assert("Permuted tree #7", strcmp(tmp, "a") == 0);
+    label_mark(r->l, tmp);
+    mu_assert("Permuted tree #13", strcmp(tmp, "r") == 0);
+    label_mark(r->c->l, tmp);
+    mu_assert("Permuted tree #14", strcmp(tmp, "b") == 0);
+    label_mark(r->c->s->l, tmp);
+    mu_assert("Permuted tree #15", strcmp(tmp, "a") == 0);
+    mu_assert("Permuted tree #16", !r->c->s->s);
+    label_mark(r->c->c->l, tmp);
+    mu_assert("Permuted tree #17", strcmp(tmp, "e") == 0);
+    label_mark(r->c->c->s->l, tmp);
+    mu_assert("Permuted tree #18", strcmp(tmp, "f") == 0);
+    label_mark(r->c->s->c->l, tmp);
+    mu_assert("Permuted tree #19", strcmp(tmp, "c") == 0);
+    label_mark(r->c->s->c->s->l, tmp);
+    mu_assert("Permuted tree #20", strcmp(tmp, "d") == 0);
 
-    mu_assert("Permuted tree #8", !t1->c->s->s);
+    // Flip lower right part of 7-node tree
+    stree_permute(b, 1);
+    label_mark(r->l, tmp);
+    mu_assert("Permuted tree #21", strcmp(tmp, "r") == 0);
+    label_mark(r->c->l, tmp);
+    mu_assert("Permuted tree #22", strcmp(tmp, "b") == 0);
+    label_mark(r->c->s->l, tmp);
+    mu_assert("Permuted tree #23", strcmp(tmp, "a") == 0);
+    mu_assert("Permuted tree #24", !r->c->s->s);
+    label_mark(r->c->c->l, tmp);
+    mu_assert("Permuted tree #25", strcmp(tmp, "f") == 0);
+    label_mark(r->c->c->s->l, tmp);
+    mu_assert("Permuted tree #26", strcmp(tmp, "e") == 0);
+    label_mark(r->c->s->c->l, tmp);
+    mu_assert("Permuted tree #27", strcmp(tmp, "c") == 0);
+    label_mark(r->c->s->c->s->l, tmp);
+    mu_assert("Permuted tree #28", strcmp(tmp, "d") == 0);
 
-    label_mark(t1->c->c->l, tmp);
-    mu_assert("Permuted tree #9", strcmp(tmp, "e") == 0);
+    // Flip lower left part of 7-node tree
+    stree_permute(a, 1);
+    label_mark(r->l, tmp);
+    mu_assert("Permuted tree #21", strcmp(tmp, "r") == 0);
+    label_mark(r->c->l, tmp);
+    mu_assert("Permuted tree #22", strcmp(tmp, "b") == 0);
+    label_mark(r->c->s->l, tmp);
+    mu_assert("Permuted tree #23", strcmp(tmp, "a") == 0);
+    mu_assert("Permuted tree #24", !r->c->s->s);
+    label_mark(r->c->c->l, tmp);
+    mu_assert("Permuted tree #25", strcmp(tmp, "f") == 0);
+    label_mark(r->c->c->s->l, tmp);
+    mu_assert("Permuted tree #26", strcmp(tmp, "e") == 0);
+    label_mark(r->c->s->c->l, tmp);
+    mu_assert("Permuted tree #27", strcmp(tmp, "d") == 0);
+    label_mark(r->c->s->c->s->l, tmp);
+    mu_assert("Permuted tree #28", strcmp(tmp, "c") == 0);
 
-    label_mark(t1->c->c->s->l, tmp);
-    mu_assert("Permuted tree #9", strcmp(tmp, "f") == 0);
+    // Flip leaf edge
+    stree_permute(f, 1);
+    label_mark(r->l, tmp);
+    mu_assert("Permuted tree #29", strcmp(tmp, "r") == 0);
+    label_mark(r->c->l, tmp);
+    mu_assert("Permuted tree #30", strcmp(tmp, "b") == 0);
+    label_mark(r->c->s->l, tmp);
+    mu_assert("Permuted tree #31", strcmp(tmp, "a") == 0);
+    mu_assert("Permuted tree #32", !r->c->s->s);
+    label_mark(r->c->c->l, tmp);
+    mu_assert("Permuted tree #33", strcmp(tmp, "f") == 0);
+    label_mark(r->c->c->s->l, tmp);
+    mu_assert("Permuted tree #34", strcmp(tmp, "e") == 0);
+    label_mark(r->c->s->c->l, tmp);
+    mu_assert("Permuted tree #35", strcmp(tmp, "d") == 0);
+    label_mark(r->c->s->c->s->l, tmp);
+    mu_assert("Permuted tree #36", strcmp(tmp, "c") == 0);
 
-    label_mark(t1->c->s->c->l, tmp);
-    mu_assert("Permuted tree #9", strcmp(tmp, "c") == 0);
+    free(r);
+    free(a);
+    free(b);
+    free(c);
+    free(d);
+    free(e);
+    free(f);
 
-    label_mark(t1->c->s->c->s->l, tmp);
-    mu_assert("Permuted tree #9", strcmp(tmp, "d") == 0);
+    r = edge("r", 0, 1);
+    a = edge(text, 0, 1);
+    b = edge(text, 1, 2);
+    c = edge(text, 2, 3);
+    stree_extend_edge_below(r, a);
+    stree_extend_edge_sibling(a, b);
+    stree_extend_edge_sibling(b, c);
+
+    stree_permute(r, 1);
+
     return NULL;
 }
 
