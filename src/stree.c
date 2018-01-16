@@ -160,6 +160,34 @@ void stree_permute(STree tree, int i)
 }
 
 
+int stree_equals(STree t1, STree t2)
+{
+    if (t1 && t2) {
+
+        char tmp1[STRING_MAX_LEN];
+        char tmp2[STRING_MAX_LEN];
+        edge_mark(t1, tmp1);
+        edge_mark(t2, tmp2);
+
+        if (strcmp(tmp1, tmp2) != 0) {
+            return 0;
+        } else {
+            return 1 && stree_equals(t1->c, t2->c) && stree_equals(t1->s, t2->s);
+        }
+    } else {
+        return !t1 && !t2;
+    }
+}
+
+
+int stree_isomorphic(STree t1, STree t2)
+{
+    t1 = NULL; // TODO
+    t2 = NULL; // TODO
+    return 0;
+}
+
+
 void stree_destroy(STree tree)
 {
     if (tree) {
