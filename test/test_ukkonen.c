@@ -78,14 +78,14 @@ char *utest_adv_alg_example()
 
     Edge el, ell, elll, elr, ellr, er, err, erl;
 
-    el   = tree->ec;
-    ell  = tree->ec->ec;
-    elll = tree->ec->ec->ec;
-    ellr = tree->ec->ec->ec->es;
-    elr  = tree->ec->ec->es;
-    er   = tree->ec->es;
-    err  = tree->ec->es->ec->es;
-    erl  = tree->ec->es->ec;
+    el   = tree->c;
+    ell  = tree->c->c;
+    elll = tree->c->c->c;
+    ellr = tree->c->c->c->s;
+    elr  = tree->c->c->s;
+    er   = tree->c->s;
+    err  = tree->c->s->c->s;
+    erl  = tree->c->s->c;
 
     edge_mark(el, l);
     mu_assert("Local inspect #1", strcmp(l, "a") == 0);

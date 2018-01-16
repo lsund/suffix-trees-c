@@ -16,10 +16,10 @@ static void write_stree(Edge probe, char *acc)
             sprintf(tmp, "%d", probe->k);
             strcat(acc, tmp);
         }
-        write_stree(probe->ec, acc);
-        char *end = probe->es ? "]," : "]";
+        write_stree(probe->c, acc);
+        char *end = probe->s ? "]," : "]";
         strcat(acc, end);
-        probe = probe->es;
+        probe = probe->s;
     }
 }
 
@@ -35,7 +35,7 @@ void write(const STree tree, char *s)
     if (probe->k != -1) {
         sprintf(s, "%s%d", s, probe->k);
     }
-    write_stree(probe->ec, s);
+    write_stree(probe->c, s);
     strcat(s, "]");
 }
 

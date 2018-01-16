@@ -4,7 +4,7 @@
 #include "edge.h"
 
 
-char *utest_stree_es_with()
+char *utest_stree_sibling_with()
 {
     char *text = "abcd";
     Edge t1 = edge(text, 0, 1);
@@ -16,12 +16,12 @@ char *utest_stree_es_with()
     stree_extend_edge_sibling(t1, t3);
     stree_extend_edge_sibling(t1, t4);
 
-    mu_assert("Branches 1", stree_es_with(t1, 'a'));
-    mu_assert("Branches 2", stree_es_with(t1, 'b'));
-    mu_assert("Branches 3", stree_es_with(t1, 'c'));
-    mu_assert("Branches 4", stree_es_with(t1, 'd'));
-    mu_assert("Branches 5", !stree_es_with(t1, 'e'));
-    mu_assert("Branches 6", stree_es_with(t2, 'c'));
+    mu_assert("Branches 1", stree_sibling_with(t1, 'a'));
+    mu_assert("Branches 2", stree_sibling_with(t1, 'b'));
+    mu_assert("Branches 3", stree_sibling_with(t1, 'c'));
+    mu_assert("Branches 4", stree_sibling_with(t1, 'd'));
+    mu_assert("Branches 5", !stree_sibling_with(t1, 'e'));
+    mu_assert("Branches 6", stree_sibling_with(t2, 'c'));
     return NULL;
 }
 
@@ -95,13 +95,13 @@ char *utest_stree_swap()
     label_mark(t1->l, tmp);
     mu_assert("Permuted tree #1", strcmp(tmp, "r") == 0);
 
-    label_mark(t1->ec->l, tmp);
+    label_mark(t1->c->l, tmp);
     mu_assert("Permuted tree #2", strcmp(tmp, "b") == 0);
 
-    label_mark(t1->ec->es->l, tmp);
+    label_mark(t1->c->s->l, tmp);
     mu_assert("Permuted tree #3", strcmp(tmp, "a") == 0);
 
-    mu_assert("Permuted tree #4", !t1->ec->es->es);
+    mu_assert("Permuted tree #4", !t1->c->s->s);
 
     // No swap of a 3-node tree
     t1 = edge("r", 0, 1);
@@ -114,13 +114,13 @@ char *utest_stree_swap()
     label_mark(t1->l, tmp);
     mu_assert("Permuted tree #5", strcmp(tmp, "r") == 0);
 
-    label_mark(t1->ec->l, tmp);
+    label_mark(t1->c->l, tmp);
     mu_assert("Permuted tree #6", strcmp(tmp, "a") == 0);
 
-    label_mark(t1->ec->es->l, tmp);
+    label_mark(t1->c->s->l, tmp);
     mu_assert("Permuted tree #7", strcmp(tmp, "b") == 0);
 
-    mu_assert("Permuted tree #8", !t1->ec->es->es);
+    mu_assert("Permuted tree #8", !t1->c->s->s);
 
     // abcdef
     // Flip a 7-node tree
@@ -142,24 +142,24 @@ char *utest_stree_swap()
     label_mark(t1->l, tmp);
     mu_assert("Permuted tree #5", strcmp(tmp, "r") == 0);
 
-    label_mark(t1->ec->l, tmp);
+    label_mark(t1->c->l, tmp);
     mu_assert("Permuted tree #6", strcmp(tmp, "b") == 0);
 
-    label_mark(t1->ec->es->l, tmp);
+    label_mark(t1->c->s->l, tmp);
     mu_assert("Permuted tree #7", strcmp(tmp, "a") == 0);
 
-    mu_assert("Permuted tree #8", !t1->ec->es->es);
+    mu_assert("Permuted tree #8", !t1->c->s->s);
 
-    label_mark(t1->ec->ec->l, tmp);
+    label_mark(t1->c->c->l, tmp);
     mu_assert("Permuted tree #9", strcmp(tmp, "e") == 0);
 
-    label_mark(t1->ec->ec->es->l, tmp);
+    label_mark(t1->c->c->s->l, tmp);
     mu_assert("Permuted tree #9", strcmp(tmp, "f") == 0);
 
-    label_mark(t1->ec->es->ec->l, tmp);
+    label_mark(t1->c->s->c->l, tmp);
     mu_assert("Permuted tree #9", strcmp(tmp, "c") == 0);
 
-    label_mark(t1->ec->es->ec->es->l, tmp);
+    label_mark(t1->c->s->c->s->l, tmp);
     mu_assert("Permuted tree #9", strcmp(tmp, "d") == 0);
     return NULL;
 }
@@ -168,7 +168,7 @@ char *utest_stree_swap()
 char *test_stree()
 {
     mu_run_utest(utest_stree_find);
-    mu_run_utest(utest_stree_es_with);
+    mu_run_utest(utest_stree_sibling_with);
     mu_run_utest(utest_stree_swap);
     return NULL;
 }
