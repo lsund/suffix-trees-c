@@ -7,13 +7,32 @@
 
 char *utest_stree_isomorphic()
 {
+    STree t1, t2, t3, t4;
+    char *s1, *s2, *s3, *s4;
+
+    s1 = "root[a1[],b2[]]";
+    s2 = "root[b2[],a1[]]";
+    s3 = "root[b3[],a1[]]";
+    s4 = "root[c3[],a1[]]";
+
+    read(s1, &t1);
+    read(s2, &t2);
+    read(s3, &t3);
+    read(s4, &t4);
+
+    mu_assert("Isomorhic #1", stree_isomorphic(t1, t2));
+    mu_assert("Isomorhic #2", stree_isomorphic(t1, t1));
+    mu_assert("Isomorhic #3", stree_isomorphic(t2, t2));
+    mu_assert("Isomorhic #3", stree_isomorphic(t2, t1));
+    mu_assert("Isomorhic #3", stree_isomorphic(t1, t3));
+    mu_assert("Isomorhic #3", !stree_isomorphic(t1, t4));
+
     return NULL;
 }
 
 
 char *utest_stree_equals()
 {
-
     STree t1, t2, t3, t4;
 
     char *s1, *s2, *s3, *s4;
@@ -45,7 +64,6 @@ char *utest_stree_equals()
     mu_assert("Equals #8", stree_equals(NULL, NULL));
 
     return NULL;
-
 }
 
 

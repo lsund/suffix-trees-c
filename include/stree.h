@@ -31,6 +31,8 @@ void stree_permute(STree tree, int i);
 
 int stree_equals(STree t1, STree t2);
 
+int stree_isomorphic(STree t1, STree t2);
+
 void stree_destroy(STree tree);
 
 #endif
