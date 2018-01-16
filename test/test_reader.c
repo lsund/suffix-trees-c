@@ -57,6 +57,13 @@ char *utest_read()
     write(tree, t);
     mu_assert("Should equal #8", strcmp(s, t) == 0);
 
+    t[0] = '\0';
+    s = "root[a1[],b2[]]";
+    read(s, &tree);
+    write(tree, t);
+    mu_assert("Should equal #8", strcmp(s, t) == 0);
+
+
     return NULL;
 }
 

@@ -2,6 +2,51 @@
 #include "test.h"
 #include "stree.h"
 #include "edge.h"
+#include "reader.h"
+#include "writer.h"
+
+char *utest_stree_isomorphic()
+{
+    return NULL;
+}
+
+
+char *utest_stree_equals()
+{
+
+    STree t1, t2, t3, t4;
+
+    char *s1, *s2, *s3, *s4;
+    s1 = "root[a1[],b2[]]";
+    s2 = "root[b5[],a2[]]";
+    s3 = "root[b1[]]";
+    s4 = "root[b5[],a2[c3[]]]";
+
+    char t[STRING_MAX_LEN];
+
+    read(s1, &t1);
+    read(s2, &t2);
+
+    mu_assert("Equals #1", !stree_equals(t1, t2));
+    mu_assert("Equals #2", stree_equals(t1, t1));
+    mu_assert("Equals #3", stree_equals(t2, t2));
+    mu_assert("Equals #4", !stree_equals(t2, t1));
+    read(s1, &t2);
+    mu_assert("Equals #5", stree_equals(t1, t2));
+    read(s2, &t2);
+    read(s3, &t3);
+
+    write(t3, t);
+    write(t2, t);
+    mu_assert("Equals #6", !stree_equals(t2, t3));
+
+    read(s4, &t4);
+    mu_assert("Equals #7", !stree_equals(t2, t4));
+    mu_assert("Equals #8", stree_equals(NULL, NULL));
+
+    return NULL;
+
+}
 
 
 char *utest_stree_sibling_with()
@@ -262,5 +307,7 @@ char *test_stree()
     mu_run_utest(utest_stree_find);
     mu_run_utest(utest_stree_sibling_with);
     mu_run_utest(utest_stree_swap);
+    mu_run_utest(utest_stree_equals);
+    mu_run_utest(utest_stree_isomorphic);
     return NULL;
 }

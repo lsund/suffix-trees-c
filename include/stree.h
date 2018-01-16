@@ -29,6 +29,8 @@ void stree_split(TreeMatching tm);
 
 void stree_permute(STree tree, int i);
 
+int stree_equals(STree t1, STree t2);
+
 void stree_destroy(STree tree);
 
 #endif
