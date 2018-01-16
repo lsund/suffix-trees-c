@@ -172,19 +172,38 @@ int stree_equals(STree t1, STree t2)
         if (strcmp(tmp1, tmp2) != 0) {
             return 0;
         } else {
-            return 1 && stree_equals(t1->c, t2->c) && stree_equals(t1->s, t2->s);
+            return stree_equals(t1->c, t2->c) && stree_equals(t1->s, t2->s);
         }
+
     } else {
         return !t1 && !t2;
     }
 }
 
 
+int stree_isomorphic_aux(STree t1, STree t2, int i)
+{
+    // TODO the 1 below is hard-coded for lengths of 2's
+    if (i > 1) {
+        return 0;
+    }
+    if (stree_equals(t1, t2)) {
+        return 1;
+    } else {
+        stree_permute(t2, i);
+        if (stree_equals(t1, t2)) {
+            return 1;
+        } else {
+            stree_permute(t2, i);
+        }
+    }
+    return stree_isomorphic_aux(t1, t2, ++i);
+}
+
+
 int stree_isomorphic(STree t1, STree t2)
 {
-    t1 = NULL; // TODO
-    t2 = NULL; // TODO
-    return 0;
+    return stree_isomorphic_aux(t1, t2, 0);
 }
 
 
