@@ -19,4 +19,6 @@ void nth_permutation(int i, char *s, char *t);
 
 void nat_sequence(int i, char *t);
 
+int factorial(const int i);
+
 #endif

@@ -139,6 +139,10 @@ void stree_permute(STree tree, int i)
     if (!n) {
         return;
     }
+    if (i > factorial(n) - 1) {
+        runtime_error("stree_permute: permutation index too damn high!");
+        return;
+    }
 
     nat_sequence(n, seq);
     nth_permutation(i, seq, perm);

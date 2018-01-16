@@ -69,6 +69,7 @@ void nth_permutation(int i, char *s, char *t)
 void nat_sequence(int i, char *t)
 {
     if (i > 9) {
+        runtime_error("nat_sequence: cannot create sequence larger than 10");
         return;
     }
     t[0] = '\0';
@@ -78,5 +79,15 @@ void nat_sequence(int i, char *t)
         sprintf(tmp, "%d", j);
         tmp[1] = '\0';
         strcat(t, tmp);
+    }
+}
+
+
+int factorial(const int i)
+{
+    if (i == 0) {
+        return 1;
+    } else {
+        return i * factorial(i - 1);
     }
 }
