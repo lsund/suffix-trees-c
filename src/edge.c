@@ -22,8 +22,8 @@ Edge edge_from_label(const Label l)
     Edge e;
     e          = malloc(sizeof(struct edge));
     e->l       = l;
-    e->ec   = NULL;
-    e->es = NULL;
+    e->c   = NULL;
+    e->s = NULL;
     e->k       = -1;
 
     return e;
