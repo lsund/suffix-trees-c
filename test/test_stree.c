@@ -219,7 +219,39 @@ char *utest_stree_swap()
     stree_extend_edge_sibling(a, b);
     stree_extend_edge_sibling(b, c);
 
+    //                  0   1   2   3   4   5
+    // 3 permutations: 012 021 102 120 210 201
     stree_permute(r, 1);
+    label_mark(r->l, tmp);
+    mu_assert("Permuted tree #37", strcmp(tmp, "r") == 0);
+    label_mark(r->c->l, tmp);
+    mu_assert("Permuted tree #38", strcmp(tmp, "a") == 0);
+    label_mark(r->c->s->l, tmp);
+    mu_assert("Permuted tree #38", strcmp(tmp, "c") == 0);
+    label_mark(r->c->s->s->l, tmp);
+    mu_assert("Permuted tree #38", strcmp(tmp, "b") == 0);
+
+
+    // Flip back
+    stree_permute(r, 1);
+    label_mark(r->l, tmp);
+    mu_assert("Permuted tree #37", strcmp(tmp, "r") == 0);
+    label_mark(r->c->l, tmp);
+    mu_assert("Permuted tree #38", strcmp(tmp, "a") == 0);
+    label_mark(r->c->s->l, tmp);
+    mu_assert("Permuted tree #38", strcmp(tmp, "b") == 0);
+    label_mark(r->c->s->s->l, tmp);
+    mu_assert("Permuted tree #38", strcmp(tmp, "c") == 0);
+
+    stree_permute(r, 4);
+    label_mark(r->l, tmp);
+    mu_assert("Permuted tree #37", strcmp(tmp, "r") == 0);
+    label_mark(r->c->l, tmp);
+    mu_assert("Permuted tree #38", strcmp(tmp, "c") == 0);
+    label_mark(r->c->s->l, tmp);
+    mu_assert("Permuted tree #38", strcmp(tmp, "b") == 0);
+    label_mark(r->c->s->s->l, tmp);
+    mu_assert("Permuted tree #38", strcmp(tmp, "a") == 0);
 
     return NULL;
 }
