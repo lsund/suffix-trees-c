@@ -123,9 +123,11 @@ void stree_split(TreeMatching tm)
 
 void stree_permute(STree tree, int i)
 {
+    int j;
     int n = 0;
-    char s[STRING_MAX_LEN];
-    char p[STRING_MAX_LEN];
+    int ord[64];
+    char seq[STRING_MAX_LEN];
+    char perm[STRING_MAX_LEN];
     Edge siblings[64], probe;
 
     probe = tree->c;
@@ -138,24 +140,18 @@ void stree_permute(STree tree, int i)
         return;
     }
 
-    char *set = "01";
-    strcpy(s, set);
+    nat_sequence(n, seq);
+    nth_permutation(i, seq, perm);
 
-    nth_permutation(i, s, p);
-
-    size_t j;
-    int order[64];
-    for (j = 0; j < strlen(set); j++)
-    {
-        order[j] = char_to_int(p[j]);
+    for (j = 0; j < n; j++) {
+        ord[j] = char_to_int(perm[j]);
     }
 
-    tree->c = siblings[order[0]];
-    for (j = 0; j < strlen(set) - 1; j++)
-    {
-        siblings[order[j]]->s = siblings[order[j + 1]];
+    tree->c = siblings[ord[0]];
+    for (j = 0; j < n - 1; j++) {
+        siblings[ord[j]]->s = siblings[ord[j + 1]];
     }
-    siblings[order[strlen(set) - 1]]->s = NULL;
+    siblings[ord[n - 1]]->s = NULL;
 
 }
 
