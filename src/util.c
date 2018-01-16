@@ -65,3 +65,18 @@ void nth_permutation(int i, char *s, char *t)
     t[len] = '\0';
 }
 
+
+void nat_sequence(int i, char *t)
+{
+    if (i > 9) {
+        return;
+    }
+    t[0] = '\0';
+    char tmp[STRING_MAX_LEN];
+    for (int j = 0; j < i; j++) {
+        tmp[0] = '\0';
+        sprintf(tmp, "%d", j);
+        tmp[1] = '\0';
+        strcat(t, tmp);
+    }
+}
