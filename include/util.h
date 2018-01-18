@@ -17,7 +17,7 @@ void all_permutations(char *s, char *t);
 
 void nth_permutation(int i, char *s, char *t);
 
-void nth_permutation_inverse(int i, char *s, char *t);
+int permutation_inverse_number(int i, int n);
 
 void nat_sequence(int i, char *t);
 
