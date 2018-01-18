@@ -151,10 +151,23 @@ void stree_permute(STree tree, int i)
         ord[j] = char_to_int(perm[j]);
     }
 
+
+    /* edge_mark(tree->c, tmp); */
+    /* edge_mark(tree->c->s, tmp2); */
+    /* edge_mark(tree->c->s->s, tmp3); */
+    /* printf("%s->%s->%s\n", tmp, tmp2, tmp3); */
+
     tree->c = siblings[ord[0]];
+
     for (j = 0; j < n - 1; j++) {
         siblings[ord[j]]->s = siblings[ord[j + 1]];
     }
+
+    /* edge_mark(tree->c, tmp); */
+    /* edge_mark(tree->c->s, tmp2); */
+    /* edge_mark(tree->c->s->s, tmp3); */
+    /* printf("%s->%s->%s\n", tmp, tmp2, tmp3); */
+
     siblings[ord[n - 1]]->s = NULL;
 
 }
@@ -168,7 +181,6 @@ int stree_equals(STree t1, STree t2)
         char tmp2[STRING_MAX_LEN];
         edge_mark(t1, tmp1);
         edge_mark(t2, tmp2);
-
         if (strcmp(tmp1, tmp2) != 0) {
             return 0;
         } else {
@@ -181,29 +193,47 @@ int stree_equals(STree t1, STree t2)
 }
 
 
-int stree_isomorphic_aux(STree t1, STree t2, int i)
+static int stree_isomorphic_aux(STree t1, STree t2, int n, int i)
 {
-    // TODO the 1 below is hard-coded for lengths of 2's
-    if (i > 1) {
+    if (i > factorial(n) - 1) {
         return 0;
     }
     if (stree_equals(t1, t2)) {
         return 1;
     } else {
         stree_permute(t2, i);
+
         if (stree_equals(t1, t2)) {
+            stree_permute(t2, i);
             return 1;
         } else {
             stree_permute(t2, i);
         }
+
     }
-    return stree_isomorphic_aux(t1, t2, ++i);
+    return stree_isomorphic_aux(t1, t2, n, ++i);
 }
 
 
 int stree_isomorphic(STree t1, STree t2)
 {
-    return stree_isomorphic_aux(t1, t2, 0);
+    Edge probe1, probe2;
+    probe1 = t1->c;
+    probe2 = t2->c;
+    int n = 0;
+
+    while (probe1 && probe2) {
+        probe1 = probe1->s;
+        probe2 = probe2->s;
+        n++;
+    }
+
+    // Do the two root nodes have the same number of children?
+    if (probe1 || probe2) {
+        return 0;
+    } else {
+        return stree_isomorphic_aux(t1, t2, n, 0);
+    }
 }
 
 

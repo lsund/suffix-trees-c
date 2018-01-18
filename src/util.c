@@ -56,13 +56,61 @@ void nth_permutation(int i, char *s, char *t)
     int len, size;
     char tmp[STRING_MAX_LEN];
 
+    tmp[0] = '\0';
     len = strlen(s);
     size = sizeof(char) * len;
 
-    tmp[0] = '\0';
     all_permutations(s, tmp);
     strncpy(t, tmp + (i * size), size);
     t[len] = '\0';
+}
+
+
+void nth_permutation_inverse(int i, char *s, char *t)
+{
+    int len, size;
+    char all[STRING_MAX_LEN];
+    char perm_seq[STRING_MAX_LEN];
+    char cand[STRING_MAX_LEN];
+    char res[STRING_MAX_LEN];
+    char permuted[STRING_MAX_LEN];
+
+    len = strlen(s);
+    size = sizeof(char) * len;
+    all[0]           = '\0';
+    cand[0] = '\0';
+    cand[len] = 0;
+    res[0]           = '\0';
+    permuted[0] = 0;
+
+    all_permutations(s, all);
+    strncpy(perm_seq, all + (i * size), size);
+    perm_seq[len] = 0;
+
+    for (int l = 0; l < len; l++) {
+        int d = char_to_int(perm_seq[l]);
+        permuted[l] = s[d];
+    }
+    permuted[len] = 0;
+
+    for (int k = 0; k < len * factorial(size); k += size) {
+
+        strncpy(cand, all + k, size);
+        res[0] = 0;
+        res[len] = 0;
+
+        for (int l = 0; l < len; l++) {
+            int d = char_to_int(cand[l]);
+            res[l] = permuted[d];
+        }
+
+        if (strcmp(res, s) == 0) {
+            cand[len] = '\0';
+            strcpy(t, cand);
+            return;
+        }
+}
+
 }
 
 
