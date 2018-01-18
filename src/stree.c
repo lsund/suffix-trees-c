@@ -151,25 +151,26 @@ void stree_permute(STree tree, int i)
         ord[j] = char_to_int(perm[j]);
     }
 
-
-    /* edge_mark(tree->c, tmp); */
-    /* edge_mark(tree->c->s, tmp2); */
-    /* edge_mark(tree->c->s->s, tmp3); */
-    /* printf("%s->%s->%s\n", tmp, tmp2, tmp3); */
-
     tree->c = siblings[ord[0]];
 
     for (j = 0; j < n - 1; j++) {
         siblings[ord[j]]->s = siblings[ord[j + 1]];
     }
 
-    /* edge_mark(tree->c, tmp); */
-    /* edge_mark(tree->c->s, tmp2); */
-    /* edge_mark(tree->c->s->s, tmp3); */
-    /* printf("%s->%s->%s\n", tmp, tmp2, tmp3); */
-
     siblings[ord[n - 1]]->s = NULL;
 
+}
+
+
+void stree_permute_inverse(STree t, int i)
+{
+    int n = 0;
+    Edge probe = t->c;
+    while (probe) {
+        probe = probe->s;
+        n++;
+    }
+    stree_permute(t, permutation_inverse_number(i, n));
 }
 
 
@@ -204,10 +205,10 @@ static int stree_isomorphic_aux(STree t1, STree t2, int n, int i)
         stree_permute(t2, i);
 
         if (stree_equals(t1, t2)) {
-            stree_permute(t2, i);
+            stree_permute_inverse(t2, i);
             return 1;
         } else {
-            stree_permute(t2, i);
+            stree_permute_inverse(t2, i);
         }
 
     }

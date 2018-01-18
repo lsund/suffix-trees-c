@@ -50,10 +50,15 @@ char *utest_stree_isomorphic()
 
     mu_assert("Isomorhic #7", symmetric_isomorphic(t5, t6));
     mu_assert("Isomorhic #9", symmetric_isomorphic(t5, t7));
-    /* mu_assert("Isomorhic #10", symmetric_isomorphic(t5, t8)); */
-    /* mu_assert("Isomorhic #11", symmetric_isomorphic(t6, t7)); */
-    /* mu_assert("Isomorhic #12", symmetric_isomorphic(t6, t8)); */
-    /* mu_assert("Isomorhic #13", symmetric_isomorphic(t7, t8)); */
+    mu_assert("Isomorhic #10", symmetric_isomorphic(t5, t8));
+    mu_assert("Isomorhic #11", symmetric_isomorphic(t6, t7));
+    mu_assert("Isomorhic #12", symmetric_isomorphic(t6, t8));
+    mu_assert("Isomorhic #13", symmetric_isomorphic(t7, t8));
+    mu_assert("Isomorhic #14", !stree_isomorphic(t8, t9));
+    mu_assert("Isomorhic #15", !stree_isomorphic(t5, t9));
+    mu_assert("Isomorhic #16", !stree_isomorphic(t9, t6));
+
+    // TODO test isomorphic trees of depths 2, 3, etc
 
     return NULL;
 }
@@ -349,36 +354,33 @@ char *utest_stree_permute()
     read(s, &t);
     read(s, &ta);
     stree_permute(t, 0);
-    stree_permute(t, 0);
+    stree_permute(t, permutation_inverse_number(0, 3));
     mu_assert("Perumted tree #39", stree_equals(t, ta));
     stree_permute(t, 1);
-    stree_permute(t, 1);
+    stree_permute(t, permutation_inverse_number(1, 3));
     mu_assert("Perumted tree #40", stree_equals(t, ta));
     stree_permute(t, 2);
-    stree_permute(t, 2);
+    stree_permute(t, permutation_inverse_number(2, 3));
     mu_assert("Perumted tree #41", stree_equals(t, ta));
     stree_permute(t, 3);
     stree_permute(t, permutation_inverse_number(3, 3));
     mu_assert("Perumted tree #42", stree_equals(t, ta));
-    /* stree_permute(t, 4); */
-    /* stree_permute(t, 4); */
-    /* mu_assert("Perumted tree #43", stree_equals(t, ta)); */
-    /* stree_permute(t, 5); */
-    /* stree_permute(t, 5); */
-    /* mu_assert("Perumted tree #44", stree_equals(t, ta)); */
-    /* stree_permute(t, 6); */
-    /* stree_permute(t, 6); */
-    /* mu_assert("Perumted tree #45", stree_equals(t, ta)); */
+    stree_permute(t, 4);
+    stree_permute(t, permutation_inverse_number(4, 3));
+    mu_assert("Perumted tree #43", stree_equals(t, ta));
+    stree_permute(t, 5);
+    stree_permute(t, permutation_inverse_number(5, 3));
+    mu_assert("Perumted tree #44", stree_equals(t, ta));
     return NULL;
 }
 
 
 char *test_stree()
 {
-    /* mu_run_utest(utest_stree_find); */
-    /* mu_run_utest(utest_stree_sibling_with); */
+    mu_run_utest(utest_stree_find);
+    mu_run_utest(utest_stree_sibling_with);
     mu_run_utest(utest_stree_permute);
-    /* mu_run_utest(utest_stree_equals); */
+    mu_run_utest(utest_stree_equals);
     mu_run_utest(utest_stree_isomorphic);
     return NULL;
 }
