@@ -176,7 +176,8 @@ char *utest_stree_find()
 
 char *utest_stree_permute()
 {
-    char tmp[64]; char *text = "abcdef";
+    char tmp[64];
+    char *text = "abcdef";
 
     // Flip a 2-branching tree
     Edge r = edge("r", 0, 1);
