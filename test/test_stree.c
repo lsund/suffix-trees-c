@@ -7,14 +7,13 @@
 
 static int symmetric_isomorphic(STree t1, STree t2)
 {
-    return stree_isomorphic(t1, t2);
-    /* return stree_isomorphic(t1, t2) && stree_isomorphic(t2, t1); */
+    return stree_isomorphic(t1, t2) && stree_isomorphic(t2, t1);
 }
 
 char *utest_stree_isomorphic()
 {
-    STree t1, t2, t3, t4, t5, t6, t7, t8, t9, t10;
-    char *s1, *s2, *s3, *s4, *s5, *s6, *s7, *s8, *s9, *s10;
+    STree t1, t2, t3, t4, t5, t6, t7, t8, t9;
+    char *s1, *s2, *s3, *s4, *s5, *s6, *s7, *s8, *s9;
 
     // These are isomorphic
     s1 = "root[a1[],b2[]]";
