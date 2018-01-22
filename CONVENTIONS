@@ -1,20 +1,28 @@
 -- Variable names
 
-e         : edge
-ec        : ec to e
-es        : es to e
-ep        : parent to e
-l         : label
-st        : suffix tree
-s, t      : string (t is used more for a mutable, temporary value)
+x1,x2...  : similar variables in the same context
+
 c         : char
-m         : matching
-x1,x2     : similar variables in the same context
 i,j       : indexing integers
+o         : offset
 n, m      : size integers
 k         : other integers
-o         : offset
 
+s, t      : string (t is used more for a mutable, temporary value)
+pre       : prefix
+suf       : suffix
+
+l         : label
+
+e         : edge
+c         : child
+s         : sibling
+p         : parent
+scan      : scanner
+
+m         : matching
+
+st        : suffix tree
 -- Style
 
 Two spaces between functions in c files

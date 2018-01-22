@@ -39,3 +39,15 @@ void edge_mark(const Edge e, char *t)
         t[0] = '\0';
     }
 }
+
+
+int edge_n_siblings(const Edge e)
+{
+    int n = 0;
+    Edge scan = e->c;
+    while (scan) {
+        scan = scan->s;
+        n++;
+    }
+    return n;
+}

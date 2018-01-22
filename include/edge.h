@@ -35,4 +35,6 @@ Edge edge_from_label(const Label l);
 
 void edge_mark(const Edge e, char *mark);
 
+int edge_n_siblings(const Edge e);
+
 #endif
