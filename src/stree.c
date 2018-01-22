@@ -6,11 +6,10 @@ STree stree_init(const char *t)
     return edge_leaf(t, 0, 1, 0);
 }
 
-// TODO rename to scan_prefix
-TreeMatching stree_find(STree tree, Label l)
+TreeMatching scan_prefix(STree st, Label l)
 {
 
-    Matching m = match(tree->l, l);
+    Matching m = match(st->l, l);
 
     TreeMatching ret;
     ret.m = matching_empty();
@@ -20,17 +19,17 @@ TreeMatching stree_find(STree tree, Label l)
         case NONE:
             // The first character of c could not be matched with any character
             // in the label of the tree
-            if (tree->s) {
-                return stree_find(tree->s, l);
+            if (st->s) {
+                return scan_prefix(st->s, l);
             } else {
                 return ret;
             }
         case PARTIAL_RIGHT:
             // The whole mark of the tree label was matched, but something
             // in c is left. Try to continue with ec nodes.
-            if (tree->c) {
+            if (st->c) {
                 label_shrink_left(l, m.n);
-                return stree_find(tree->c, l);
+                return scan_prefix(st->c, l);
             } else {
                 return ret;
             }
@@ -38,11 +37,11 @@ TreeMatching stree_find(STree tree, Label l)
             // The whole c was matched but ended up in the middle of the tree
             // label.
             ret.m = m;
-            ret.end = tree;
+            ret.end = st;
             return ret;
         case EXACT:
             ret.m = m;
-            ret.end = tree;
+            ret.end = st;
             return ret;
     }
 
@@ -50,11 +49,11 @@ TreeMatching stree_find(STree tree, Label l)
 }
 
 
-int stree_sibling_with(STree tree, char c)
+int stree_sibling_with(STree st, char c)
 {
-    if (!tree) return 1;
+    if (!st) return 1;
 
-    Edge probe = tree;
+    Edge probe = st;
 
     while(probe) {
         if (label_char_at(probe->l, 0) == c) {
@@ -66,9 +65,9 @@ int stree_sibling_with(STree tree, char c)
 }
 
 
-int stree_child_with(STree tree, char c)
+int stree_child_with(STree st, char c)
 {
-    Edge probe = tree->c;
+    Edge probe = st->c;
     while(probe) {
         if (label_char_at(probe->l, 0) == c) {
             return 1;
@@ -79,28 +78,28 @@ int stree_child_with(STree tree, char c)
 }
 
 
-void stree_extend_edge_below(STree tree, const Edge ext)
+void stree_extend_edge_below(STree st, const Edge ext)
 {
-    int tmp = tree->k;
-    if (!tree->c) {
-        tree->c = ext;
+    int tmp = st->k;
+    if (!st->c) {
+        st->c = ext;
     } else {
-        Edge probe = tree->c;
+        Edge probe = st->c;
         while (probe->s) {
             probe = probe->s;
         }
         probe->s = ext;
     }
-    tree->k = -1;
+    st->k = -1;
     if (ext->k == -1) {
         ext->k = tmp;
     }
 }
 
 
-void stree_extend_edge_sibling(STree tree, const Edge ext)
+void stree_extend_edge_sibling(STree st, const Edge ext)
 {
-    Edge probe = tree;
+    Edge probe = st;
 
     while (probe->s) {
         probe = probe->s;
@@ -121,7 +120,7 @@ void stree_split(TreeMatching tm)
 }
 
 
-void stree_permute(STree tree, int i)
+void stree_permute(STree st, int i)
 {
     int j;
     int n = 0;
@@ -130,7 +129,7 @@ void stree_permute(STree tree, int i)
     char perm[STRING_MAX_LEN];
     Edge siblings[64], probe;
 
-    probe = tree->c;
+    probe = st->c;
     while (probe) {
         siblings[n] = probe;
         probe = probe->s;
@@ -151,7 +150,7 @@ void stree_permute(STree tree, int i)
         ord[j] = char_to_int(perm[j]);
     }
 
-    tree->c = siblings[ord[0]];
+    st->c = siblings[ord[0]];
 
     for (j = 0; j < n - 1; j++) {
         siblings[ord[j]]->s = siblings[ord[j + 1]];
@@ -238,16 +237,16 @@ int stree_isomorphic(STree t1, STree t2)
 }
 
 
-void stree_destroy(STree tree)
+void stree_destroy(STree st)
 {
-    if (tree) {
-        if (tree->c) {
-            stree_destroy(tree->c);
+    if (st) {
+        if (st->c) {
+            stree_destroy(st->c);
         }
-        if (tree->s) {
-            stree_destroy(tree->s);
+        if (st->s) {
+            stree_destroy(st->s);
         }
-        label_destroy(tree->l);
-        free(tree);
+        label_destroy(st->l);
+        free(st);
     }
 }

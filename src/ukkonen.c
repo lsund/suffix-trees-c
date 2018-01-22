@@ -30,7 +30,7 @@ STree ukkonen_naive(const char *text) {
         for(unsigned long j = 0; j <= i; j++) {
 
             Label l = label(text, j, i);
-            TreeMatching tm = stree_find(tree, l);
+            TreeMatching tm = scan_prefix(tree, l);
 
             if (tm.m.n) {
 

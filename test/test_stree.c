@@ -120,7 +120,7 @@ char *utest_stree_sibling_with()
     return NULL;
 }
 
-char *utest_stree_find()
+char *utest_scan_prefix()
 {
     char *text = "helloasj";
     Edge t1 = edge(text, 0, 2);
@@ -133,14 +133,14 @@ char *utest_stree_find()
     stree_extend_edge_below(t2, t4);
     stree_extend_edge_below(t1, t5);
 
-    TreeMatching tm0 = stree_find(t1,label_full("he"));
-    TreeMatching tm1 = stree_find(t1,label_full("h"));
-    TreeMatching tm2 = stree_find(t1,label_full("hej"));
-    TreeMatching tm3 = stree_find(t1,label_full("hello"));
-    TreeMatching tm4 = stree_find(t1,label_full("hellas"));
-    TreeMatching tm5 = stree_find(t1,label_full("hel"));
-    TreeMatching tm6 = stree_find(t1,label_full("hella"));
-    TreeMatching tm7 = stree_find(t1,label_full(""));
+    TreeMatching tm0 = scan_prefix(t1,label_full("he"));
+    TreeMatching tm1 = scan_prefix(t1,label_full("h"));
+    TreeMatching tm2 = scan_prefix(t1,label_full("hej"));
+    TreeMatching tm3 = scan_prefix(t1,label_full("hello"));
+    TreeMatching tm4 = scan_prefix(t1,label_full("hellas"));
+    TreeMatching tm5 = scan_prefix(t1,label_full("hel"));
+    TreeMatching tm6 = scan_prefix(t1,label_full("hella"));
+    TreeMatching tm7 = scan_prefix(t1,label_full(""));
 
     mu_assert("End should exist #1", tm0.end);
     mu_assert("End should exist #2", tm1.end);
@@ -377,7 +377,7 @@ char *utest_stree_permute()
 
 char *test_stree()
 {
-    mu_run_utest(utest_stree_find);
+    mu_run_utest(utest_scan_prefix);
     mu_run_utest(utest_stree_sibling_with);
     mu_run_utest(utest_stree_permute);
     mu_run_utest(utest_stree_equals);

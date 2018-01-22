@@ -5,7 +5,7 @@ ec        : ec to e
 es        : es to e
 ep        : parent to e
 l         : label
-tree      : suffix tree
+st        : suffix tree
 s, t      : string (t is used more for a mutable, temporary value)
 c         : char
 m         : matching
