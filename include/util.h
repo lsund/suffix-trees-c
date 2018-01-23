@@ -19,7 +19,7 @@ void nth_permutation(char *t, int i, char *s);
 
 int permutation_inverse_number(int i, int n);
 
-void nat_sequence(int i, char *t);
+void nat_sequence(char *t, int i);
 
 int factorial(const int i);
 

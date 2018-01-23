@@ -147,7 +147,7 @@ void stree_permute(STree st, int i)
         return;
     }
 
-    nat_sequence(n, seq);
+    nat_sequence(seq, n);
     nth_permutation(perm, i, seq);
 
     for (j = 0; j < n; j++) {

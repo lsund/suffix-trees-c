@@ -1,5 +1,14 @@
 #include "util.h"
 
+
+int runtime_error(const char *msg)
+{
+    fprintf(stderr, "Error: %s\n", msg);
+    exit(1);
+    return -99;
+}
+
+
 void sstring(char *dst, const int i, const int n, const char *src)
 {
     *dst = '\0';
@@ -9,17 +18,12 @@ void sstring(char *dst, const int i, const int n, const char *src)
     sprintf(dst, "%s", tmp);
 }
 
-int runtime_error(const char *msg)
-{
-    fprintf(stderr, "Error: %s\n", msg);
-    exit(1);
-    return -99;
-}
 
 int char_to_int(char c)
 {
     return c - 48;
 }
+
 
 static void swap(char *a, char *b)
 {
@@ -27,6 +31,7 @@ static void swap(char *a, char *b)
     *a = *b;
     *b = t;
 }
+
 
 static void permute(char *t, char *s, int i, int n)
 {
@@ -83,7 +88,7 @@ int permutation_inverse_number(int i, int n)
     res[0]      = '\0';
     permuted[0] = 0;
 
-    nat_sequence(n, s);
+    nat_sequence(s, n);
     all_permutations(all, s);
     strncpy(perm_seq, all + (i * size), size);
     perm_seq[n] = 0;
@@ -113,7 +118,7 @@ int permutation_inverse_number(int i, int n)
 }
 
 
-void nat_sequence(int i, char *t)
+void nat_sequence(char *t, int i)
 {
     if (i > 9) {
         runtime_error("nat_sequence: cannot create sequence larger than 10");
