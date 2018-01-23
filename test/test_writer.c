@@ -10,13 +10,13 @@ char *utest_write()
 
     s[0] = '\0';
     tree = stree_init("root");
-    write(tree, s);
+    write(s, tree);
     t = "r0[]";
     mu_assert("Should equal #1", strcmp(s, t) == 0);
 
     s[0] = '\0';
     stree_extend_edge_below(tree, edge("a", 0, 1));
-    write(tree, s);
+    write(s, tree);
     t = "r[a0[]]";
     mu_assert("Should equal #2", strcmp(s, t) == 0);
 

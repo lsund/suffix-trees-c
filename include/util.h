@@ -13,9 +13,9 @@ void sstring(char *dst, const int i, const int n, const char *src);
 
 int char_to_int(char c);
 
-void all_permutations(char *s, char *t);
+void all_permutations(char *t, char *s);
 
-void nth_permutation(int i, char *s, char *t);
+void nth_permutation(char *t, int i, char *s);
 
 int permutation_inverse_number(int i, int n);
 

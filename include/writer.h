@@ -3,8 +3,8 @@
 
 #include "stree.h"
 
-void write(const STree tree, char *s);
+void write(char *s, const STree tree);
 
-void write_file(const STree tree, const char *path);
+void write_file(const char *path, const STree tree);
 
 #endif

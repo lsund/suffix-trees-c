@@ -148,7 +148,7 @@ void stree_permute(STree st, int i)
     }
 
     nat_sequence(n, seq);
-    nth_permutation(i, seq, perm);
+    nth_permutation(perm, i, seq);
 
     for (j = 0; j < n; j++) {
         ord[j] = char_to_int(perm[j]);

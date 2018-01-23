@@ -28,7 +28,7 @@ static void swap(char *a, char *b)
     *b = t;
 }
 
-static void permute(char *s, int i, int n, char *t)
+static void permute(char *t, char *s, int i, int n)
 {
    if (i == (n - 1)) {
        strcat(t, s);
@@ -37,7 +37,7 @@ static void permute(char *s, int i, int n, char *t)
 
      for (int j = i; j < n; j++) {
        swap((s + i), (s + j));
-       permute(s, i + 1, n, t);
+       permute(t, s, i + 1, n);
        swap((s + i), (s + j));
      }
 
@@ -45,13 +45,13 @@ static void permute(char *s, int i, int n, char *t)
 }
 
 
-void all_permutations(char *s, char *t)
+void all_permutations(char *t, char *s)
 {
-    permute(s, 0, strlen(s), t);
+    permute(t, s, 0, strlen(s));
 }
 
 
-void nth_permutation(int i, char *s, char *t)
+void nth_permutation(char *t, int i, char *s)
 {
     int len, size;
     char tmp[STRING_MAX_LEN];
@@ -60,7 +60,7 @@ void nth_permutation(int i, char *s, char *t)
     len = strlen(s);
     size = sizeof(char) * len;
 
-    all_permutations(s, tmp);
+    all_permutations(tmp, s);
     strncpy(t, tmp + (i * size), size);
     t[len] = '\0';
 }
@@ -84,7 +84,7 @@ int permutation_inverse_number(int i, int n)
     permuted[0] = 0;
 
     nat_sequence(n, s);
-    all_permutations(s, all);
+    all_permutations(all, s);
     strncpy(perm_seq, all + (i * size), size);
     perm_seq[n] = 0;
 

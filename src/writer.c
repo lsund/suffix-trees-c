@@ -1,7 +1,7 @@
 
 #include "writer.h"
 
-static void write_stree(Edge probe, char *acc)
+static void write_stree(char *acc, Edge probe)
 {
     strcat(acc, "[");
 
@@ -16,14 +16,14 @@ static void write_stree(Edge probe, char *acc)
             sprintf(tmp, "%d", probe->k);
             strcat(acc, tmp);
         }
-        write_stree(probe->c, acc);
+        write_stree(acc, probe->c);
         char *end = probe->s ? "]," : "]";
         strcat(acc, end);
         probe = probe->s;
     }
 }
 
-void write(const STree tree, char *s)
+void write(char *s, const STree tree)
 {
 
     Edge probe = tree;
@@ -35,15 +35,15 @@ void write(const STree tree, char *s)
     if (probe->k != -1) {
         sprintf(s, "%s%d", s, probe->k);
     }
-    write_stree(probe->c, s);
+    write_stree(s, probe->c);
     strcat(s, "]");
 }
 
 
-void write_file(const STree tree, const char *path)
+void write_file(const char *path, const STree tree)
 {
     char *res = calloc(256, sizeof(char));
-    write(tree, res);
+    write(res, tree);
 
     FILE *f = fopen(path, "w");
     if (f) {

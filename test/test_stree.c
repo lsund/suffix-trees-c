@@ -87,8 +87,8 @@ char *utest_stree_equals()
     read(s2, &t2);
     read(s3, &t3);
 
-    write(t3, t);
-    write(t2, t);
+    write(t, t3);
+    write(t, t2);
     mu_assert("Equals #6", !stree_equals(t2, t3));
 
     read(s4, &t4);
