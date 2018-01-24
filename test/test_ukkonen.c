@@ -36,7 +36,6 @@ char *utest_adv_alg_example()
     s_actual = "R[a[baa0[],a2[]],baa1[]]";
     tree = ukkonen_naive(input);
     write(s, tree);
-    /* printf("res: %s\n1:   %s\n", s, s_actual); */
     mu_assert("Should equal #4", strcmp(s_actual, s) == 0);
 
     s[0] = '\0';
@@ -44,7 +43,6 @@ char *utest_adv_alg_example()
     s_actual = "R[a[baab0[],ab2[]],baab1[]]";
     tree = ukkonen_naive(input);
     write(s, tree);
-    /* printf("res: %s\n1:   %s\n", s, s_actual); */
     mu_assert("Should equal #5", strcmp(s_actual, s) == 0);
 
     s[0] = '\0';
@@ -60,7 +58,6 @@ char *utest_adv_alg_example()
     s_actual2 = "R[a[ba[abab0[],b3[]],abab2[]],ba[b4[],abab1[]]]";
     tree = ukkonen_naive(input);
     write(s, tree);
-    /* printf("res: %s\n1:   %s\n2:   %s\n", s, s_actual, s_actual2); */
     int pass = strcmp(s_actual, s) == 0 || strcmp(s_actual2, s) == 0;
     mu_assert("Should equal #7", pass);
 
@@ -70,7 +67,6 @@ char *utest_adv_alg_example()
     s_actual2 = "R[a[ba[ababa0[],ba3[]],ababa2[]],ba[ba4[],ababa1[]]]";
     tree = ukkonen_naive(input);
     write(s, tree);
-    /* printf("res: %s\n1:   %s\n2:   %s\n", s, s_actual, s_actual2); */
     pass = strcmp(s_actual, s) == 0 || strcmp(s_actual2, s) == 0;
     mu_assert("Should equal #7", pass);
 

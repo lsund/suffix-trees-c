@@ -12,3 +12,5 @@
 
 #define STRING_MAX_LEN     256
 
+#define MAX_INT            999999
+

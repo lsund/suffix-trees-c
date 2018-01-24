@@ -172,19 +172,36 @@ void stree_permute_inverse(STree t, int i)
 }
 
 
+int root_equals(STree t1, STree t2)
+{
+    char tmp1[STRING_MAX_LEN];
+    char tmp2[STRING_MAX_LEN];
+    edge_mark(t1, tmp1);
+    edge_mark(t2, tmp2);
+    return strcmp(tmp1, tmp2) == 0;
+}
+
+
+int stree_children_equals_aux(STree t1, STree t2)
+{
+    if (t1 && t2 && root_equals(t1, t2)) {
+        return stree_children_equals_aux(t1->s, t2->s);
+    } else {
+        return !t1 && !t2;
+    }
+}
+
+
+int stree_children_equals(STree t1, STree t2)
+{
+    return stree_children_equals_aux(t1->c, t2->c);
+}
+
 int stree_equals(STree t1, STree t2)
 {
-    if (t1 && t2) {
+    if (t1 && t2 && root_equals(t1, t2)) {
 
-        char tmp1[STRING_MAX_LEN];
-        char tmp2[STRING_MAX_LEN];
-        edge_mark(t1, tmp1);
-        edge_mark(t2, tmp2);
-        if (strcmp(tmp1, tmp2) != 0) {
-            return 0;
-        } else {
-            return stree_equals(t1->c, t2->c) && stree_equals(t1->s, t2->s);
-        }
+        return stree_equals(t1->c, t2->c) && stree_equals(t1->s, t2->s);
 
     } else {
         return !t1 && !t2;
@@ -197,12 +214,14 @@ static int stree_isomorphic_aux(STree t1, STree t2, int n, int i)
     if (i > factorial(n) - 1) {
         return 0;
     }
-    if (stree_equals(t1, t2)) {
+
+    if (stree_children_equals(t1, t2)) {
         return 1;
     } else {
+
         stree_permute(t2, i);
 
-        if (stree_equals(t1, t2)) {
+        if (stree_children_equals(t1, t2)) {
             stree_permute_inverse(t2, i);
             return 1;
         } else {
