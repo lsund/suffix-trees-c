@@ -8,6 +8,11 @@ char *utest_read()
     char *s;
 
     char t[STRING_MAX_LEN];
+    t[0] = '\0';
+    s = "root[a[c3[],d4[]],b2[]]";
+    read(s, &tree);
+    write(t, tree);
+    mu_assert("Should equal #0", strcmp(s, t) == 0);
 
     t[0] = '\0';
     s = "root[a[a1[],c[x2[],y3[]]]]";

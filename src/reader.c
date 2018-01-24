@@ -26,20 +26,24 @@ int read_edge(const int o, const char *s, Edge *e)
 
 void read(const char *s, STree *tree)
 {
-    Edge e, ep, es;
+    Edge e, ep, es, prev;
     int o;
 
-    o      = read_edge(0, s, &e);
-    e->k   = 1;
-    ep = e;
-    *tree  = e;
+    o     = read_edge(0, s, &e);
+    e->k  = 1;
+    ep    = e;
+    *tree = e;
+
+    prev = tree;
 
     while (s[o]) {
+
 
         if (s[o] != ']') {
 
             o = read_edge(o, s, &e);
             stree_extend_edge_below(ep, e);
+            prev = ep;
             ep = e;
 
         } else if (s[o + 1] == ',') {
@@ -49,9 +53,9 @@ void read(const char *s, STree *tree)
             ep = es;
 
         } else {
-
-            break;
-
+            ep = prev;
+            o++;
         }
+
     }
 }
