@@ -216,16 +216,13 @@ static int stree_isomorphic_aux(STree t1, STree t2, int n, int i)
     }
 
     if (stree_children_equals(t1, t2)) {
-        return 1;
+        return stree_isomorphic(t1->c, t2->c);
     } else {
 
         stree_permute(t2, i);
 
         if (stree_children_equals(t1, t2)) {
-            /* root_equals(t1, t2); */
-            return  stree_isomorphic(t1->c, t2->c) &&
-                    stree_isomorphic(t1->s, t2->s);
-            /* stree_permute_inverse(t2, i); */
+            return stree_isomorphic(t1->c, t2->c);
         } else {
             stree_permute_inverse(t2, i);
         }
@@ -234,7 +231,7 @@ static int stree_isomorphic_aux(STree t1, STree t2, int n, int i)
     return stree_isomorphic_aux(t1, t2, n, ++i);
 }
 
-
+// TODO Remember structure before permute and return to this
 int stree_isomorphic(STree t1, STree t2)
 {
     if (t1 && t2) {

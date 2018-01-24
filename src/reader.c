@@ -34,7 +34,7 @@ void read(const char *s, STree *tree)
     ep    = e;
     *tree = e;
 
-    prev = tree;
+    prev = e;
 
     while (s[o]) {
 

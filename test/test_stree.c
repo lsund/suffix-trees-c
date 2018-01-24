@@ -68,8 +68,8 @@ char *utest_stree_isomorphic()
     read(s2, &t2);
     read(s3, &t3);
     read(s4, &t4);
-    /* mu_assert("Isomorphic #17", symmetric_isomorphic(t1, t2)); */
-    /* mu_assert("Isomorphic #18", symmetric_isomorphic(t1, t3)); */
+    mu_assert("Isomorphic #17", symmetric_isomorphic(t1, t2));
+    mu_assert("Isomorphic #18", symmetric_isomorphic(t1, t3));
     mu_assert("Isomorphic #19", !stree_isomorphic(t1, t4));
 
     return NULL;
