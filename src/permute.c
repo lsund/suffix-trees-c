@@ -1,5 +1,5 @@
 
-#include "permute.h"
+#include "stree_permute.h"
 
 
 void stree_permute(STree st, int i)

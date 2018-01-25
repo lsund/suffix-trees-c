@@ -17,6 +17,8 @@ char *test_matching();
 char *test_util();
 char *test_reader();
 char *test_writer();
+char *test_stree_permute();
+char *test_stree_compare();
 
 enum MessageOption {
     MODULE,

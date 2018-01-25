@@ -1,5 +1,5 @@
-#ifndef PERMUTE_H
-#define PERMUTE_H
+#ifndef STREE_PERMUTE_H
+#define STREE_PERMUTE_H
 
 #include "stree.h"
 

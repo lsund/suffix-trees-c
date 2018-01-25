@@ -2,7 +2,7 @@
 #define STREE_COMPARE_H
 
 #include "stree.h"
-#include "permute.h"
+#include "stree_permute.h"
 
 int stree_root_equals(STree t1, STree t2);
 
