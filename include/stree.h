@@ -2,8 +2,7 @@
 #define STREE_H
 
 #include "edge.h"
-
-typedef Edge STree;
+#include "permute.h"
 
 typedef struct treematching {
     Edge end;
@@ -30,6 +29,8 @@ void stree_split(TreeMatching tm);
 void stree_permute(STree tree, int i);
 
 int stree_equals(STree t1, STree t2);
+
+int stree_children_equals(STree t1, STree t2);
 
 int stree_isomorphic(STree t1, STree t2);
 

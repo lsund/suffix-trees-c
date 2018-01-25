@@ -11,7 +11,7 @@ int main()
 
     STree u = ukkonen_naive(text);
 
-    write_file(u, "../suffix-trees-haskell/data/sample");
+    write_file("../suffix-trees-haskell/data/sample", u);
 
     stree_destroy(u);
 
