@@ -19,6 +19,7 @@ c         : child
 s         : sibling
 p         : parent
 scan      : scanner
+v         : vertex
 
 m         : matching
 
