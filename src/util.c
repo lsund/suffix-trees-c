@@ -5,7 +5,7 @@ int runtime_error(const char *msg)
 {
     fprintf(stderr, "Error: %s\n", msg);
     exit(1);
-    return -99;
+    return 1;
 }
 
 
@@ -84,7 +84,7 @@ int permutation_inverse_number(int i, int n)
     size = sizeof(char) * n;
     all[0]      = '\0';
     cand[0]     = '\0';
-    cand[n]   = 0;
+    cand[n]     = 0;
     res[0]      = '\0';
     permuted[0] = 0;
 
