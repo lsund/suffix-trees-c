@@ -5,8 +5,6 @@
 
 int main()
 {
-
-    /* char *text = "abaababa"; // adv alg */
     char *text = "acbcabcac";
 
     STree u = ukkonen_naive(text);
