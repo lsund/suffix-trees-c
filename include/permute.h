@@ -1,9 +1,7 @@
 #ifndef PERMUTE_H
 #define PERMUTE_H
 
-#include "edge.h"
-
-typedef Edge STree;
+#include "stree.h"
 
 void stree_permute(STree st, int i);
 

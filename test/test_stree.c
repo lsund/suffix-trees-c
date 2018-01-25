@@ -4,6 +4,8 @@
 #include "edge.h"
 #include "reader.h"
 #include "writer.h"
+#include "permute.h"
+#include "stree_compare.h"
 
 static int symmetric_isomorphic(STree t1, STree t2)
 {
