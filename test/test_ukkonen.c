@@ -56,16 +56,10 @@ char *utest_adv_alg_example()
     s[0] = '\0';
     input = "abaabab";
     s_actual = "R[a[ba[abab0[],b3[]],abab2[]],ba[abab1[],b4[]]]";
-    s_actual2 = "R[a[ba[abab0[],b3[]],abab2[]],ba[b4[],abab1[]]]";
     tree = ukkonen_naive(input);
     read(s_actual, &actual_tree);
 
     mu_assert("Should be isomorphic #1", stree_isomorphic(tree, actual_tree));
-
-
-    write(s, tree);
-    int pass = strcmp(s_actual, s) == 0 || strcmp(s_actual2, s) == 0;
-    mu_assert("Should equal #7", pass);
 
     s[0] = '\0';
     input = "abaababa";
@@ -73,7 +67,7 @@ char *utest_adv_alg_example()
     s_actual2 = "R[a[ba[ababa0[],ba3[]],ababa2[]],ba[ba4[],ababa1[]]]";
     tree = ukkonen_naive(input);
     write(s, tree);
-    pass = strcmp(s_actual, s) == 0 || strcmp(s_actual2, s) == 0;
+    int pass = strcmp(s_actual, s) == 0 || strcmp(s_actual2, s) == 0;
     mu_assert("Should equal #7", pass);
 
     char l[74];
