@@ -1,6 +1,10 @@
 #include "edge.h"
 
 
+///////////////////////////////////////////////////////////////////////////////
+// Public API
+
+
 Edge edge(const char *s, const int i, const int j)
 {
     return edge_leaf(s, i, j, -1);
