@@ -24,6 +24,7 @@ typedef struct edge {
     Label l;
     struct edge *c;
     struct edge *s;
+    struct edge *p;
     int k;
 } *Edge;
 

@@ -83,17 +83,25 @@ void stree_extend_edge_below(STree st, const Edge ext)
     int tmp = st->k;
     if (!st->c) {
         st->c = ext;
+        ext->p = st;
+
     } else {
+
         Edge scan = st->c;
         while (scan->s) {
             scan = scan->s;
         }
+
         scan->s = ext;
+        ext->p = st;
+
     }
+
     st->k = -1;
     if (ext->k == -1) {
         ext->k = tmp;
     }
+
 }
 
 
@@ -106,6 +114,7 @@ void stree_extend_edge_sibling(STree st, const Edge ext)
     }
 
     scan->s = ext;
+    ext->p = st->p;
 }
 
 

@@ -68,6 +68,17 @@ char *utest_read()
     write(t, tree);
     mu_assert("Should equal #8", strcmp(s, t) == 0);
 
+    t[0] = '\0';
+    s = "R[a[b[c0[],d3[]],e2[]],f[g1[],h4[]]]";
+    read(s, &tree);
+    write(t, tree);
+    mu_assert("Should equal #9", strcmp(s, t) == 0);
+
+    t[0] = '\0';
+    s = "R[a[ba[abab0[],b3[]],abab2[]],ba[b4[],abab1[]]]";
+    read(s, &tree);
+    write(t, tree);
+    mu_assert("Should equal #10", strcmp(s, t) == 0);
 
     return NULL;
 }

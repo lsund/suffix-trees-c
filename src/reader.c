@@ -26,15 +26,13 @@ int read_edge(const int o, const char *s, Edge *e)
 
 void read(const char *s, STree *tree)
 {
-    Edge e, ep, es, prev;
+    Edge e, base, es;
     int o;
 
     o     = read_edge(0, s, &e);
     e->k  = 1;
-    ep    = e;
+    base  = e;
     *tree = e;
-
-    prev = e;
 
     while (s[o]) {
 
@@ -42,19 +40,24 @@ void read(const char *s, STree *tree)
         if (s[o] != ']') {
 
             o = read_edge(o, s, &e);
-            stree_extend_edge_below(ep, e);
-            prev = ep;
-            ep = e;
+            stree_extend_edge_below(base, e);
+            base = e;
 
         } else if (s[o + 1] == ',') {
 
             o = read_edge(o += 2, s, &es);
-            stree_extend_edge_sibling(ep, es);
-            ep = es;
+            stree_extend_edge_sibling(base, es);
+            base = es;
+
+        } else if (s[o] == ']') {
+
+            base = base->p;
+            o++;
 
         } else {
-            ep = prev;
+
             o++;
+
         }
 
     }

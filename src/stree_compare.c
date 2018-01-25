@@ -90,5 +90,3 @@ int stree_isomorphic(STree t1, STree t2)
         return !t1 && !t2;
     }
 }
-
-

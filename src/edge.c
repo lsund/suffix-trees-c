@@ -25,6 +25,7 @@ Edge edge_from_label(const Label l)
     e->l = l;
     e->c = NULL;
     e->s = NULL;
+    e->p = NULL;
     e->k = -1;
 
     return e;
