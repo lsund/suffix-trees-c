@@ -203,6 +203,7 @@ char *utest_stree_permute()
     stree_permute(t, 5);
     stree_permute(t, permutation_inverse_number(5, 3));
     mu_assert("Perumted tree #44", stree_equals(t, ta));
+
     return NULL;
 }
 
