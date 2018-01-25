@@ -20,7 +20,7 @@ Vertex vertex_leaf(const int i, const int k)
 }
 
 
-void edge_mark_tmp(const char *s, const Vertex v1, const Vertex v2, char *mark)
+void edge_mark2(const char *s, const Vertex v1, const Vertex v2, char *mark)
 {
     sstring(mark, v1->i, v2->i - v1->i, s);
 }
