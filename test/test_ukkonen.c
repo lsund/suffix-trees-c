@@ -114,16 +114,18 @@ char *utest_adv_alg_example()
 
 char *utest_stefan_kurz_example()
 {
-    /* STree tree; */
-    /* char *input, *s_actual; */
-    /* char s[STRING_MAX_LEN]; */
-    /* s[0] = '\0'; */
+    STree tree, actual_tree;
+    char *input, *s_actual;
+    char s[STRING_MAX_LEN];
+    s[0] = '\0';
 
-    /* input = "acbcabcac"; */
-    /* s_actual = "R[a0[]]"; */
-    /* tree = ukkonen_naive(input); */
-    /* write(s, tree); */
-    /* mu_assert("Should equal #1", strcmp(s_actual, s) == 0); */
+    input = "acbcabcac";
+    s_actual = "R[a[bcac4[],cbcabcac0[]],bca[bcac2[],c5[]],c[a[bcac3[],c6[]],bcabcac1[]]]";
+    tree = ukkonen_naive(input);
+    write(s, tree);
+    read(s_actual, &actual_tree);
+    mu_assert("Isomorphic #1", stree_isomorphic(tree, actual_tree));
+
     return NULL;
 }
 
@@ -131,5 +133,6 @@ char *utest_stefan_kurz_example()
 char *test_ukkonen()
 {
     mu_run_utest(utest_adv_alg_example);
+    mu_run_utest(utest_stefan_kurz_example);
     return NULL;
 }
