@@ -15,8 +15,10 @@ Vertex vertex(const int i);
 
 Vertex vertex_leaf(const int i, const int k);
 
-void label_mark2(const char *s, const Vertex v1, const Vertex v2, char *mark);
-
 int vertex_n_siblings(const Vertex e);
+
+void label_mark2(char *t, const Vertex v1, const Vertex v2, const char *s);
+
+Label2 vertex_label_below(Vertex v);
 
 #endif

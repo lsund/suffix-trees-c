@@ -1,9 +1,61 @@
 #include "stree.h"
 
 
-STree stree_init(const char *t)
+STree stree_init(const char *s)
 {
-    return edge_leaf(t, 0, 1, 0);
+    return edge_leaf(s, 0, 1, 0);
+}
+
+
+STree2 stree_init2(const char *x)
+{
+    STree2 ret = malloc(sizeof(STree2));
+    ret->r = vertex(0);
+    ret->x    = x;
+    return ret;
+}
+
+TreeMatching2 scan_prefix2_aux(const char *x, Vertex v, const Label2 pre)
+{
+    Label2 rl = vertex_label_below(v);
+    Matching m = match2(x, rl, pre);
+
+    TreeMatching ret;
+    ret.m = matching_empty();
+    ret.end = NULL;
+
+    switch (match_type(m)) {
+        case NONE:
+            if (v->s) {
+                return scan_prefix2_aux(x, v->s, pre);
+            }
+        case PARTIAL_RIGHT:
+            // The whole mark of the tree label was matched, but something
+            // in c is left. Try to continue with ec nodes.
+            if (v->c) {
+                label_shrink_left(pre, m.n);
+                return scan_prefix(st->c, pre);
+            } else {
+                return ret;
+            }
+        case PARTIAL_LEFT:
+            // The whole c was matched but ended up in the middle of the tree
+            // label.
+            ret.m = m;
+            ret.end = st;
+            return ret;
+        case EXACT:
+            ret.m = m;
+            ret.end = st;
+            return ret;
+    }
+
+    return ret;
+}
+
+TreeMatching2 scan_prefix2(STree2 tree, const Label2 pre)
+{
+    return scan_prefix2_aux(tree->x, tree->r, pre);
 }
 
 TreeMatching scan_prefix(STree st, Label pre)

@@ -15,6 +15,12 @@ typedef struct label {
     int i, j;
 } *Label;
 
+typedef struct label2 {
+    int i, j;
+} *Label2;
+
+Label2 label2(int i, int j);
+
 Label label(const char *s, const int i, const int j);
 
 Label label_full(char *mark);
@@ -33,5 +39,16 @@ void label_extend(const Label l);
 void label_print(Label l);
 
 void label_destroy(Label l);
+
+///////////////////////////////////////////////////////////////////////////////
+// new
+
+char label_char_at_2(const char *s, const Label2 lbl, const int i);
+
+void label_shrink_left2(const Label2 lbl, const int n);
+
+void label_extend_right2(const Label2 lbl);
+
+void label_set_right2(const Label2 lbl, const int i);
 
 #endif

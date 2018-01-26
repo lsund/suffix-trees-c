@@ -5,6 +5,7 @@
 #include <stdio.h>
 #include <string.h>
 
+#include "vertex.h"
 #include "label.h"
 #include "util.h"
 
@@ -35,4 +36,8 @@ MatchType match_type(const Matching m);
 
 Matching match(const Label l1, const Label l2);
 
+///////////////////////////////////////////////////////////////////////////////
+// new
+
+Matching match2(const char *x, const Label2 l1, const Label2 l2);
 #endif

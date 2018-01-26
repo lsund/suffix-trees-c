@@ -2,6 +2,7 @@
 #define STREE_H
 
 #include "edge.h"
+#include "vertex.h"
 
 typedef Edge STree;
 
@@ -9,6 +10,16 @@ typedef struct treematching {
     Edge end;
     Matching m;
 } TreeMatching;
+
+typedef struct stree2 {
+    Vertex r;
+    const char *x;
+} *STree2;
+
+typedef struct treematching2 {
+    Vertex end;
+    Matching m;
+} TreeMatching2;
 
 ///////////////////////////////////////////////////////////////////////////////
 // Functions
