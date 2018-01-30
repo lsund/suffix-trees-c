@@ -20,7 +20,7 @@ TreeMatching2 scan_prefix2_aux(const char *x, Vertex v, const Label2 pre)
     Label2 rl = vertex_label_below(v);
     Matching m = match2(x, rl, pre);
 
-    TreeMatching ret;
+    TreeMatching2 ret;
     ret.m = matching_empty();
     ret.end = NULL;
 
@@ -33,8 +33,8 @@ TreeMatching2 scan_prefix2_aux(const char *x, Vertex v, const Label2 pre)
             // The whole mark of the tree label was matched, but something
             // in c is left. Try to continue with ec nodes.
             if (v->c) {
-                label_shrink_left(pre, m.n);
-                return scan_prefix(st->c, pre);
+                label_shrink_left2(pre, m.n);
+                return scan_prefix2_aux(x, v->c, pre);
             } else {
                 return ret;
             }
@@ -42,11 +42,11 @@ TreeMatching2 scan_prefix2_aux(const char *x, Vertex v, const Label2 pre)
             // The whole c was matched but ended up in the middle of the tree
             // label.
             ret.m = m;
-            ret.end = st;
+            ret.end = v;
             return ret;
         case EXACT:
             ret.m = m;
-            ret.end = st;
+            ret.end = v;
             return ret;
     }
 
