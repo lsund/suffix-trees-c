@@ -10,8 +10,8 @@ STree stree_init(const char *s)
 STree2 stree_init2(const char *x)
 {
     STree2 ret = malloc(sizeof(STree2));
-    ret->r = vertex(-1, -1);
-    ret->x    = x;
+    ret->r     = vertex_root();
+    ret->x     = x;
     return ret;
 }
 
@@ -129,6 +129,33 @@ int stree_child_with(STree st, char c)
     return 0;
 }
 
+
+void stree_extend_below(STree2 st, const Vertex v)
+{
+    Vertex root = st->r;
+    int tmp = root->k;
+    if (!root->c) {
+        root->c = v;
+        v->p = v;
+
+    } else {
+
+        Vertex scan = root->c;
+        while (scan->s) {
+            scan = scan->s;
+        }
+
+        scan->s = v;
+        v->p = root;
+
+    }
+
+    root->k = -1;
+    if (v->k == -1) {
+        v->k = tmp;
+    }
+
+}
 
 void stree_extend_edge_below(STree st, const Edge ext)
 {

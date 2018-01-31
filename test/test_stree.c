@@ -83,18 +83,18 @@ char *utest_scan_prefix()
 char *utest_scan_prefix2()
 {
     char *text = "helloasj";
-    Vertex r = vertex_root();
+    STree2 r   = stree_init2(text);
     Vertex v1 = vertex(0, 2);
     Vertex v2 = vertex(2, 4);
     Vertex v3 = vertex(4, 5);
     Vertex v4 = vertex(5, 7);
     Vertex v5 = vertex(7, 8);
-    /* stree_extend_edge_below(t1, t2); */
+    stree_extend_below(r, v1);
     /* stree_extend_edge_below(t2, t3); */
     /* stree_extend_edge_below(t2, t4); */
     /* stree_extend_edge_below(t1, t5); */
 
-    /* TreeMatching tm0 = scan_prefix(t1,label_full("he")); */
+    TreeMatching2 tm0 = scan_prefix2(r, label2(0, 2));
     /* TreeMatching tm1 = scan_prefix(t1,label_full("h")); */
     /* TreeMatching tm2 = scan_prefix(t1,label_full("hej")); */
     /* TreeMatching tm3 = scan_prefix(t1,label_full("hello")); */
@@ -103,7 +103,7 @@ char *utest_scan_prefix2()
     /* TreeMatching tm6 = scan_prefix(t1,label_full("hella")); */
     /* TreeMatching tm7 = scan_prefix(t1,label_full("")); */
 
-    /* mu_assert("End should exist #1", tm0.end); */
+    mu_assert("End should exist #1", tm0.end);
     /* mu_assert("End should exist #2", tm1.end); */
     /* mu_assert("End should exist #3", tm2.end); */
     /* mu_assert("End should exist #4", tm3.end); */
@@ -136,6 +136,7 @@ char *utest_scan_prefix2()
 char *test_stree()
 {
     mu_run_utest(utest_scan_prefix);
+    mu_run_utest(utest_scan_prefix2);
     mu_run_utest(utest_stree_sibling_with);
     return NULL;
 }

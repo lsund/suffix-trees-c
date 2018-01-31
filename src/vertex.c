@@ -48,7 +48,8 @@ int vertex_n_siblings(const Vertex v)
 
 Label2 vertex_label_below(Vertex v)
 {
-    return label2(v->i, v->c->i);
+    Vertex child = v->c;
+    return label2(child->i, child->j);
 }
 
 
