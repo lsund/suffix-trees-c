@@ -10,7 +10,7 @@ STree stree_init(const char *s)
 STree2 stree_init2(const char *x)
 {
     STree2 ret = malloc(sizeof(STree2));
-    ret->r = vertex(0);
+    ret->r = vertex(-1, -1);
     ret->x    = x;
     return ret;
 }

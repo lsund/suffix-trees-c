@@ -4,20 +4,18 @@
 #include "label.h"
 
 typedef struct vertex {
-    int i;
+    int i, j;
     struct vertex *c;
     struct vertex *s;
     struct vertex *p;
     int k;
 } *Vertex;
 
-Vertex vertex(const int i);
+Vertex vertex(const int i, const int j);
 
-Vertex vertex_leaf(const int i, const int k);
+Vertex vertex_leaf(const int i, const int j, const int k);
 
 int vertex_n_siblings(const Vertex e);
-
-void label_mark2(char *t, const Vertex v1, const Vertex v2, const char *s);
 
 Label2 vertex_label_below(Vertex v);
 

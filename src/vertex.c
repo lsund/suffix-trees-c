@@ -1,16 +1,17 @@
 
 #include "vertex.h"
 
-Vertex vertex(const int i)
+Vertex vertex(const int i, const int j)
 {
-    return vertex_leaf(i, -1);
+    return vertex_leaf(i, j, -1);
 }
 
-Vertex vertex_leaf(const int i, const int k)
+Vertex vertex_leaf(const int i, const int j, const int k)
 {
     Vertex v;
     v = malloc(sizeof(struct vertex));
     v->i = i;
+    v->j = j;
     v->k = k;
     v->c = NULL;
     v->s = NULL;

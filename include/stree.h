@@ -28,6 +28,8 @@ TreeMatching scan_prefix(STree tree, Label l);
 
 Edge stree_init(const char *t);
 
+STree2 stree_init2(const char *x);
+
 int stree_sibling_with(STree tree, char c);
 
 int stree_child_with(STree tree, char c);
