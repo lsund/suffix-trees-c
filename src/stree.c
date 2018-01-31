@@ -19,7 +19,7 @@ TreeMatching2 scan_prefix2_aux(const char *x, Vertex v, const Label2 pre)
 {
 
     if (vertex_is_root(v)) {
-        scan_prefix2_aux(x, v->c, pre);
+        return scan_prefix2_aux(x, v->c, pre);
     }
 
     Matching m = match2(x, v, pre);
@@ -28,7 +28,6 @@ TreeMatching2 scan_prefix2_aux(const char *x, Vertex v, const Label2 pre)
     ret.m = matching_empty();
     ret.end = NULL;
 
-    char tmp[74]; // remove
     switch (match_type(m)) {
         case NONE:
             if (v->s) {
@@ -52,7 +51,6 @@ TreeMatching2 scan_prefix2_aux(const char *x, Vertex v, const Label2 pre)
             ret.end = v;
             return ret;
         case EXACT:
-            vertex_mark(tmp, v, x);
             ret.m = m;
             ret.end = v;
             return ret;

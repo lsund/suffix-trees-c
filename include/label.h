@@ -51,4 +51,5 @@ void label_extend_right2(const Label2 lbl);
 
 void label_set_right2(const Label2 lbl, const int i);
 
+void label_mark2(char *t, const Label2 lbl, const char *s);
 #endif
