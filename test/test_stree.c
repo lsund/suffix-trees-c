@@ -86,33 +86,38 @@ char *utest_scan_prefix2()
     STree2 r   = stree_init2(text);
     Vertex v1 = vertex(0, 1);   // a
     Vertex v2 = vertex(1, 2);   // ba
-    Vertex v3 = vertex(1, 2);   // ba
-    Vertex v4 = vertex(3, 6);   // abab
+    Vertex v3 = vertex(3, 6);   // abab
+
+    Vertex v4 = vertex(1, 2);   // ba
     Vertex v5 = vertex(3, 6);   // abab
-    Vertex v6 = vertex(5, 6);   // b
     Vertex v7 = vertex(3, 6);   // abab
+
+    Vertex v6 = vertex(5, 6);   // b
     Vertex v8 = vertex(4, 5);   // b
 
     stree_extend_below(r, v1);
-    stree_extend_below(r, v2);
+    vertex_extend_below(v1, v2);
+    vertex_extend_below(v2, v3);
 
-    vertex_extend_below(v1, v3);
-    vertex_extend_below(v1, v4);
+    vertex_extend_right(v1, v4);
+    vertex_extend_below(v4, v5);
+    vertex_extend_right(v2, v7);
 
-    vertex_extend_below(v3, v5);
-    vertex_extend_below(v3, v6);
-
-
-    vertex_extend_below(v2, v8);
-    vertex_extend_below(v2, v7);
+    vertex_extend_right(v3, v6);
+    vertex_extend_right(v5, v8);
 
 
-    TreeMatching2 tm0 = scan_prefix2(r, label2(1, 2));
+    /* TreeMatching2 tm0 = scan_prefix2(r, label2(0, 2)); */
+    /* TreeMatching2 tm1 = scan_prefix2(r, label2(0, 1)); */
+    TreeMatching2 tm2 = scan_prefix2(r, label2(1, 2));
 
-    char tmp[64];
-    stree_mark(tmp, r, tm0.end);
-    printf("%s\n", tmp);
-    mu_assert("control of label #1", strcmp(tmp, "a") == 0);
+    /* mu_assert("End should exist #1", tm0.end); */
+    /* mu_assert("End should exist #2", tm1.end); */
+    mu_assert("End should exist #2", tm2.end);
+
+    /* char tmp[64]; */
+    /* label_mark(tm0.end->l, tmp); */
+    /* mu_assert("control of label #1", strcmp(tmp, "he") == 0); */
     /* label_mark(tm1.end->l, tmp); */
     /* mu_assert("control of label #2", strcmp(tmp, "he") == 0); */
     /* label_mark(tm2.end->l, tmp); */

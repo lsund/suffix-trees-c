@@ -23,6 +23,12 @@ Label2 vertex_label_below(Vertex v);
 
 void vertex_extend_below(Vertex v, const Vertex c);
 
+void vertex_extend_right(Vertex v, Vertex s);
+
 void vertex_mark(char *t, Vertex v, const char *x);
+
+int vertex_is_root(const Vertex v);
+
+Label2 vertex_label(Vertex v);
 
 #endif

@@ -17,16 +17,13 @@ void label_mark2(char *t, const Label2 lbl, const char *s)
     sstring(t, lbl->i, lbl->j - lbl->i, s);
 }
 
-// TODO possibly make more efficient by directly getting index from real string
-char label_char_at_2(const char *s, const Label2 lbl, const int i)
+
+char label_char_at_2(const char *x, const Label2 lbl, const int i)
 {
     if (i > lbl->i) {
         return '\0';
     } else {
-        char tmp[64];
-        tmp[0] = '\0';
-        label_mark2(tmp, lbl, s);
-        return *(tmp + lbl->i + i);
+        return *(x + lbl->i + i);
     }
 }
 

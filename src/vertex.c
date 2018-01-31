@@ -80,10 +80,28 @@ void vertex_extend_below(Vertex v, const Vertex c)
 }
 
 
+void vertex_extend_right(Vertex v, Vertex s)
+{
+    Vertex scan = v;
+
+    while (scan->s) {
+        scan = scan->s;
+    }
+
+    scan->s = s;
+    s->p = v->p;
+}
+
+
 void vertex_mark(char *t, Vertex v, const char *x)
 {
-    printf("%d %d\n", v->i, v->j);
     sstring(t, v->i, v->j - v->i, x);
+}
+
+
+Label2 vertex_label(Vertex v)
+{
+    return label2(v->i, v->j);
 }
 
 

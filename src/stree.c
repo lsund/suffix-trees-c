@@ -17,21 +17,27 @@ STree2 stree_init2(const char *x)
 
 TreeMatching2 scan_prefix2_aux(const char *x, Vertex v, const Label2 pre)
 {
-    Label2 rl = vertex_label_below(v);
+
+    if (vertex_is_root(v)) {
+        scan_prefix2_aux(x, v->c, pre);
+    }
+
+    Label2 rl = vertex_label(v);
     Matching m = match2(x, rl, pre);
 
     TreeMatching2 ret;
     ret.m = matching_empty();
     ret.end = NULL;
 
+    char tmp[74]; // remove
     switch (match_type(m)) {
         case NONE:
-            printf("none\n");
             if (v->s) {
                 return scan_prefix2_aux(x, v->s, pre);
+            } else {
+                return ret;
             }
         case PARTIAL_RIGHT:
-            printf("right\n");
             // The whole mark of the tree label was matched, but something
             // in c is left. Try to continue with ec nodes.
             if (v->c) {
@@ -41,14 +47,13 @@ TreeMatching2 scan_prefix2_aux(const char *x, Vertex v, const Label2 pre)
                 return ret;
             }
         case PARTIAL_LEFT:
-            printf("left\n");
             // The whole c was matched but ended up in the middle of the tree
             // label.
             ret.m = m;
             ret.end = v;
             return ret;
         case EXACT:
-            printf("exact %d %d\n", v->i, v->j);
+            vertex_mark(tmp, v, x);
             ret.m = m;
             ret.end = v;
             return ret;
@@ -176,6 +181,12 @@ void stree_extend_edge_sibling(STree st, const Edge ext)
 
     scan->s = ext;
     ext->p = st->p;
+}
+
+
+void stree_extend_right(STree2 st, const Vertex v)
+{
+    vertex_extend_right(st->r, v);
 }
 
 
