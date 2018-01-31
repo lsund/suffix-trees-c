@@ -21,4 +21,6 @@ int vertex_n_siblings(const Vertex e);
 
 Label2 vertex_label_below(Vertex v);
 
+void vertex_extend_below(Vertex v, const Vertex c);
+
 #endif

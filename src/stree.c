@@ -132,29 +132,7 @@ int stree_child_with(STree st, char c)
 
 void stree_extend_below(STree2 st, const Vertex v)
 {
-    Vertex root = st->r;
-    int tmp = root->k;
-    if (!root->c) {
-        root->c = v;
-        v->p = v;
-
-    } else {
-
-        Vertex scan = root->c;
-        while (scan->s) {
-            scan = scan->s;
-        }
-
-        scan->s = v;
-        v->p = root;
-
-    }
-
-    root->k = -1;
-    if (v->k == -1) {
-        v->k = tmp;
-    }
-
+    vertex_extend_below(st->r, v);
 }
 
 void stree_extend_edge_below(STree st, const Edge ext)

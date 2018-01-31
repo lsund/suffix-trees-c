@@ -53,6 +53,33 @@ Label2 vertex_label_below(Vertex v)
 }
 
 
+void vertex_extend_below(Vertex v, const Vertex c)
+{
+    int tmp = v->k;
+    if (!v->c) {
+        v->c = c;
+        c->p = v;
+
+    } else {
+
+        Vertex scan = v->c;
+        while (scan->s) {
+            scan = scan->s;
+        }
+
+        scan->s = c;
+        c->p = v;
+
+    }
+
+    v->k = -1;
+    if (c->k == -1) {
+        c->k = tmp;
+    }
+
+}
+
+
 void vertex_destroy(Vertex v)
 {
     free(v);
