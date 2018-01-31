@@ -39,5 +39,5 @@ Matching match(const Label l1, const Label l2);
 ///////////////////////////////////////////////////////////////////////////////
 // new
 
-Matching match2(const char *x, const Label2 l1, const Label2 l2);
+Matching match2(const char *x, const Vertex v, const Label2 l);
 #endif

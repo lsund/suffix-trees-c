@@ -104,6 +104,10 @@ Label2 vertex_label(Vertex v)
     return label2(v->i, v->j);
 }
 
+char vertex_char_at(const char *x, Vertex v, int i)
+{
+    return label_char_at_2(x, label2(v->i, v->j), i);
+}
 
 
 void vertex_destroy(Vertex v)

@@ -31,4 +31,6 @@ int vertex_is_root(const Vertex v);
 
 Label2 vertex_label(Vertex v);
 
+char vertex_char_at(const char *x, Vertex v, int i);
+
 #endif

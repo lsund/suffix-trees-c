@@ -53,7 +53,7 @@ Matching match(const Label l1, const Label l2)
     return m;
 }
 
-Matching match2(const char *x, const Label2 l1, const Label2 l2)
+Matching match2(const char *x, const Vertex v, const Label2 l)
 {
 
     Matching m;
@@ -61,14 +61,14 @@ Matching match2(const char *x, const Label2 l1, const Label2 l2)
     char lc, rc;
 
     m.n = 0;
-    n1 = l1->j - l1->i;
-    n2 = l2->j - l2->i;
+    n1 = v->j - v->i;
+    n2 = l->j - l->i;
     min  = n2 > n1 ? n1 : n2;
 
     while  (m.n < min) {
 
-        rc = label_char_at_2(x, l2, m.n);
-        lc = label_char_at_2(x, l1, m.n);
+        rc = label_char_at_2(x, l, m.n);
+        lc = vertex_char_at(x, v, m.n);
 
         if (rc != lc) {
             break;

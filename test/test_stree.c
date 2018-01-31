@@ -85,10 +85,10 @@ char *utest_scan_prefix2()
     char *text = "abaabab";
     STree2 r   = stree_init2(text);
     Vertex v1 = vertex(0, 1);   // a
-    Vertex v2 = vertex(1, 2);   // ba
+    Vertex v2 = vertex(1, 3);   // ba
     Vertex v3 = vertex(3, 6);   // abab
 
-    Vertex v4 = vertex(1, 2);   // ba
+    Vertex v4 = vertex(1, 3);   // ba
     Vertex v5 = vertex(3, 6);   // abab
     Vertex v7 = vertex(3, 6);   // abab
 
@@ -108,30 +108,20 @@ char *utest_scan_prefix2()
 
 
     /* TreeMatching2 tm0 = scan_prefix2(r, label2(0, 2)); */
-    /* TreeMatching2 tm1 = scan_prefix2(r, label2(0, 1)); */
+    TreeMatching2 tm1 = scan_prefix2(r, label2(0, 1));
     TreeMatching2 tm2 = scan_prefix2(r, label2(1, 2));
 
     /* mu_assert("End should exist #1", tm0.end); */
-    /* mu_assert("End should exist #2", tm1.end); */
+    mu_assert("End should exist #2", tm1.end);
     mu_assert("End should exist #2", tm2.end);
 
-    /* char tmp[64]; */
-    /* label_mark(tm0.end->l, tmp); */
-    /* mu_assert("control of label #1", strcmp(tmp, "he") == 0); */
-    /* label_mark(tm1.end->l, tmp); */
-    /* mu_assert("control of label #2", strcmp(tmp, "he") == 0); */
-    /* label_mark(tm2.end->l, tmp); */
-    /* mu_assert("control of label #3", strcmp(tmp, "j") == 0); */
-    /* label_mark(tm3.end->l, tmp); */
-    /* mu_assert("control of label #4", strcmp(tmp, "o") == 0); */
-    /* label_mark(tm4.end->l, tmp); */
-    /* mu_assert("control of label #5", strcmp(tmp, "as") == 0); */
-    /* label_mark(tm5.end->l, tmp); */
-    /* mu_assert("control of label #6", strcmp(tmp, "ll") == 0); */
-    /* label_mark(tm6.end->l, tmp); */
-    /* mu_assert("control of label #7", strcmp(tmp, "as") == 0); */
-    /* label_mark(tm7.end->l, tmp); */
-    /* mu_assert("control of label #8", strcmp(tmp, "he") == 0); */
+    char tmp[64];
+    tmp[0] = 0;
+    vertex_mark(tmp, tm1.end, text);
+    mu_assert("control of label #1", strcmp(tmp, "a") == 0);
+    tmp[0] = 0;
+    vertex_mark(tmp, tm2.end, text);
+    mu_assert("control of label #2", strcmp(tmp, "ba") == 0);
 
     return NULL;
 }

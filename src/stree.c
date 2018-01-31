@@ -22,8 +22,7 @@ TreeMatching2 scan_prefix2_aux(const char *x, Vertex v, const Label2 pre)
         scan_prefix2_aux(x, v->c, pre);
     }
 
-    Label2 rl = vertex_label(v);
-    Matching m = match2(x, rl, pre);
+    Matching m = match2(x, v, pre);
 
     TreeMatching2 ret;
     ret.m = matching_empty();
