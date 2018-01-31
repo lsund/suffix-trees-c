@@ -1,10 +1,17 @@
 
 #include "vertex.h"
 
+Vertex vertex_root()
+{
+    return vertex_leaf(-1, -1, -1);
+}
+
+
 Vertex vertex(const int i, const int j)
 {
     return vertex_leaf(i, j, -1);
 }
+
 
 Vertex vertex_leaf(const int i, const int j, const int k)
 {
@@ -21,10 +28,16 @@ Vertex vertex_leaf(const int i, const int j, const int k)
 }
 
 
-int vertex_n_siblings(const Vertex e)
+int vertex_is_root(const Vertex v)
+{
+    return v->i == -1 && v->j == -1;
+}
+
+
+int vertex_n_siblings(const Vertex v)
 {
     int n = 0;
-    Vertex scan = e->c;
+    Vertex scan = v->c;
     while (scan) {
         scan = scan->s;
         n++;

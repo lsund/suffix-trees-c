@@ -11,6 +11,8 @@ typedef struct vertex {
     int k;
 } *Vertex;
 
+Vertex vertex_root();
+
 Vertex vertex(const int i, const int j);
 
 Vertex vertex_leaf(const int i, const int j, const int k);
