@@ -47,14 +47,6 @@ void label_set_right2(const Label2 lbl, const int i)
     lbl->j = i;
 }
 
-/* void label_print2(const char *s, const Vertex v1, const Vertex v2) */
-/* { */
-/*     char tmp[STRING_MAX_LEN]; */
-/*     label_mark2(s, v1, v2, tmp); */
-/*     printf("%s\n", tmp); */
-/* } */
-
-
 ///////////////////////////////////////////////////////////////////////////////
 // new
 

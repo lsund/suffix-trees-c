@@ -26,10 +26,12 @@ TreeMatching2 scan_prefix2_aux(const char *x, Vertex v, const Label2 pre)
 
     switch (match_type(m)) {
         case NONE:
+            printf("none\n");
             if (v->s) {
                 return scan_prefix2_aux(x, v->s, pre);
             }
         case PARTIAL_RIGHT:
+            printf("right\n");
             // The whole mark of the tree label was matched, but something
             // in c is left. Try to continue with ec nodes.
             if (v->c) {
@@ -39,12 +41,14 @@ TreeMatching2 scan_prefix2_aux(const char *x, Vertex v, const Label2 pre)
                 return ret;
             }
         case PARTIAL_LEFT:
+            printf("left\n");
             // The whole c was matched but ended up in the middle of the tree
             // label.
             ret.m = m;
             ret.end = v;
             return ret;
         case EXACT:
+            printf("exact %d %d\n", v->i, v->j);
             ret.m = m;
             ret.end = v;
             return ret;
@@ -187,6 +191,12 @@ void stree_split(TreeMatching tm)
     Edge c = edge(tm.end->l->s, new_right, j);
 
     stree_extend_edge_below(tm.end, c);
+}
+
+
+void stree_mark(char *t, STree2 st, Vertex v)
+{
+    vertex_mark(t, v, st->x);
 }
 
 

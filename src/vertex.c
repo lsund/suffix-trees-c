@@ -80,6 +80,14 @@ void vertex_extend_below(Vertex v, const Vertex c)
 }
 
 
+void vertex_mark(char *t, Vertex v, const char *x)
+{
+    printf("%d %d\n", v->i, v->j);
+    sstring(t, v->i, v->j - v->i, x);
+}
+
+
+
 void vertex_destroy(Vertex v)
 {
     free(v);

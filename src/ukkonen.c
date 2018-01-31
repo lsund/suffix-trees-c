@@ -22,7 +22,6 @@ STree ukkonen_naive(const char *text) {
 
     size_t len = strlen(text);
     STree tree = stree_init(text);
-    STree2 tree2 = stree_init2(text);
 
     for (unsigned long i = 1; i <= len - 1; i++) {
 

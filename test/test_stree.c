@@ -82,39 +82,37 @@ char *utest_scan_prefix()
 
 char *utest_scan_prefix2()
 {
-    char *text = "helloasj";
+    char *text = "abaabab";
     STree2 r   = stree_init2(text);
-    Vertex v1 = vertex(0, 2);
-    Vertex v2 = vertex(2, 4);
-    Vertex v3 = vertex(4, 5);
-    Vertex v4 = vertex(5, 7);
-    Vertex v5 = vertex(7, 8);
+    Vertex v1 = vertex(0, 1);   // a
+    Vertex v2 = vertex(1, 2);   // ba
+    Vertex v3 = vertex(1, 2);   // ba
+    Vertex v4 = vertex(3, 6);   // abab
+    Vertex v5 = vertex(3, 6);   // abab
+    Vertex v6 = vertex(5, 6);   // b
+    Vertex v7 = vertex(3, 6);   // abab
+    Vertex v8 = vertex(4, 5);   // b
+
     stree_extend_below(r, v1);
-    /* stree_extend_edge_below(t2, t3); */
-    /* stree_extend_edge_below(t2, t4); */
-    /* stree_extend_edge_below(t1, t5); */
+    stree_extend_below(r, v2);
 
-    TreeMatching2 tm0 = scan_prefix2(r, label2(0, 2));
-    /* TreeMatching tm1 = scan_prefix(t1,label_full("h")); */
-    /* TreeMatching tm2 = scan_prefix(t1,label_full("hej")); */
-    /* TreeMatching tm3 = scan_prefix(t1,label_full("hello")); */
-    /* TreeMatching tm4 = scan_prefix(t1,label_full("hellas")); */
-    /* TreeMatching tm5 = scan_prefix(t1,label_full("hel")); */
-    /* TreeMatching tm6 = scan_prefix(t1,label_full("hella")); */
-    /* TreeMatching tm7 = scan_prefix(t1,label_full("")); */
+    vertex_extend_below(v1, v3);
+    vertex_extend_below(v1, v4);
 
-    mu_assert("End should exist #1", tm0.end);
-    /* mu_assert("End should exist #2", tm1.end); */
-    /* mu_assert("End should exist #3", tm2.end); */
-    /* mu_assert("End should exist #4", tm3.end); */
-    /* mu_assert("End should exist #5", tm4.end); */
-    /* mu_assert("End should exist #6", tm5.end); */
-    /* mu_assert("End should exist #7", tm6.end); */
-    /* mu_assert("End should exist #8", tm7.end); */
+    vertex_extend_below(v3, v5);
+    vertex_extend_below(v3, v6);
 
-    /* char tmp[64]; */
-    /* label_mark(tm0.end->l, tmp); */
-    /* mu_assert("control of label #1", strcmp(tmp, "he") == 0); */
+
+    vertex_extend_below(v2, v8);
+    vertex_extend_below(v2, v7);
+
+
+    TreeMatching2 tm0 = scan_prefix2(r, label2(1, 2));
+
+    char tmp[64];
+    stree_mark(tmp, r, tm0.end);
+    printf("%s\n", tmp);
+    mu_assert("control of label #1", strcmp(tmp, "a") == 0);
     /* label_mark(tm1.end->l, tmp); */
     /* mu_assert("control of label #2", strcmp(tmp, "he") == 0); */
     /* label_mark(tm2.end->l, tmp); */

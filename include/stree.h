@@ -49,4 +49,6 @@ void stree_extend_below(STree2 st, const Vertex v);
 
 TreeMatching2 scan_prefix2(STree2 tree, const Label2 pre);
 
+void stree_mark(char *t, STree2 st, Vertex v);
+
 #endif
