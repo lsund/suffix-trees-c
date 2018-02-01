@@ -101,3 +101,16 @@ void vertex_destroy(Vertex v)
 {
     free(v);
 }
+
+
+int vertex_branches_with(const char *x, const Vertex v, const char c)
+{
+    Vertex scan = v;
+    while(scan) {
+        if (label_char_at_2(x, scan->l, 0) == c) {
+            return 1;
+        }
+        scan = scan->s;
+    }
+    return 0;
+}

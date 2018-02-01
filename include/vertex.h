@@ -29,4 +29,6 @@ int vertex_is_root(const Vertex v);
 
 char vertex_char_at(const char *x, Vertex v, int i);
 
+int vertex_branches_with(const char *x, const Vertex v, const char c);
+
 #endif

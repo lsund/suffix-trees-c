@@ -70,6 +70,9 @@ TreeMatching2 scan_prefix2(STree2 tree, const Label2 pre)
     return scan_prefix2_aux(tree->x, tree->r, pre);
 }
 
+///////////////////////////////////////////////////////////////////////////////
+// Old
+
 TreeMatching scan_prefix(STree st, Label pre)
 {
 

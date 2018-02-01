@@ -2,15 +2,15 @@
 #include "vertex_ukkonen.h"
 
 
-/* static void extend_end(TreeMatching2 tm, const char a) */
-/* { */
-/*     if (!stree_child_with(tm.end, a)) { */
-/*         label_extend_right2(tm.end->l); */
-/*     } */
-/* } */
+static void extend_end(const char *x, const Vertex v, const char a)
+{
+    if (!vertex_branches_with(x, v, a)) {
+        label_extend_right2(v->l);
+    }
+}
 
 
-/* static void split_end(TreeMatching tm, int k, Label l) */
+/* static void split_end(TreeMatching2 tm, int k, Label l) */
 /* { */
 /*     stree_split(tm); */
 /*     Edge new_leaf = edge_leaf(l->s, l->i + tm.m.n, l->i + tm.m.n + 1, k); */
@@ -31,14 +31,14 @@
 
 /*             Label2 l = label2(j, i); */
 
-/*             TreeMatching2 tm2 = scan_prefix2(tree, l); */
+/*             TreeMatching2 tm = scan_prefix2(tree, l); */
 
-/*             if (tm2.m.n) { */
+/*             if (tm.m.n) { */
 
-/*                 if (match_type(tm2.m) == EXACT) { */
-/*                     extend_end(tm2, a); */
+/*                 if (match_type(tm.m) == EXACT) { */
+/*                     extend_end(text, tm.end, a); */
 /*                 } else { */
-/*                     char last = label_char_at(tm.end->l, tm.m.n); */
+/*                     char last = label_char_at_2(text, tm.end->l, tm.m.n); */
 /*                     if (last != a) { */
 /*                         split_end(tm, j, l); */
 /*                     } */
