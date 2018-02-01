@@ -3,6 +3,7 @@
 ///////////////////////////////////////////////////////////////////////////////
 // new
 
+
 Label2 label2(int i, int j)
 {
     Label2 ret = malloc(sizeof(struct label));
@@ -12,9 +13,9 @@ Label2 label2(int i, int j)
 
 }
 
-void label_mark2(char *t, const Label2 lbl, const char *s)
+void label_mark2(char *t, const Label2 l, const char *x)
 {
-    sstring(t, lbl->i, lbl->j - lbl->i, s);
+    sstring(t, l->i, l->j - l->i, x);
 }
 
 
@@ -44,8 +45,16 @@ void label_set_right2(const Label2 lbl, const int i)
     lbl->j = i;
 }
 
+
+int label_is_undefined(const Label2 l)
+{
+    return l->i == -1 && l->j == -1;
+}
+
+
 ///////////////////////////////////////////////////////////////////////////////
-// new
+// old
+
 
 Label label_full(char *s)
 {

@@ -4,7 +4,7 @@
 #include "label.h"
 
 typedef struct vertex {
-    int i, j;
+    Label2 l;
     struct vertex *c;
     struct vertex *s;
     struct vertex *p;
@@ -19,8 +19,6 @@ Vertex vertex_leaf(const int i, const int j, const int k);
 
 int vertex_n_siblings(const Vertex e);
 
-Label2 vertex_label_below(Vertex v);
-
 void vertex_extend_below(Vertex v, const Vertex c);
 
 void vertex_extend_right(Vertex v, Vertex s);
@@ -28,8 +26,6 @@ void vertex_extend_right(Vertex v, Vertex s);
 void vertex_mark(char *t, Vertex v, const char *x);
 
 int vertex_is_root(const Vertex v);
-
-Label2 vertex_label(Vertex v);
 
 char vertex_char_at(const char *x, Vertex v, int i);
 

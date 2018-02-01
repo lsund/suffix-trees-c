@@ -17,8 +17,7 @@ Vertex vertex_leaf(const int i, const int j, const int k)
 {
     Vertex v;
     v = malloc(sizeof(struct vertex));
-    v->i = i;
-    v->j = j;
+    v->l = label2(i, j);
     v->k = k;
     v->c = NULL;
     v->s = NULL;
@@ -30,7 +29,7 @@ Vertex vertex_leaf(const int i, const int j, const int k)
 
 int vertex_is_root(const Vertex v)
 {
-    return v->i == -1 && v->j == -1;
+    return label_is_undefined(v->l);
 }
 
 
@@ -43,13 +42,6 @@ int vertex_n_siblings(const Vertex v)
         n++;
     }
     return n;
-}
-
-
-Label2 vertex_label_below(Vertex v)
-{
-    Vertex child = v->c;
-    return label2(child->i, child->j);
 }
 
 
@@ -95,18 +87,13 @@ void vertex_extend_right(Vertex v, Vertex s)
 
 void vertex_mark(char *t, Vertex v, const char *x)
 {
-    sstring(t, v->i, v->j - v->i, x);
+    label_mark2(t, v->l, x);
 }
 
-
-Label2 vertex_label(Vertex v)
-{
-    return label2(v->i, v->j);
-}
 
 char vertex_char_at(const char *x, Vertex v, int i)
 {
-    return label_char_at_2(x, label2(v->i, v->j), i);
+    return label_char_at_2(x, v->l, i);
 }
 
 

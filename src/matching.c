@@ -60,7 +60,7 @@ Matching match2(const char *x, const Vertex v, const Label2 l)
     char lc, rc;
 
     m.n = 0;
-    nv = v->j - v->i;
+    nv = v->l->j - v->l->i;
     nl = l->j - l->i;
     min  = nl > nv ? nv : nl;
 

@@ -43,6 +43,8 @@ void label_destroy(Label l);
 ///////////////////////////////////////////////////////////////////////////////
 // new
 
+int label_is_undefined(const Label2 l);
+
 char label_char_at_2(const char *s, const Label2 lbl, const int i);
 
 void label_shrink_left2(const Label2 lbl, const int n);
