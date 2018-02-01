@@ -7,6 +7,11 @@
 #include "stree_permute.h"
 #include "stree_compare.h"
 
+
+/* char *utest_stree_split() */
+/* { */
+/* } */
+
 char *utest_stree_sibling_with()
 {
     char *text = "abcd";

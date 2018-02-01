@@ -7,7 +7,7 @@
 
 char *utest_adv_alg_example()
 {
-    STree tree, actual_tree;
+    STree tree, actual_tree, vertex_tree;
     char *input, *s_actual;
     char s[STRING_MAX_LEN];
     s[0] = '\0';

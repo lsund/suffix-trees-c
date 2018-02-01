@@ -17,16 +17,22 @@ STree2 stree_init2(const char *x)
 
 TreeMatching2 scan_prefix2_aux(const char *x, Vertex v, const Label2 pre)
 {
-
-    if (vertex_is_root(v)) {
-        return scan_prefix2_aux(x, v->c, pre);
-    }
-
-    Matching m = match2(x, v, pre);
-
     TreeMatching2 ret;
     ret.m = matching_empty();
     ret.end = NULL;
+
+    Matching m = match2(x, v, pre);
+
+    if (vertex_is_root(v)) {
+        if (v->c) {
+            return scan_prefix2_aux(x, v->c, pre);
+        } else {
+            ret.m = m;
+            ret.end = v;
+            return ret;
+        }
+    }
+
 
     switch (match_type(m)) {
         case NONE:
