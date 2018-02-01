@@ -211,6 +211,21 @@ void stree_split(TreeMatching tm)
 }
 
 
+void stree_split2(TreeMatching2 tm)
+{
+    int i = tm.end->l->i;
+    int j = tm.end->l->j;
+
+    int new_right = tm.m.n + i;
+
+    label_set_right2(tm.end->l, new_right);
+
+    Vertex c = vertex(new_right, j);
+
+    vertex_extend_below(tm.end, c);
+}
+
+
 void stree_mark(char *t, STree2 st, Vertex v)
 {
     vertex_mark(t, v, st->x);

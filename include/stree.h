@@ -51,4 +51,6 @@ TreeMatching2 scan_prefix2(STree2 tree, const Label2 pre);
 
 void stree_mark(char *t, STree2 st, Vertex v);
 
+void stree_split2(TreeMatching2 tm);
+
 #endif

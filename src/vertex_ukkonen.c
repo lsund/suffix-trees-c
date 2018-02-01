@@ -10,12 +10,12 @@ static void extend_end(const char *x, const Vertex v, const char a)
 }
 
 
-/* static void split_end(TreeMatching2 tm, int k, Label l) */
-/* { */
-/*     stree_split(tm); */
-/*     Edge new_leaf = edge_leaf(l->s, l->i + tm.m.n, l->i + tm.m.n + 1, k); */
-/*     stree_extend_edge_sibling(tm.end->c, new_leaf); */
-/* } */
+static void split_end(TreeMatching2 tm, int k, Label2 l)
+{
+    stree_split2(tm);
+    Vertex new_leaf = vertex_leaf(l->i + tm.m.n, l->i + tm.m.n + 1, k);
+    vertex_extend_right(tm.end->c, new_leaf);
+}
 
 
 /* STree ukkonen_naive(const char *text) { */

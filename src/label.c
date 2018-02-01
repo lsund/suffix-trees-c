@@ -40,9 +40,9 @@ void label_extend_right2(const Label2 lbl)
 }
 
 
-void label_set_right2(const Label2 lbl, const int i)
+void label_set_right2(const Label2 l, const int i)
 {
-    lbl->j = i;
+    l->j = i;
 }
 
 
