@@ -114,3 +114,19 @@ int vertex_branches_with(const char *x, const Vertex v, const char c)
     }
     return 0;
 }
+
+
+int vertex_sibling_with(const char *x, const Vertex v, const char c)
+{
+    if (!v) return 1;
+
+    Vertex scan = v;
+
+    while(scan) {
+        if (label_char_at_2(x, scan->l, 0) == c) {
+            return 1;
+        }
+        scan = scan->s;
+    }
+    return 0;
+}
