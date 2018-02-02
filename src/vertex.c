@@ -3,7 +3,7 @@
 
 Vertex vertex_root()
 {
-    return vertex_leaf(-1, -1, -1);
+    return vertex_leaf(-1, -1, 0);
 }
 
 
@@ -48,7 +48,9 @@ int vertex_n_siblings(const Vertex v)
 void vertex_extend_below(Vertex v, const Vertex c)
 {
     int tmp = v->k;
+
     if (!v->c) {
+
         v->c = c;
         c->p = v;
 
@@ -65,6 +67,7 @@ void vertex_extend_below(Vertex v, const Vertex c)
     }
 
     v->k = -1;
+
     if (c->k == -1) {
         c->k = tmp;
     }
@@ -87,7 +90,11 @@ void vertex_extend_right(Vertex v, Vertex s)
 
 void vertex_mark(char *t, Vertex v, const char *x)
 {
-    label_mark2(t, v->l, x);
+    if (vertex_is_root(v)) {
+        strcpy(t, "r");
+    } else {
+        label_mark2(t, v->l, x);
+    }
 }
 
 

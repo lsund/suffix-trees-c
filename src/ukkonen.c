@@ -23,7 +23,6 @@ STree ukkonen_naive(const char *text) {
     size_t len = strlen(text);
     STree tree = stree_init(text);
     //New
-    STree2 tree2 = stree_init2(text);
 
     for (unsigned long i = 1; i <= len - 1; i++) {
 
@@ -32,12 +31,8 @@ STree ukkonen_naive(const char *text) {
         for(unsigned long j = 0; j <= i; j++) {
 
             Label l = label(text, j, i);
-            //New
-            Label2 l2 = label2(j, i);
 
             TreeMatching tm = scan_prefix(tree, l);
-            //New
-            TreeMatching2 tm2 = scan_prefix2(tree2, l2);
 
             if (tm.m.n) {
 
