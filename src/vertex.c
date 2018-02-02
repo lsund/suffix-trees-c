@@ -77,14 +77,25 @@ void vertex_extend_below(Vertex v, const Vertex c)
 
 void vertex_extend_right(Vertex v, Vertex s)
 {
-    Vertex scan = v;
+    if (vertex_is_root(v)) {
 
-    while (scan->s) {
-        scan = scan->s;
+        v->c = s;
+        s->p = v;
+        v->k = -1;
+        s->k = 0;
+
+    } else {
+
+        Vertex scan = v;
+
+        while (scan->s) {
+            scan = scan->s;
+        }
+
+        scan->s = s;
+        s->p = v->p;
+
     }
-
-    scan->s = s;
-    s->p = v->p;
 }
 
 

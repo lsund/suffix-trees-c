@@ -51,6 +51,12 @@ int label_is_undefined(const Label2 l)
     return l->i == -1 && l->j == -1;
 }
 
+void label_print2(const char *x, Label2 l)
+{
+    char tmp[STRING_MAX_LEN];
+    label_mark2(tmp, l, x);
+    printf("%s\n", tmp);
+}
 
 ///////////////////////////////////////////////////////////////////////////////
 // old

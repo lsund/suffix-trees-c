@@ -21,16 +21,20 @@ static void split_end(TreeMatching2 tm, int k, Label2 l)
 STree2 ukkonen_naive2(const char *text)
 {
 
-    size_t len = strlen(text);
+    int len = strlen(text);
     STree2 tree = stree_init2(text);
 
-    for (unsigned long i = 1; i <= len - 1; i++) {
+    for (int i = 0; i <= len - 1; i++) {
 
         char a = text[i];
 
-        for(unsigned long j = 0; j <= i; j++) {
+        for(int j = 0; j <= i; j++) {
 
-            Label2 l = label2(j, i);
+            Label2 l = label2(j, i + 1);
+
+            /* label_print2(text, l); */
+
+            /* printf("%d %d\n",j, i); */
 
             TreeMatching2 tm = scan_prefix2(tree, l);
 
