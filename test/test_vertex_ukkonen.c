@@ -12,60 +12,60 @@ static char *utest_adv_alg_example()
     char s[STRING_MAX_LEN];
     s[0] = '\0';
 
-    input = "a";
-    s_actual = "r[a0[]]";
-    tree = ukkonen_naive2(input);
-    write2(s, tree);
-    printf("%s\n", s);
-    mu_assert("Should equal #1", strcmp(s_actual, s) == 0);
+    /* input = "a"; */
+    /* s_actual = "r[a0[]]"; */
+    /* tree = ukkonen_naive2(input); */
+    /* write2(s, tree); */
+    /* mu_assert("Should equal #1", strcmp(s_actual, s) == 0); */
 
     /* s[0] = '\0'; */
     /* input = "ab"; */
-    /* s_actual = "R[ab0[],b1[]]"; */
-    /* tree = ukkonen_naive(input); */
-    /* write(s, tree); */
+    /* s_actual = "r[ab0[],b1[]]"; */
+    /* tree = ukkonen_naive2(input); */
+    /* write2(s, tree); */
     /* mu_assert("Should equal #2", strcmp(s_actual, s) == 0); */
 
-    /* s[0] = '\0'; */
-    /* input = "aba"; */
-    /* s_actual = "R[aba0[],ba1[]]"; */
-    /* tree = ukkonen_naive(input); */
-    /* write(s, tree); */
-    /* mu_assert("Should equal #3", strcmp(s_actual, s) == 0); */
+    s[0] = '\0';
+    input = "aba";
+    s_actual = "r[aba0[],ba1[]]";
+    tree = ukkonen_naive2(input);
+    write2(s, tree);
+    printf("%s\n", s);
+    mu_assert("Should equal #3", strcmp(s_actual, s) == 0);
 
     /* s[0] = '\0'; */
     /* input = "abaa"; */
-    /* s_actual = "R[a[baa0[],a2[]],baa1[]]"; */
-    /* tree = ukkonen_naive(input); */
-    /* write(s, tree); */
+    /* s_actual = "r[a[baa0[],a2[]],baa1[]]"; */
+    /* tree = ukkonen_naive2(input); */
+    /* write2(s, tree); */
     /* mu_assert("Should equal #4", strcmp(s_actual, s) == 0); */
 
     /* s[0] = '\0'; */
     /* input = "abaab"; */
-    /* s_actual = "R[a[baab0[],ab2[]],baab1[]]"; */
-    /* tree = ukkonen_naive(input); */
-    /* write(s, tree); */
+    /* s_actual = "r[a[baab0[],ab2[]],baab1[]]"; */
+    /* tree = ukkonen_naive2(input); */
+    /* write2(s, tree); */
     /* mu_assert("Should equal #5", strcmp(s_actual, s) == 0); */
 
     /* s[0] = '\0'; */
     /* input = "abaaba"; */
-    /* s_actual = "R[a[baaba0[],aba2[]],baaba1[]]"; */
-    /* tree = ukkonen_naive(input); */
-    /* write(s, tree); */
+    /* s_actual = "r[a[baaba0[],aba2[]],baaba1[]]"; */
+    /* tree = ukkonen_naive2(input); */
+    /* write2(s, tree); */
     /* mu_assert("Should equal #6", strcmp(s_actual, s) == 0); */
 
     /* s[0] = '\0'; */
     /* input = "abaabab"; */
-    /* s_actual = "R[a[ba[abab0[],b3[]],abab2[]],ba[abab1[],b4[]]]"; */
-    /* tree = ukkonen_naive(input); */
+    /* s_actual = "r[a[ba[abab0[],b3[]],abab2[]],ba[abab1[],b4[]]]"; */
+    /* tree = ukkonen_naive2(input); */
     /* read(s_actual, &actual_tree); */
 
     /* mu_assert("Should be isomorphic #1", stree_isomorphic(tree, actual_tree)); */
 
     /* s[0] = '\0'; */
     /* input = "abaababa"; */
-    /* s_actual = "R[a[ba[ababa0[],ba3[]],ababa2[]],ba[ababa1[],ba4[]]]"; */
-    /* tree = ukkonen_naive(input); */
+    /* s_actual = "r[a[ba[ababa0[],ba3[]],ababa2[]],ba[ababa1[],ba4[]]]"; */
+    /* tree = ukkonen_naive2(input); */
     /* read(s_actual, &actual_tree); */
 
     /* mu_assert("Should be isomorphic #2", stree_isomorphic(tree, actual_tree)); */
@@ -121,9 +121,9 @@ static char *utest_stefan_kurz_example()
     /* s[0] = '\0'; */
 
     /* input = "acbcabcac"; */
-    /* s_actual = "R[a[bcac4[],cbcabcac0[]],bca[bcac2[],c5[]],c[a[bcac3[],c6[]],bcabcac1[]]]"; */
-    /* tree = ukkonen_naive(input); */
-    /* write(s, tree); */
+    /* s_actual = "r[a[bcac4[],cbcabcac0[]],bca[bcac2[],c5[]],c[a[bcac3[],c6[]],bcabcac1[]]]"; */
+    /* tree = ukkonen_naive2(input); */
+    /* write2(s, tree); */
     /* read(s_actual, &actual_tree); */
     /* mu_assert("Isomorphic #1", stree_isomorphic(tree, actual_tree)); */
 

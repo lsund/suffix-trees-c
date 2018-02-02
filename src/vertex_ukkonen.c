@@ -4,9 +4,9 @@
 
 static void extend_end(const char *x, const Vertex v, const char a)
 {
-    if (!vertex_branches_with(x, v, a)) {
+    /* if (!vertex_branches_with(x, v, a)) { */
         label_extend_right2(v->l);
-    }
+    /* } */
 }
 
 
@@ -30,11 +30,7 @@ STree2 ukkonen_naive2(const char *text)
 
         for(int j = 0; j <= i; j++) {
 
-            Label2 l = label2(j, i + 1);
-
-            /* label_print2(text, l); */
-
-            /* printf("%d %d\n",j, i); */
+            Label2 l = label2(j, i);
 
             TreeMatching2 tm = scan_prefix2(tree, l);
 
@@ -49,8 +45,8 @@ STree2 ukkonen_naive2(const char *text)
                     }
                 }
 
-            } else if (!vertex_sibling_with(text, tree->r, a)) {
-                vertex_extend_right(tree->r, vertex_leaf(j, j + 1, j));
+            } else if (!vertex_sibling_with(text, tm.end, a)) {
+                vertex_extend_below(tree->r, vertex_leaf(j, j + 1, j));
             }
             free(l);
         }
