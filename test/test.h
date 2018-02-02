@@ -19,6 +19,7 @@ char *test_reader();
 char *test_writer();
 char *test_stree_permute();
 char *test_stree_compare();
+char *test_vertex_ukkonen();
 
 enum MessageOption {
     MODULE,

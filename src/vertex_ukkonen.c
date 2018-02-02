@@ -18,7 +18,8 @@ static void split_end(TreeMatching2 tm, int k, Label2 l)
 }
 
 
-STree2 ukkonen_naive2(const char *text) {
+STree2 ukkonen_naive2(const char *text)
+{
 
     size_t len = strlen(text);
     STree2 tree = stree_init2(text);

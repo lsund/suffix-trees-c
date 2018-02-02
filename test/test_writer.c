@@ -35,7 +35,6 @@ char *utest_write2()
     tree = stree_init2("a");
     write2(s, tree);
     t = "r0[]";
-    printf("%s\n", s);
     mu_assert("Should equal #1", strcmp(s, t) == 0);
 
     s[0] = '\0';

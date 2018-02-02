@@ -12,7 +12,6 @@ static void write_stree2(const char *x, char *acc, Vertex scan)
         vertex_mark(mark, scan, x);
 
         strcat(acc, mark);
-        printf("%d\n", scan->k);
         if (scan->k != -1) {
             char tmp[STRING_MAX_LEN];
             sprintf(tmp, "%d", scan->k);
