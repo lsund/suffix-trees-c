@@ -49,15 +49,20 @@ void read2(const char *x, const char *rep, STree2 tree)
             o = read_vertex(o, rep, &v);
             vertex_extend_below(base, v);
             base = v;
-        } else {
-            o++;
+            o = o + 2;
         }
 
-        /* else if (s[o + 1] == ',') { */
+        if (rep[o + 1] == ',') {
+            o = o + 2;
+            o = read_vertex(o, rep, &vs);
+            vertex_extend_right(base, vs);
+            base = vs;
+        } else if (rep[o] == ']') {
+            base = base->p;
+        }
+        o = o + 1;
 
-        /*     o = read_vertex(o += 2, s, &vs); */
-        /*     vertex_extend_right(base, vs); */
-        /*     base = vs; */
+
 
         /* } else if (s[o] == ']') { */
 

@@ -87,6 +87,7 @@ char *utest_read2()
 {
     STree2 tree;
     char *s;
+    //            01234567
     char *text = "abaababa";
 
     char t[STRING_MAX_LEN];
@@ -95,85 +96,42 @@ char *utest_read2()
     tree = stree_init2(s);
     read2(text, s, tree);
     write2(t, tree);
-    printf("%s\n", t);
     mu_assert("Should equal #0", strcmp(s, t) == 0);
 
-    /* t[0] = '\0'; */
-    /* s = "r[<0,2,0>[],<1,2,1>[]]"; */
-    /* tree = stree_init2(s); */
-    /* read2(text, s, tree); */
-    /* write2(t, tree); */
-    /* mu_assert("Should equal #2", strcmp(s, t) == 0); */
+    t[0] = '\0';
+    s = "r[<0,2,0>[],<1,2,1>[]]";
+    tree = stree_init2(s);
+    read2(text, s, tree);
+    write2(t, tree);
+    mu_assert("Should equal #2", strcmp(s, t) == 0);
 
-    /* t[0] = '\0'; */
-    /* s = "r[aba0[],ba1[]]"; */
-    /* tree = stree_init2(s); */
-    /* read2(s, tree); */
-    /* write2(t, tree); */
-    /* mu_assert("Should equal #1", strcmp(s, t) == 0); */
+    t[0] = '\0';
+    s = "r[<0,3,0>[],<0,2,1>[]]";
+    tree = stree_init2(s);
+    read2(text, s, tree);
+    write2(t, tree);
+    mu_assert("Should equal #1", strcmp(s, t) == 0);
 
-    /* t[0] = '\0'; */
-    /* s = "r[a[baa0[],a2[]],baa1[]]"; */
-    /* tree = stree_init2(s); */
-    /* read2(s, tree); */
-    /* write2(t, tree); */
-    /* mu_assert("Should equal #3", strcmp(s, t) == 0); */
+    t[0] = '\0';
+    s = "r[<0,1,-1>[<1,4,0>[],<0,1,2>[]],<1,4,1>[]]";
+    tree = stree_init2(s);
+    read2(text, s, tree);
+    write2(t, tree);
+    mu_assert("Should equal #3", strcmp(s, t) == 0);
 
-    /* t[0] = '\0'; */
-    /* s = "r[a[baab0[],ab2[]],baab1[]]"; */
-    /* tree = stree_init2(s); */
-    /* read2(s, tree); */
-    /* write2(t, tree); */
-    /* mu_assert("Should equal #4", strcmp(s, t) == 0); */
+    t[0] = '\0';
+    s = "r[<0,1,-1>[<1,5,0>[],<0,2,2>[]],<1,5,1>[]]";
+    tree = stree_init2(s);
+    read2(text, s, tree);
+    write2(t, tree);
+    mu_assert("Should equal #4", strcmp(s, t) == 0);
 
-    /* t[0] = '\0'; */
-    /* s = "r1[]"; */
-    /* tree = stree_init2(s); */
-    /* read2(s, tree); */
-    /* write2(t, tree); */
-    /* mu_assert("Should equal #5", strcmp(s, t) == 0); */
-
-    /* t[0] = '\0'; */
-    /* s = "r[a[ba[abab0[],b3[]],abab2[]],ba[b4[],abab2[]]]"; */
-    /* tree = stree_init2(s); */
-    /* read2(s, tree); */
-    /* write2(t, tree); */
-    /* mu_assert("Should equal #6", strcmp(s, t) == 0); */
-
-    /* t[0] = '\0'; */
-    /* s = "r[b1[],c2[]]"; */
-    /* tree = stree_init2(s); */
-    /* read2(s, tree); */
-    /* write2(t, tree); */
-    /* mu_assert("Should equal #7", strcmp(s, t) == 0); */
-
-    /* t[0] = '\0'; */
-    /* s = "r[b[c[d1[]]]]"; */
-    /* tree = stree_init2(s); */
-    /* read2(s, tree); */
-    /* write2(t, tree); */
-    /* mu_assert("Should equal #8", strcmp(s, t) == 0); */
-
-    /* t[0] = '\0'; */
-    /* s = "r[a1[],b2[]]"; */
-    /* tree = stree_init2(s); */
-    /* read2(s, tree); */
-    /* write2(t, tree); */
-    /* mu_assert("Should equal #8", strcmp(s, t) == 0); */
-
-    /* t[0] = '\0'; */
-    /* s = "r[a[b[c0[],d3[]],e2[]],f[g1[],h4[]]]"; */
-    /* tree = stree_init2(s); */
-    /* read2(s, tree); */
-    /* write2(t, tree); */
-    /* mu_assert("Should equal #9", strcmp(s, t) == 0); */
-
-    /* t[0] = '\0'; */
-    /* s = "r[a[ba[abab0[],b3[]],abab2[]],ba[b4[],abab1[]]]"; */
-    /* tree = stree_init2(s); */
-    /* read2(s, tree); */
-    /* write2(t, tree); */
-    /* mu_assert("Should equal #10", strcmp(s, t) == 0); */
+    t[0] = '\0';
+    s = "r[<0,1,-1>[<1,3,-1>[<3,7,0>[],<1,2,3>[]],<3,7,2>[]],<1,3,-1>[<1,2,4>[],<3,7,2>[]]]";
+    tree = stree_init2(s);
+    read2(text, s, tree);
+    write2(t, tree);
+    mu_assert("Should equal #6", strcmp(s, t) == 0);
 
     return NULL;
 }
