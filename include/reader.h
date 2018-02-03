@@ -7,6 +7,6 @@
 
 void read(const char *s, STree *tree);
 
-void read2(const char *s, STree2 *tree);
+void read2(const char *s, STree2 tree);
 
 #endif

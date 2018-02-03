@@ -24,7 +24,7 @@ int read_vertex(const int o, const char *s, Vertex *v)
     return k == -1 ? o + i + 1 : o + i + 2;
 }
 
-void read2(const char *s, STree2 *tree)
+void read2(const char *s, STree2 tree)
 {
     Vertex v, base, vs;
     int o;
@@ -32,8 +32,8 @@ void read2(const char *s, STree2 *tree)
     o     = read_vertex(0, s, &v);
     v->k  = 1;
     base  = v;
-    (*tree)->r = v;
-    (*tree)->x = s;
+    tree->r = v;
+    tree->x = s;
 
     while (s[o]) {
 

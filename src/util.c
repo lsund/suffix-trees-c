@@ -143,3 +143,20 @@ int factorial(const int i)
         return i * factorial(i - 1);
     }
 }
+
+/* void rep_to_string(char *x, const char *rep) */
+/* { */
+/*     int i = 0; */
+/*     int j = 0; */
+/*     while (rep[i]) { */
+/*         if (rep[i] == ']') { */
+/*             break; */
+/*         } */
+/*         if (isalpha(rep[i])) { */
+/*             x[j] = rep[i]; */
+/*             j++; */
+/*         } */
+/*         i++; */
+/*     } */
+/*     x[j] = '\0'; */
+/* } */

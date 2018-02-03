@@ -163,33 +163,35 @@ char *utest_stree_isomorphic2()
     char *s1, *s2, *s3, *s4, *s5, *s6, *s7, *s8, *s9;
 
     // These are isomorphic
-    s1 = "root[a1[],b2[]]";
-    s2 = "root[b2[],a1[]]";
-    s3 = "root[b3[],a1[]]";
+    s1 = "r[a0[],b1[]]";
+    t1 = stree_init2(s1);
+    s2 = "r[b2[],a1[]]";
+    s3 = "r[b3[],a1[]]";
 
     // This is not
-    s4 = "root[c3[],a1[]]";
+    s4 = "r[c3[],a1[]]";
 
     // These are isomorphic
-    s5 = "root[b1[],a2[],c3[]]";
-    s6 = "root[a1[],c2[],b3[]]";
-    s7 = "root[c1[],b2[],a3[]]";
-    s8 = "root[c1[],a2[],b3[]]";
+    s5 = "r[b1[],a2[],c3[]]";
+    s6 = "r[a1[],c2[],b3[]]";
+    s7 = "r[c1[],b2[],a3[]]";
+    s8 = "r[c1[],a2[],b3[]]";
 
     // This is not
-    s9 = "root[c1[],c2[],b3[]]";
+    s9 = "r[c1[],c2[],b3[]]";
 
-    read2(s1, &t1);
-    read2(s2, &t2);
-    read2(s3, &t3);
-    read2(s4, &t4);
-    read2(s5, &t5);
-    read2(s6, &t6);
-    read2(s7, &t7);
-    read2(s8, &t8);
-    read2(s9, &t9);
+    read2(s1, t1);
+    /* read2(s2, &t2); */
+    /* read2(s3, &t3); */
+    /* read2(s4, &t4); */
+    /* read2(s5, &t5); */
+    /* read2(s6, &t6); */
+    /* read2(s7, &t7); */
+    /* read2(s8, &t8); */
+    /* read2(s9, &t9); */
 
-    mu_assert("Isomorphic #1", symmetric_isomorphic(t1, t2));
+    /* mu_assert("Isomorphic #1", stree_isomorphic2(t1, t2)); */
+    /* mu_assert("Isomorphic #1", symmetric_isomorphic2(t1, t2)); */
     /* mu_assert("Isomorphic #3", symmetric_isomorphic(t2, t2)); */
     /* mu_assert("Isomorphic #5", symmetric_isomorphic(t1, t3)); */
     /* mu_assert("Isomorphic #6", !stree_isomorphic(t1, t4)); */
@@ -232,8 +234,9 @@ char *utest_stree_isomorphic2()
 
 char *test_stree_compare()
 {
-    mu_run_utest(utest_stree_equals);
-    mu_run_utest(utest_stree_equals2);
-    mu_run_utest(utest_stree_isomorphic);
+    /* mu_run_utest(utest_stree_equals); */
+    /* mu_run_utest(utest_stree_equals2); */
+    /* mu_run_utest(utest_stree_isomorphic); */
+    mu_run_utest(utest_stree_isomorphic2);
     return NULL;
 }
