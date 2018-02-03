@@ -25,6 +25,8 @@ static char *test()
     mu_run_test(test_matching);
     mu_message(MODULE, "writer\n");
     mu_run_test(test_writer);
+    mu_message(MODULE,"vertex\n");
+    mu_run_test(test_vertex);
     mu_message(MODULE, "reader\n");
     mu_run_test(test_reader);
     mu_message(MODULE,"stree\n");
@@ -35,7 +37,7 @@ static char *test()
     mu_run_test(test_stree_permute);
     mu_message(MODULE,"ukkonen\n");
     mu_run_test(test_ukkonen);
-    mu_message(MODULE,"ukkonen\n");
+    mu_message(MODULE,"vertex_ukkonen\n");
     mu_run_test(test_vertex_ukkonen);
     return 0;
 }

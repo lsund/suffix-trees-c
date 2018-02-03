@@ -10,6 +10,7 @@
 #include "minunit.h"
 #include "config.h"
 
+char *test_vertex();
 char *test_stree();
 char *test_ukkonen();
 char *test_label();

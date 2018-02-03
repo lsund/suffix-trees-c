@@ -4,9 +4,9 @@
 
 static void extend_end(const char *x, const Vertex v, const char a)
 {
-    /* if (!vertex_branches_with(x, v, a)) { */
+    if (!vertex_branches_with(x, v, a)) {
         label_extend_right2(v->l);
-    /* } */
+    }
 }
 
 
