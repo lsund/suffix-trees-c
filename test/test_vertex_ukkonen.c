@@ -53,13 +53,20 @@ static char *utest_adv_alg_example()
     write2(s, tree);
     mu_assert("Should equal #6", strcmp(s_actual, s) == 0);
 
-    /* s[0] = '\0'; */
-    /* input = "abaabab"; */
-    /* s_actual = "r[a[ba[abab0[],b3[]],abab2[]],ba[abab1[],b4[]]]"; */
-    /* tree = ukkonen_naive2(input); */
-    /* read(s_actual, &actual_tree); */
+    s[0] = '\0';
+    input = "abaabab";
+    s_actual = "r[a[ba[abab0[],b3[]],abab2[]],ba[abab1[],b4[]]]";
+    char tmp[STRING_MAX_LEN];
+    rep_to_string(tmp, s_actual);
+    int equal = strcmp(tmp, input) == 0;
+    printf("%s\n", tmp);
+    mu_assert("Rep should be read correct #1", equal);
 
-    /* mu_assert("Should be isomorphic #1", stree_isomorphic(tree, actual_tree)); */
+    actual_tree = stree_init2(s_actual);
+    tree = ukkonen_naive2(input);
+    read2(s_actual, actual_tree);
+
+    mu_assert("Should be isomorphic #1", stree_isomorphic2(tree, actual_tree));
 
     /* s[0] = '\0'; */
     /* input = "abaababa"; */

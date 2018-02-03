@@ -125,3 +125,21 @@ void read(const char *s, STree *tree)
 
     }
 }
+
+
+void rep_to_string(char *x, const char *rep)
+{
+    int i = 1;
+    int j = 0;
+    while (rep[i]) {
+        if (rep[i] == ']') {
+            break;
+        }
+        if (isalpha(rep[i])) {
+            x[j] = rep[i];
+            j++;
+        }
+        i++;
+    }
+    x[j] = '\0';
+}
