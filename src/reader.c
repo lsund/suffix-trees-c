@@ -62,19 +62,6 @@ void read2(const char *x, const char *rep, STree2 tree)
         }
         o = o + 1;
 
-
-
-        /* } else if (s[o] == ']') { */
-
-        /*     base = base->p; */
-        /*     o++; */
-
-        /* } else { */
-
-        /*     o++; */
-
-        /* } */
-
     }
 }
 

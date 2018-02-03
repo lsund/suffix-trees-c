@@ -87,7 +87,6 @@ char *utest_read2()
 {
     STree2 tree;
     char *s;
-    //            01234567
     char *text = "abaababa";
 
     char t[STRING_MAX_LEN];
