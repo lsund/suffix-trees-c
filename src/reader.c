@@ -1,65 +1,74 @@
 
 #include "reader.h"
 
-int read_vertex(const int o, const char *s, Vertex *v)
+int read_vertex(const int o, const char *rep, Vertex *v)
 {
 
-    int i, k;
+    int p, k;
 
-    i = 0;
+    int i, j;
+
+    p = 0;
     k = -1;
 
-    while (s[i + o] != '[' && !isdigit(s[i + o]))
-    {
-        i++;
+
+    if (rep[p + o] == 'r') {
+        *v = vertex_root();
+        return 2;
     }
 
-    if (isdigit(s[i + o])) {
-        k = char_to_int(s[i + o]);
-    }
+    p++;
+    i = char_to_int(rep[p + o]);
+    p++;
+    p++;
+    j = char_to_int(rep[p + o]);
+    p++;
+    p++;
+    k = char_to_int(rep[p + o]);
+    p++;
+    *v = vertex_leaf(i, j, k);
 
-    *v = vertex(o, o + i);
-    (*v)->k = k;
+    return p + o;
 
-    return k == -1 ? o + i + 1 : o + i + 2;
 }
 
-void read2(const char *s, STree2 tree)
+void read2(const char *x, const char *rep, STree2 tree)
 {
     Vertex v, base, vs;
     int o;
 
-    o     = read_vertex(0, s, &v);
+    o     = read_vertex(0, rep, &v);
     v->k  = 1;
     base  = v;
     tree->r = v;
-    tree->x = s;
+    tree->x = x;
 
-    while (s[o]) {
+    while (rep[o]) {
 
-
-        if (s[o] != ']') {
-
-            o = read_vertex(o, s, &v);
+        if (rep[o] == '<') {
+            o = read_vertex(o, rep, &v);
             vertex_extend_below(base, v);
             base = v;
-
-        } else if (s[o + 1] == ',') {
-
-            o = read_vertex(o += 2, s, &vs);
-            vertex_extend_right(base, vs);
-            base = vs;
-
-        } else if (s[o] == ']') {
-
-            base = base->p;
-            o++;
-
         } else {
-
             o++;
-
         }
+
+        /* else if (s[o + 1] == ',') { */
+
+        /*     o = read_vertex(o += 2, s, &vs); */
+        /*     vertex_extend_right(base, vs); */
+        /*     base = vs; */
+
+        /* } else if (s[o] == ']') { */
+
+        /*     base = base->p; */
+        /*     o++; */
+
+        /* } else { */
+
+        /*     o++; */
+
+        /* } */
 
     }
 }

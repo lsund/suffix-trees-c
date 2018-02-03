@@ -8,15 +8,16 @@ static void write_stree2(const char *x, char *acc, Vertex scan)
 
     while (scan) {
 
-        char mark[64];
-        vertex_mark(mark, scan, x);
+        /* char mark[64]; */
+        /* vertex_mark(mark, scan, x); */
 
-        strcat(acc, mark);
-        if (scan->k != -1) {
-            char tmp[STRING_MAX_LEN];
-            sprintf(tmp, "%d", scan->k);
-            strcat(acc, tmp);
-        }
+        char tmp[STRING_MAX_LEN];
+        sprintf(tmp, "<%d,%d,%d>", scan->l->i, scan->l->j, scan->k);
+        strcat(acc, tmp);
+        /* if (scan->k != -1) { */
+        /*     sprintf(tmp, "%d", scan->k); */
+        /*     strcat(acc, tmp); */
+        /* } */
         write_stree2(x, acc, scan->c);
         char *end = scan->s ? "]," : "]";
         strcat(acc, end);

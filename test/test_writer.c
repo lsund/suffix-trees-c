@@ -40,7 +40,7 @@ char *utest_write2()
     s[0] = '\0';
     stree_extend_below(tree, vertex(0, 1));
     write2(s, tree);
-    t = "r[a0[]]";
+    t = "r[<0,1,0>[]]";
     mu_assert("Should equal #2", strcmp(s, t) == 0);
 
     return NULL;
