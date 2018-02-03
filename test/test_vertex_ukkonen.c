@@ -47,12 +47,12 @@ static char *utest_adv_alg_example()
     write2(s, tree);
     mu_assert("Should equal #5", strcmp(s_actual, s) == 0);
 
-    /* s[0] = '\0'; */
-    /* input = "abaaba"; */
-    /* s_actual = "r[a[baaba0[],aba2[]],baaba1[]]"; */
-    /* tree = ukkonen_naive2(input); */
-    /* write2(s, tree); */
-    /* mu_assert("Should equal #6", strcmp(s_actual, s) == 0); */
+    s[0] = '\0';
+    input = "abaaba";
+    s_actual = "r[a[baaba0[],aba2[]],baaba1[]]";
+    tree = ukkonen_naive2(input);
+    write2(s, tree);
+    mu_assert("Should equal #6", strcmp(s_actual, s) == 0);
 
     /* s[0] = '\0'; */
     /* input = "abaabab"; */

@@ -12,10 +12,7 @@ static char *utest_test_vertex_branches_with()
 
     vertex_extend_below(v, v2);
 
-    int b = vertex_branches_with(x, v, 'a');
-
-    printf("%d\n", b);
-
+    mu_assert("Branch #1", vertex_branches_with(x, v, 'b'));
 
     return NULL;
 }
