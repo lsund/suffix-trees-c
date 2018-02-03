@@ -65,6 +65,15 @@ int stree_equals(STree t1, STree t2)
     }
 }
 
+int stree_equals2(STree2 t1, STree2 t2)
+{
+    if (strcmp(t1->x, t2->x) == 0) {
+        return vertex_equals(t1->x, t1->r, t2->r);
+    } else {
+        return 0;
+    }
+}
+
 
 // TODO Remember structure before permute and return to this
 int stree_isomorphic(STree t1, STree t2)
@@ -88,5 +97,15 @@ int stree_isomorphic(STree t1, STree t2)
         }
     } else {
         return !t1 && !t2;
+    }
+}
+
+
+int stree_isomorphic2(STree2 t1, STree2 t2)
+{
+    if (strcmp(t1->x, t2->x) == 0) {
+        return vertex_isomorphic(t1->x, t1->r, t2->r);
+    } else {
+        return 0;
     }
 }

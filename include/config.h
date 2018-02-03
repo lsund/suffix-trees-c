@@ -14,3 +14,5 @@
 
 #define MAX_INT            999999
 
+#define MAX_BRANCHING       64
+

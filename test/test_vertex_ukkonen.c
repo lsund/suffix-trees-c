@@ -30,7 +30,6 @@ static char *utest_adv_alg_example()
     s_actual = "r[aba0[],ba1[]]";
     tree = ukkonen_naive2(input);
     write2(s, tree);
-    printf("%s\n", s);
     mu_assert("Should equal #3", strcmp(s_actual, s) == 0);
 
     s[0] = '\0';

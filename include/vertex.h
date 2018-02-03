@@ -33,4 +33,14 @@ int vertex_branches_with(const char *x, const Vertex v, const char c);
 
 int vertex_sibling_with(const char *x, const Vertex v, const char c);
 
+int vertex_children_equals(const char *x, Vertex v1, Vertex v2);
+
+int vertex_equals(const char *x, Vertex v1, Vertex v2);
+
+int vertex_isomorphic(const char *x, Vertex v1, Vertex v2);
+
+void vertex_permute(Vertex v, int i);
+
+void vertex_permute_inverse(Vertex v, int i);
+
 #endif

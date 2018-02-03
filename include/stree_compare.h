@@ -19,4 +19,6 @@ int stree_children_equals2(STree2 t1, STree2 t2);
 
 int stree_equals2(STree2 t1, STree2 t2);
 
+int stree_isomorphic2(STree2 t1, STree2 t2);
+
 #endif
