@@ -33,6 +33,7 @@ void read2(const char *s, STree2 *tree)
     v->k  = 1;
     base  = v;
     (*tree)->r = v;
+    (*tree)->x = s;
 
     while (s[o]) {
 
