@@ -1,6 +1,22 @@
 
 #include "vertex.h"
 
+int vertex_children_equals_aux(const char *x, Vertex v1, Vertex v2)
+{
+    if (v1 && v2 && label_equals(x, v1->l, v2->l)) {
+        return vertex_children_equals_aux(x, v1->s, v2->s);
+    } else {
+        return !v1 && !v2;
+    }
+}
+
+
+int vertex_children_equals(const char *x, Vertex v1, Vertex v2)
+{
+    return vertex_children_equals_aux(x, v1->c, v2->c);
+}
+
+
 Vertex vertex_root()
 {
     return vertex_leaf(-1, -1, 0);

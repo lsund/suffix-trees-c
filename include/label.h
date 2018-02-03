@@ -57,4 +57,6 @@ void label_mark2(char *t, const Label2 lbl, const char *s);
 
 void label_print2(const char *x, Label2 l);
 
+int label_equals(const char *x, Label2 l1, Label2 l2);
+
 #endif

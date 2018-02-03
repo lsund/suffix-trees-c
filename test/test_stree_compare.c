@@ -118,9 +118,45 @@ char *utest_stree_equals()
 }
 
 
+char *utest_stree_equals2()
+{
+    STree2 t1, t2, t3, t4;
+
+    char *s1, *s2, *s3, *s4;
+    s1 = "root[a1[],b2[]]";
+    s2 = "root[b5[],a2[]]";
+    s3 = "root[b1[]]";
+    s4 = "root[b5[],a2[c3[]]]";
+
+    char t[STRING_MAX_LEN];
+
+    read2(s1, &t1);
+    read2(s2, &t2);
+
+    mu_assert("Equals #1", !stree_equals2(t1, t2));
+    mu_assert("Equals #2", stree_equals2(t1, t1));
+    mu_assert("Equals #3", stree_equals2(t2, t2));
+    mu_assert("Equals #4", !stree_equals2(t2, t1));
+    read2(s1, &t2);
+    mu_assert("Equals #5", stree_equals2(t1, t2));
+    read2(s2, &t2);
+    read2(s3, &t3);
+
+    write2(t, t3);
+    write2(t, t2);
+    mu_assert("Equals #6", !stree_equals2(t2, t3));
+
+    read2(s4, &t4);
+    mu_assert("Equals #7", !stree_equals2(t2, t4));
+    mu_assert("Equals #8", stree_equals2(NULL, NULL));
+
+    return NULL;
+}
+
 char *test_stree_compare()
 {
     mu_run_utest(utest_stree_equals);
+    mu_run_utest(utest_stree_equals2);
     mu_run_utest(utest_stree_isomorphic);
     return NULL;
 }

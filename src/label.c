@@ -58,6 +58,15 @@ void label_print2(const char *x, Label2 l)
     printf("%s\n", tmp);
 }
 
+int label_equals(const char *x, Label2 l1, Label2 l2)
+{
+    char tmp1[STRING_MAX_LEN];
+    char tmp2[STRING_MAX_LEN];
+    label_mark2(tmp1, l1, x);
+    label_mark2(tmp2, l2, x);
+    return strcmp(tmp1, tmp2) == 0;
+}
+
 ///////////////////////////////////////////////////////////////////////////////
 // old
 
@@ -78,7 +87,6 @@ Label label(const char *s, const int i, const int j)
 
     return l;
 }
-
 
 void label_mark(Label l, char *t)
 {
