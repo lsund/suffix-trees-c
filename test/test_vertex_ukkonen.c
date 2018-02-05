@@ -44,8 +44,6 @@ static char *utest_adv_alg_example()
     s_actual = "r[<0,1,-1>[<1,5,0>[],<3,5,2>[]],<1,5,1>[]]";
     tree = ukkonen_naive2(input);
     write2(s, tree);
-    /* printf("%s\n",s ); */
-    /* printf("%s\n",s_actual ); */
     mu_assert("Should equal #5", strcmp(s_actual, s) == 0);
 
     s[0] = '\0';
@@ -66,13 +64,15 @@ static char *utest_adv_alg_example()
 
     mu_assert("Should be isomorphic #1", stree_isomorphic2(tree, actual_tree));
 
-    /* s[0] = '\0'; */
-    /* input = "abaababa"; */
-    /* s_actual = "r[a[ba[ababa0[],ba3[]],ababa2[]],ba[ababa1[],ba4[]]]"; */
-    /* tree = ukkonen_naive2(input); */
-    /* read(s_actual, &actual_tree); */
+    s[0] = '\0';
+    input = "abaababa";
+    s_actual = "r[<0,1,-1>[<1,3,-1>[<3,8,0>[],<6,7,3>[]],<3,8,2>[]],<1,3,-1>[<3,8,1>[],<6,7,4>[]]]";
+    tree = ukkonen_naive2(input);
+    read2(input, s_actual, actual_tree);
 
-    /* mu_assert("Should be isomorphic #2", stree_isomorphic(tree, actual_tree)); */
+    // TODO Continue here after testing isomorphic
+
+    /* mu_assert("Should be isomorphic #2", stree_isomorphic2(tree, actual_tree)); */
 
     /* char l[74]; */
 
