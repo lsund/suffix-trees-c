@@ -361,7 +361,7 @@ char *utest_stree_permute2()
     r = t1->r;
     char *s = "r[<0,3,0>[],<1,3,1>[],<2,3,2>[]]";
     STree2 t2 = stree_init2(text);
-    read2(text, s, t2);
+    read2(s, t2);
     stree_permute2(t1, 0);
     stree_permute2(t1, permutation_inverse_number(0, 3));
     mu_assert("Perumted tree #43", stree_equals2(t1, t2));

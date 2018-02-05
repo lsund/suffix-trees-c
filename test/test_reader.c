@@ -93,42 +93,42 @@ char *utest_read2()
     t[0] = '\0';
     s = "r[<0,1,0>[]]";
     tree = stree_init2(s);
-    read2(text, s, tree);
+    read2(s, tree);
     write2(t, tree);
     mu_assert("Should equal #0", strcmp(s, t) == 0);
 
     t[0] = '\0';
     s = "r[<0,2,0>[],<1,2,1>[]]";
     tree = stree_init2(s);
-    read2(text, s, tree);
+    read2(s, tree);
     write2(t, tree);
     mu_assert("Should equal #2", strcmp(s, t) == 0);
 
     t[0] = '\0';
     s = "r[<0,3,0>[],<0,2,1>[]]";
     tree = stree_init2(s);
-    read2(text, s, tree);
+    read2(s, tree);
     write2(t, tree);
     mu_assert("Should equal #1", strcmp(s, t) == 0);
 
     t[0] = '\0';
     s = "r[<0,1,-1>[<1,4,0>[],<0,1,2>[]],<1,4,1>[]]";
     tree = stree_init2(s);
-    read2(text, s, tree);
+    read2(s, tree);
     write2(t, tree);
     mu_assert("Should equal #3", strcmp(s, t) == 0);
 
     t[0] = '\0';
     s = "r[<0,1,-1>[<1,5,0>[],<0,2,2>[]],<1,5,1>[]]";
     tree = stree_init2(s);
-    read2(text, s, tree);
+    read2(s, tree);
     write2(t, tree);
     mu_assert("Should equal #4", strcmp(s, t) == 0);
 
     t[0] = '\0';
     s = "r[<0,1,-1>[<1,3,-1>[<3,7,0>[],<1,2,3>[]],<3,7,2>[]],<1,3,-1>[<1,2,4>[],<3,7,2>[]]]";
     tree = stree_init2(s);
-    read2(text, s, tree);
+    read2(s, tree);
     write2(t, tree);
     mu_assert("Should equal #6", strcmp(s, t) == 0);
 

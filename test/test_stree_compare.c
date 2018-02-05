@@ -159,26 +159,32 @@ char *utest_stree_equals2()
 
 char *utest_stree_isomorphic2()
 {
-    STree2 t1, t2, t3, t4, t5, t6, t7, t8, t9;
-    char *s1, *s2, *s3, *s4, *s5, *s6, *s7, *s8, *s9;
+    char *text = "abaa";
+    char tmp[75];
+
+    char *rep0 = "r[<0,1,-1>[<1,4,0>[],<3,4,2>[]],<1,4,1>[]]";
 
     // These are isomorphic
-    s1 = "r[a0[],b1[]]";
-    t1 = stree_init2(s1);
-    s2 = "r[b2[],a1[]]";
-    s3 = "r[b3[],a1[]]";
+    char *rep1 = "r[<0,3,0>[],<1,3,1>[]]";
+    char *rep2 = "r[<1,3,1>[],<0,3,0>[]]";
+    char *rep3 = "r[<1,3,3>[],<0,3,6>[]]";
+
+    STree2 tree = stree_init2(text);
+
+    read2(rep1, tree);
+
 
     // This is not
-    s4 = "r[c3[],a1[]]";
+    /* s4 = "r[c3[],a1[]]"; */
 
-    // These are isomorphic
-    s5 = "r[b1[],a2[],c3[]]";
-    s6 = "r[a1[],c2[],b3[]]";
-    s7 = "r[c1[],b2[],a3[]]";
-    s8 = "r[c1[],a2[],b3[]]";
+    /* // These are isomorphic */
+    /* s5 = "r[b1[],a2[],c3[]]"; */
+    /* s6 = "r[a1[],c2[],b3[]]"; */
+    /* s7 = "r[c1[],b2[],a3[]]"; */
+    /* s8 = "r[c1[],a2[],b3[]]"; */
 
-    // This is not
-    s9 = "r[c1[],c2[],b3[]]";
+    /* // This is not */
+    /* s9 = "r[c1[],c2[],b3[]]"; */
 
     /* read2(s1, t1); */
     /* read2(s2, &t2); */
