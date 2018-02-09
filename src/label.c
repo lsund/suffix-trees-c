@@ -15,6 +15,9 @@ Label2 label2(int i, int j)
 
 void label_mark2(char *t, const Label2 l, const char *x)
 {
+    if (l->i < 0 || l->j > (int) strlen(x)) {
+        runtime_error("Index out of bounds");
+    }
     sstring(t, l->i, l->j - l->i, x);
 }
 

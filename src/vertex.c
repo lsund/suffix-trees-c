@@ -223,15 +223,21 @@ int vertex_isomorphic_aux(const char *x, Vertex v1, Vertex v2, int n, int i)
     }
 
     if (vertex_children_equals(x, v1, v2)) {
+
         return vertex_isomorphic(x, v1->c, v2->c);
+
     } else {
 
         vertex_permute(v2, i);
 
         if (vertex_children_equals(x, v1, v2)) {
+
             return vertex_isomorphic(x, v1->c, v2->c);
+
         } else {
+
             vertex_permute_inverse(v2, i);
+
         }
 
     }
@@ -242,8 +248,8 @@ int vertex_isomorphic(const char *x, Vertex v1, Vertex v2)
 {
     if (v1 && v2) {
         Vertex probe1, probe2;
-        probe1 = v1->c;
-        probe2 = v2->c;
+        probe1 = v1;
+        probe2 = v2;
         int n = 0;
         while (probe1 && probe2) {
             probe1 = probe1->s;

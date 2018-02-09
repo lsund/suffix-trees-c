@@ -381,6 +381,7 @@ char *utest_stree_permute2()
     stree_permute2(t1, permutation_inverse_number(5, 3));
     mu_assert("Perumted tree #41", stree_equals2(t1, t2));
 
+
     return NULL;
 }
 
