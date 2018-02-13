@@ -16,6 +16,7 @@ Label2 label2(int i, int j)
 void label_mark2(char *t, const Label2 l, const char *x)
 {
     if (l->i < 0 || l->j > (int) strlen(x)) {
+        printf("%d %d\n", l->i, l->j);
         runtime_error("Index out of bounds");
     }
     sstring(t, l->i, l->j - l->i, x);
@@ -63,6 +64,9 @@ void label_print2(const char *x, Label2 l)
 
 int label_equals(const char *x, Label2 l1, Label2 l2)
 {
+    if (label_is_undefined(l1) && label_is_undefined(l2)) {
+        return 1;
+    }
     char tmp1[STRING_MAX_LEN];
     char tmp2[STRING_MAX_LEN];
     label_mark2(tmp1, l1, x);

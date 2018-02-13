@@ -132,28 +132,48 @@ char *utest_read2()
     write2(t, tree);
     mu_assert("Should equal #6", strcmp(s, t) == 0);
 
-    // TODO Make this work
-    ////////////////////////////////////////////////////////////////////////////////
     text = "abcdx";
     char tmp[64];
     char *rep10 = "r[<0,1,1>[<2,3,3>[],<3,4,4>[]],<1,2,2>[]]";
     char *rep11 = "r[<1,2,2>[],<0,1,1>[<3,4,4>[],<2,3,3>[]]]";
+    char *rep12 = "r[<1,2,-1>[],<0,1,-1>[<3,4,-1>[],<2,3,3>[]]]";
 
     STree2 t10 = stree_init2(text);
     STree2 t11 = stree_init2(text);
+    STree2 t12 = stree_init2(text);
     read2(rep10, t10);
     read2(rep11, t11);
+    read2(rep12, t12);
     Vertex r10 = t10->r;
-    /* Vertex r11 = t11->r; */
+    Vertex r11 = t11->r;
+    Vertex r12 = t12->r;
 
     label_mark2(tmp, r10->c->l, text);
     mu_assert("Should equal #7", strcmp(tmp, "a") == 0);
     label_mark2(tmp, r10->c->s->l, text);
-    printf("%s\n", tmp);
     mu_assert("Should equal #8", strcmp(tmp, "b") == 0);
+    label_mark2(tmp, r10->c->c->l, text);
+    mu_assert("Should equal #8", strcmp(tmp, "c") == 0);
+    label_mark2(tmp, r10->c->c->s->l, text);
+    mu_assert("Should equal #8", strcmp(tmp, "d") == 0);
 
-    ///////////////////////////////////////////////////////////////////////////////
-    //
+    label_mark2(tmp, r11->c->l, text);
+    mu_assert("Should equal #7", strcmp(tmp, "b") == 0);
+    label_mark2(tmp, r11->c->s->l, text);
+    mu_assert("Should equal #8", strcmp(tmp, "a") == 0);
+    label_mark2(tmp, r11->c->s->c->l, text);
+    mu_assert("Should equal #8", strcmp(tmp, "d") == 0);
+    label_mark2(tmp, r11->c->s->c->s->l, text);
+    mu_assert("Should equal #8", strcmp(tmp, "c") == 0);
+
+    label_mark2(tmp, r12->c->l, text);
+    mu_assert("Should equal #7", strcmp(tmp, "b") == 0);
+    label_mark2(tmp, r12->c->s->l, text);
+    mu_assert("Should equal #8", strcmp(tmp, "a") == 0);
+    label_mark2(tmp, r12->c->s->c->l, text);
+    mu_assert("Should equal #8", strcmp(tmp, "d") == 0);
+    label_mark2(tmp, r12->c->s->c->s->l, text);
+    mu_assert("Should equal #8", strcmp(tmp, "c") == 0);
 
     return NULL;
 }

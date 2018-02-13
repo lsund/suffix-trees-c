@@ -43,4 +43,6 @@ void vertex_permute(Vertex v, int i);
 
 void vertex_permute_inverse(Vertex v, int i);
 
+void vertex_print(const Vertex v);
+
 #endif

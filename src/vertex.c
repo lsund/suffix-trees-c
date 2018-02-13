@@ -267,3 +267,9 @@ int vertex_isomorphic(const char *x, Vertex v1, Vertex v2)
         return !v1 && !v2;
     }
 }
+
+
+void vertex_print(const Vertex v)
+{
+    printf("<%d, %d, %d>\n", v->l->i, v->l->j, v->k);
+}
