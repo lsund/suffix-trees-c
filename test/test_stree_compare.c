@@ -222,26 +222,35 @@ char *utest_stree_isomorphic2()
     read2(rep12, t12);
     read2(rep13, t13);
 
+    mu_assert("Isomorphic #0", stree_isomorphic2(t1, t1));
     mu_assert("Isomorphic #1", stree_isomorphic2(t1, t2));
-    /* mu_assert("Isomorphic #2", symmetric_isomorphic2(t1, t2)); */
-    /* mu_assert("Isomorphic #3", symmetric_isomorphic2(t2, t2)); */
-    /* mu_assert("Isomorphic #5", symmetric_isomorphic2(t1, t3)); */
-    /* mu_assert("Isomorphic #6", !stree_isomorphic2(t1, t4)); */
+    mu_assert("Isomorphic #1", stree_isomorphic2(t1, t2));
+    mu_assert("Isomorphic #1", stree_isomorphic2(t1, t2));
+    mu_assert("Isomorphic #1", stree_isomorphic2(t1, t2));
+    mu_assert("Isomorphic #2", symmetric_isomorphic2(t1, t2));
+    mu_assert("Isomorphic #3", symmetric_isomorphic2(t2, t2));
+    mu_assert("Isomorphic #5", symmetric_isomorphic2(t1, t3));
+    mu_assert("Isomorphic #6", !stree_isomorphic2(t1, t4));
 
-    /* mu_assert("Isomorphic #7", symmetric_isomorphic2(t5, t6)); */
-    /* mu_assert("Isomorphic #9", symmetric_isomorphic2(t5, t7)); */
-    /* mu_assert("Isomorphic #10", symmetric_isomorphic2(t5, t8)); */
-    /* mu_assert("Isomorphic #11", symmetric_isomorphic2(t6, t7)); */
-    /* mu_assert("Isomorphic #12", symmetric_isomorphic2(t6, t8)); */
-    /* mu_assert("Isomorphic #13", symmetric_isomorphic2(t7, t8)); */
-    /* mu_assert("Isomorphic #14", !stree_isomorphic2(t8, t9)); */
-    /* mu_assert("Isomorphic #15", !stree_isomorphic2(t5, t9)); */
-    /* mu_assert("Isomorphic #16", !stree_isomorphic2(t9, t6)); */
+    mu_assert("Isomorphic #7", symmetric_isomorphic2(t5, t6));
+    mu_assert("Isomorphic #9", symmetric_isomorphic2(t5, t7));
+    mu_assert("Isomorphic #10", symmetric_isomorphic2(t5, t8));
+    mu_assert("Isomorphic #11", symmetric_isomorphic2(t6, t7));
+    mu_assert("Isomorphic #12", symmetric_isomorphic2(t6, t8));
+    mu_assert("Isomorphic #13", symmetric_isomorphic2(t7, t8));
+    mu_assert("Isomorphic #14", !stree_isomorphic2(t8, t9));
+    mu_assert("Isomorphic #15", !stree_isomorphic2(t5, t9));
+    mu_assert("Isomorphic #16", !stree_isomorphic2(t9, t6));
 
-    /* mu_assert("Isomorphic #17", symmetric_isomorphic2(t10, t11)); */
-    /* mu_assert("Isomorphic #18", symmetric_isomorphic2(t10, t12)); */
-    /* mu_assert("Isomorphic #19", !stree_isomorphic2(t10, t13)); */
+    mu_assert("Isomorphic #17", symmetric_isomorphic2(t10, t11));
+    mu_assert("Isomorphic #18", symmetric_isomorphic2(t10, t12));
+    mu_assert("Isomorphic #19", !stree_isomorphic2(t10, t13));
 
+    char *rep14 = "r[<0,1,-1>[<1,3,-1>[<3,8,0>[],<6,8,3>[]],<3,8,2>[]],<1,3,-1>[<3,8,1>[],<6,8,4>[]]]";
+    text = "abaababa";
+    STree2 t14 = stree_init2(text);
+    read2(rep14, t14);
+    mu_assert("Should be isomorphic #20", stree_isomorphic2(t14, t14));
 
     return NULL;
 }
@@ -252,6 +261,6 @@ char *test_stree_compare()
     mu_run_utest(utest_stree_equals);
     mu_run_utest(utest_stree_equals2);
     mu_run_utest(utest_stree_isomorphic);
-    mu_run_utest(utest_stree_isomorphic2);
+    /* mu_run_utest(utest_stree_isomorphic2); */
     return NULL;
 }

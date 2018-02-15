@@ -248,8 +248,8 @@ int vertex_isomorphic(const char *x, Vertex v1, Vertex v2)
 {
     if (v1 && v2) {
         Vertex probe1, probe2;
-        probe1 = v1;
-        probe2 = v2;
+        probe1 = v1->c;
+        probe2 = v2->c;
         int n = 0;
         while (probe1 && probe2) {
             probe1 = probe1->s;

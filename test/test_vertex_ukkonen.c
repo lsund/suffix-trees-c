@@ -57,38 +57,38 @@ static char *utest_adv_alg_example()
     input = "abaabab";
     s_actual = "r[<0,1,-1>[<1,3,-1>[<3,7,0>[],<6,7,3>[]],<3,7,2>[]],<1,3,-1>[<3,7,1>[],<6,7,4>[]]]";
 
-    actual_tree = stree_init2(s_actual);
     tree = ukkonen_naive2(input);
+    actual_tree = stree_init2(input);
     write2(s, tree);
     read2(s_actual, actual_tree);
 
-    /* mu_assert("Should be isomorphic #1", stree_isomorphic2(tree, actual_tree)); */
+    mu_assert("Should be isomorphic #1", stree_isomorphic2(tree, actual_tree));
 
     s[0] = '\0';
     input = "abaababa";
-    s_actual = "r[<0,1,-1>[<1,3,-1>[<3,8,0>[],<6,7,3>[]],<3,8,2>[]],<1,3,-1>[<3,8,1>[],<6,7,4>[]]]";
+    s_actual = "r[<0,1,-1>[<1,3,-1>[<3,8,0>[],<6,8,3>[]],<3,8,2>[]],<1,3,-1>[<3,8,1>[],<6,8,4>[]]]";
     tree = ukkonen_naive2(input);
+    actual_tree = stree_init2(input);
     read2(s_actual, actual_tree);
+    char tmp[500];
+    tmp[0] = 0;
+    write2(tmp, tree);
 
-    // TODO Continue here after testing isomorphic
+    mu_assert("Should be isomorphic #2", stree_isomorphic2(tree, actual_tree));
 
-    /* mu_assert("Should be isomorphic #2", stree_isomorphic2(tree, actual_tree)); */
+    Vertex el, ell, elll, elr, ellr, er, err, erl;
 
-    /* char l[74]; */
+    el   = tree->r->c;
+    ell  = tree->r->c->c;
+    elll = tree->r->c->c->c;
+    ellr = tree->r->c->c->c->s;
+    elr  = tree->r->c->c->s;
+    er   = tree->r->c->s;
+    err  = tree->r->c->s->c->s;
+    erl  = tree->r->c->s->c;
 
-    /* Edge el, ell, elll, elr, ellr, er, err, erl; */
-
-    /* el   = tree->c; */
-    /* ell  = tree->c->c; */
-    /* elll = tree->c->c->c; */
-    /* ellr = tree->c->c->c->s; */
-    /* elr  = tree->c->c->s; */
-    /* er   = tree->c->s; */
-    /* err  = tree->c->s->c->s; */
-    /* erl  = tree->c->s->c; */
-
-    /* edge_mark(el, l); */
-    /* mu_assert("Local inspect #1", strcmp(l, "a") == 0); */
+    vertex_mark(tmp, el, input);
+    mu_assert("Local inspect #1", strcmp(tmp, "a") == 0);
     /* edge_mark(ell, l); */
     /* mu_assert("Local inspect #2", strcmp(l, "ba") == 0); */
     /* edge_mark(elll, l); */
