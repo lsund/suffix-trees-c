@@ -130,8 +130,6 @@ static char *utest_stefan_kurz_example()
     write2(s, tree);
     actual_tree = stree_init2(input);
     read2(s_actual, actual_tree);
-    printf("%s\n", s);
-    printf("%s\n", s_actual);
     mu_assert("Isomorphic #1", stree_isomorphic2(tree, actual_tree));
 
     return NULL;

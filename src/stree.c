@@ -87,6 +87,11 @@ void stree_split2(TreeMatching2 tm)
     vertex_extend_below(tm.end, c);
 }
 
+void stree_extend_below(STree2 st, const Vertex v)
+{
+    vertex_extend_below(st->r, v);
+}
+
 
 void stree_mark(char *t, STree2 st, Vertex v)
 {

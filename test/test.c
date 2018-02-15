@@ -35,8 +35,6 @@ static char *test()
     mu_run_test(test_stree_permute);
     mu_message(MODULE,"stree_compare\n");
     mu_run_test(test_stree_compare);
-    mu_message(MODULE,"ukkonen\n");
-    mu_run_test(test_ukkonen);
     mu_message(MODULE,"vertex_ukkonen\n");
     mu_run_test(test_vertex_ukkonen);
     return 0;

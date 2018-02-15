@@ -12,7 +12,6 @@
 
 char *test_vertex();
 char *test_stree();
-char *test_ukkonen();
 char *test_label();
 char *test_matching();
 char *test_util();
