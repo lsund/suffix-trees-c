@@ -119,17 +119,20 @@ static char *utest_adv_alg_example()
 
 static char *utest_stefan_kurz_example()
 {
-    /* STree tree, actual_tree; */
-    /* char *input, *s_actual; */
-    /* char s[STRING_MAX_LEN]; */
-    /* s[0] = '\0'; */
+    STree2 tree, actual_tree;
+    char *input, *s_actual;
+    char s[STRING_MAX_LEN];
+    s[0] = '\0';
 
-    /* input = "acbcabcac"; */
-    /* s_actual = "r[a[bcac4[],cbcabcac0[]],bca[bcac2[],c5[]],c[a[bcac3[],c6[]],bcabcac1[]]]"; */
-    /* tree = ukkonen_naive2(input); */
-    /* write2(s, tree); */
-    /* read(s_actual, &actual_tree); */
-    /* mu_assert("Isomorphic #1", stree_isomorphic(tree, actual_tree)); */
+    input = "acbcabcac";
+    s_actual = "r[<0,1,-1>[<5,9,4>[],<1,9,0>[]],<2,5,-1>[<2,7,2>[],<1,2,5>[]],<1,2,-1>[<0,1,-1>[<2,7,3>[],<1,2,6>[]],<1,9,1>[]]]";
+    tree = ukkonen_naive2(input);
+    write2(s, tree);
+    actual_tree = stree_init2(input);
+    read2(s_actual, actual_tree);
+    printf("%s\n", s);
+    printf("%s\n", s_actual);
+    mu_assert("Isomorphic #1", stree_isomorphic2(tree, actual_tree));
 
     return NULL;
 }

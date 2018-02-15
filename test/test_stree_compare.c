@@ -261,6 +261,6 @@ char *test_stree_compare()
     mu_run_utest(utest_stree_equals);
     mu_run_utest(utest_stree_equals2);
     mu_run_utest(utest_stree_isomorphic);
-    /* mu_run_utest(utest_stree_isomorphic2); */
+    mu_run_utest(utest_stree_isomorphic2);
     return NULL;
 }
