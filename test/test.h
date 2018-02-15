@@ -10,7 +10,6 @@
 #include "minunit.h"
 #include "config.h"
 
-char *test_vertex();
 char *test_stree();
 char *test_ukkonen();
 char *test_label();
@@ -20,7 +19,6 @@ char *test_reader();
 char *test_writer();
 char *test_stree_permute();
 char *test_stree_compare();
-char *test_vertex_ukkonen();
 
 enum MessageOption {
     MODULE,

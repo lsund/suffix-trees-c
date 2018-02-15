@@ -11,15 +11,6 @@
 #include "label.h"
 #include "matching.h"
 
-/*
- * struct edge
- *
- * Label l        : the edge label
- * struct edge *c : The child pointer
- * struct edge *s : The sibling pointer
- * int k          : The leaf number (-1 if not a leaf)
- *
- */
 typedef struct edge {
     Label l;
     struct edge *c;
