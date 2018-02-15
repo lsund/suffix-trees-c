@@ -89,29 +89,29 @@ static char *utest_adv_alg_example()
 
     vertex_mark(tmp, el, input);
     mu_assert("Local inspect #1", strcmp(tmp, "a") == 0);
-    /* edge_mark(ell, l); */
-    /* mu_assert("Local inspect #2", strcmp(l, "ba") == 0); */
-    /* edge_mark(elll, l); */
-    /* mu_assert("Local inspect #3", strcmp(l, "ababa") == 0); */
-    /* edge_mark(ellr, l); */
-    /* mu_assert("Local inspect #4", strcmp(l, "ba") == 0); */
-    /* edge_mark(elr, l); */
-    /* mu_assert("Local inspect #5", strcmp(l, "ababa") == 0); */
-    /* edge_mark(er, l); */
-    /* mu_assert("Local inspect #6", strcmp(l, "ba") == 0); */
-    /* edge_mark(erl, l); */
-    /* mu_assert("Local inspect #7", strcmp(l, "ababa") == 0); */
-    /* edge_mark(err, l); */
-    /* mu_assert("Local inspect #8", strcmp(l, "ba") == 0); */
+    vertex_mark(tmp, ell, input);
+    mu_assert("Local inspect #2", strcmp(tmp, "ba") == 0);
+    vertex_mark(tmp, elll, input);
+    mu_assert("Local inspect #2", strcmp(tmp, "ababa") == 0);
+    vertex_mark(tmp, ellr, input);
+    mu_assert("Local inspect #2", strcmp(tmp, "ba") == 0);
+    vertex_mark(tmp, elr, input);
+    mu_assert("Local inspect #2", strcmp(tmp, "ababa") == 0);
+    vertex_mark(tmp, er, input);
+    mu_assert("Local inspect #5", strcmp(tmp, "ba") == 0);
+    vertex_mark(tmp, erl, input);
+    mu_assert("Local inspect #5", strcmp(tmp, "ababa") == 0);
+    vertex_mark(tmp, err, input);
+    mu_assert("Local inspect #5", strcmp(tmp, "ba") == 0);
 
-    /* mu_assert("Local inspect #9", el->k == -1); */
-    /* mu_assert("Local inspect #10", ell->k == -1); */
-    /* mu_assert("Local inspect #11", elll->k == 0); */
-    /* mu_assert("Local inspect #12", ellr->k == 3); */
-    /* mu_assert("Local inspect #13", elr->k == 2); */
-    /* mu_assert("Local inspect #14", er->k == -1); */
-    /* mu_assert("Local inspect #15", erl->k == 1); */
-    /* mu_assert("Local inspect #16", err->k == 4); */
+    mu_assert("Local inspect #9", el->k == -1);
+    mu_assert("Local inspect #10", ell->k == -1);
+    mu_assert("Local inspect #11", elll->k == 0);
+    mu_assert("Local inspect #12", ellr->k == 3);
+    mu_assert("Local inspect #13", elr->k == 2);
+    mu_assert("Local inspect #14", er->k == -1);
+    mu_assert("Local inspect #15", erl->k == 1);
+    mu_assert("Local inspect #16", err->k == 4);
 
     return NULL;
 }
