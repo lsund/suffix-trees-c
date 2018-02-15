@@ -1,17 +1,16 @@
 
 #include "stree.h"
 #include "writer.h"
-#include "ukkonen.h"
 
 int main()
 {
-    char *text = "acbcabcac";
+    /* char *text = "acbcabcac"; */
 
-    STree u = ukkonen_naive(text);
+    /* STree u = ukkonen_naive2(text); */
 
-    write_file("../suffix-trees-haskell/data/sample", u);
+    /* write_file("../suffix-trees-haskell/data/sample", u); */
 
-    stree_destroy(u);
+    /* stree_destroy(u); */
 
     return 0;
 }

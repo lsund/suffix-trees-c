@@ -1,15 +1,8 @@
 #ifndef STREE_H
 #define STREE_H
 
-#include "edge.h"
 #include "vertex.h"
-
-typedef Edge STree;
-
-typedef struct treematching {
-    Edge end;
-    Matching m;
-} TreeMatching;
+#include "matching.h"
 
 typedef struct stree2 {
     Vertex r;
@@ -20,25 +13,6 @@ typedef struct treematching2 {
     Vertex end;
     Matching m;
 } TreeMatching2;
-
-///////////////////////////////////////////////////////////////////////////////
-// Functions
-
-TreeMatching scan_prefix(STree tree, Label l);
-
-Edge stree_init(const char *t);
-
-int stree_sibling_with(STree tree, char c);
-
-int stree_child_with(STree tree, char c);
-
-void stree_extend_edge_below(STree base, const Edge ext);
-
-void stree_extend_edge_sibling(STree base, const Edge ext);
-
-void stree_split(TreeMatching tm);
-
-void stree_destroy(STree tree);
 
 ///////////////////////////////////////////////////////////////////////////////
 // New
